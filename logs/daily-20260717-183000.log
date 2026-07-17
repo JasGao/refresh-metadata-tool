@@ -1,0 +1,3510 @@
+=== refresh daily run: Fri Jul 17 18:30:00 HKT 2026 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/usr/bin/python3 (Python 3.9.6)
+args=<full pipeline>
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       688
+  Already done       0
+  Remaining          688
+  Concurrency        10
+  RPC                https://bsc-dataseed.binance.org
+  ⚠ …4436224210  out_of_sync (4 diffs)
+  ⚠ …4652956509  out_of_sync (4 diffs)
+  ⚠ …2433056117  out_of_sync (5 diffs)
+  ⚠ …9895489227  out_of_sync (5 diffs)
+  ⚠ …8157238248  out_of_sync (5 diffs)
+  ⚠ …7685038888  out_of_sync (5 diffs)
+  ⚠ …4841300172  out_of_sync (5 diffs)
+  ⚠ …7687727946  out_of_sync (5 diffs)
+  ⚠ …2103920315  out_of_sync (5 diffs)
+  ⚠ …2642094623  out_of_sync (5 diffs)
+  · Batch done — 10/688 tokens
+  ⚠ …9957155937  out_of_sync (5 diffs)
+  ⚠ …2704904882  out_of_sync (4 diffs)
+  ⚠ …5433807169  out_of_sync (4 diffs)
+  ⚠ …6620502309  out_of_sync (5 diffs)
+  ✗ …7992255361  [Errno 60] Operation timed out
+  ⚠ …3772825904  out_of_sync (5 diffs)
+  ⚠ …6657043384  out_of_sync (5 diffs)
+  ⚠ …0051930857  out_of_sync (4 diffs)
+  ⚠ …9561324223  out_of_sync (5 diffs)
+  ⚠ …1381240249  out_of_sync (5 diffs)
+  · Batch done — 20/688 tokens
+  ⚠ …3093496226  out_of_sync (5 diffs)
+  ⚠ …2344087651  out_of_sync (5 diffs)
+  ⚠ …8544754650  out_of_sync (5 diffs)
+  ⚠ …7575051512  out_of_sync (5 diffs)
+  ⚠ …4435981715  out_of_sync (5 diffs)
+  ✗ …8680858381  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …0442033051  out_of_sync (5 diffs)
+  ⚠ …2737149660  out_of_sync (5 diffs)
+  ⚠ …6025135418  out_of_sync (5 diffs)
+  ⚠ …5213161465  out_of_sync (5 diffs)
+  · Batch done — 30/688 tokens
+  ⚠ …8627652016  out_of_sync (5 diffs)
+  ⚠ …4595282100  out_of_sync (5 diffs)
+  ⚠ …4473764466  out_of_sync (5 diffs)
+  ⚠ …5336500853  out_of_sync (5 diffs)
+  ⚠ …3905466864  out_of_sync (5 diffs)
+  ⚠ …7029466759  out_of_sync (4 diffs)
+  ⚠ …8510617069  out_of_sync (4 diffs)
+  ⚠ …3688295761  out_of_sync (5 diffs)
+  ⚠ …7046562953  out_of_sync (5 diffs)
+  ✓ …3924537000  in_sync
+  · Batch done — 40/688 tokens
+  ⚠ …5239881682  out_of_sync (5 diffs)
+  ⚠ …4750766166  out_of_sync (5 diffs)
+  ⚠ …7944217778  out_of_sync (5 diffs)
+  ✓ …5133786974  in_sync
+  ⚠ …1581147374  out_of_sync (4 diffs)
+  ⚠ …8152912840  out_of_sync (5 diffs)
+  ⚠ …1304671325  out_of_sync (4 diffs)
+  ⚠ …0358462944  out_of_sync (4 diffs)
+  ⚠ …4731028083  out_of_sync (5 diffs)
+  ⚠ …6133830587  out_of_sync (5 diffs)
+  · Batch done — 50/688 tokens
+  ⚠ …2524016797  out_of_sync (5 diffs)
+  ✓ …5344096067  in_sync
+  ✓ …8608984640  in_sync
+  ✓ …0538666173  in_sync
+  ⚠ …0028766957  out_of_sync (4 diffs)
+  ⚠ …2183897388  out_of_sync (5 diffs)
+  ⚠ …3238293156  out_of_sync (5 diffs)
+  ⚠ …9617834067  out_of_sync (4 diffs)
+  ⚠ …6135139997  out_of_sync (4 diffs)
+  ⚠ …7672658320  out_of_sync (4 diffs)
+  · Batch done — 60/688 tokens
+  ⚠ …8719584969  out_of_sync (5 diffs)
+  ⚠ …0640688641  out_of_sync (4 diffs)
+  ⚠ …9296769316  out_of_sync (5 diffs)
+  ⚠ …8084278977  out_of_sync (5 diffs)
+  ⚠ …5614453601  out_of_sync (5 diffs)
+  ⚠ …4369515739  out_of_sync (5 diffs)
+  ⚠ …5098403565  out_of_sync (4 diffs)
+  ✗ …3767203871  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …5479664393  out_of_sync (5 diffs)
+  ⚠ …3199856772  out_of_sync (5 diffs)
+  · Batch done — 70/688 tokens
+  ⚠ …4291846752  out_of_sync (5 diffs)
+  ✗ …0705037223  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …2309904920  out_of_sync (5 diffs)
+  ⚠ …5060738341  out_of_sync (4 diffs)
+  ⚠ …4043147274  out_of_sync (5 diffs)
+  ⚠ …1288089239  out_of_sync (5 diffs)
+  ⚠ …4985423650  out_of_sync (5 diffs)
+  ⚠ …3526567714  out_of_sync (5 diffs)
+  ⚠ …5252599185  out_of_sync (5 diffs)
+  ⚠ …3049622698  out_of_sync (4 diffs)
+  · Batch done — 80/688 tokens
+  ⚠ …7515097305  out_of_sync (5 diffs)
+  ⚠ …3245716268  out_of_sync (4 diffs)
+  ⚠ …5048337954  out_of_sync (4 diffs)
+  ⚠ …7850478645  out_of_sync (5 diffs)
+  ⚠ …4321880453  out_of_sync (4 diffs)
+  ⚠ …5636276145  out_of_sync (4 diffs)
+  ⚠ …0686488023  out_of_sync (4 diffs)
+  ⚠ …7797550640  out_of_sync (5 diffs)
+  ⚠ …5713249737  out_of_sync (5 diffs)
+  ⚠ …9363454032  out_of_sync (5 diffs)
+  · Batch done — 90/688 tokens
+  ⚠ …2698735213  out_of_sync (5 diffs)
+  ⚠ …6668175471  out_of_sync (4 diffs)
+  ⚠ …6470284925  out_of_sync (4 diffs)
+  ⚠ …1120434314  out_of_sync (4 diffs)
+  ✗ …5777062269  The read operation timed out
+  ⚠ …6070568451  out_of_sync (5 diffs)
+  ⚠ …7958118078  out_of_sync (5 diffs)
+  ⚠ …4720782626  out_of_sync (4 diffs)
+  ⚠ …9912889235  out_of_sync (4 diffs)
+  ⚠ …9117217068  out_of_sync (5 diffs)
+  · Batch done — 100/688 tokens
+  ⚠ …5368779609  out_of_sync (5 diffs)
+  ⚠ …0062586316  out_of_sync (5 diffs)
+  ⚠ …9107373285  out_of_sync (5 diffs)
+  ⚠ …5837990590  out_of_sync (4 diffs)
+  ⚠ …6512969734  out_of_sync (4 diffs)
+  ⚠ …2577532687  out_of_sync (4 diffs)
+  ⚠ …4398656010  out_of_sync (4 diffs)
+  ⚠ …1795598489  out_of_sync (4 diffs)
+  ⚠ …9132353249  out_of_sync (5 diffs)
+  ⚠ …8078558155  out_of_sync (4 diffs)
+  · Batch done — 110/688 tokens
+  ⚠ …1838680135  out_of_sync (4 diffs)
+  ⚠ …7180993784  out_of_sync (4 diffs)
+  ⚠ …4922271882  out_of_sync (4 diffs)
+  ⚠ …5210828127  out_of_sync (4 diffs)
+  ⚠ …8883510786  out_of_sync (4 diffs)
+  ⚠ …7787034551  out_of_sync (5 diffs)
+  ⚠ …3264599287  out_of_sync (4 diffs)
+  ⚠ …5158034008  out_of_sync (4 diffs)
+  ⚠ …2950552546  out_of_sync (4 diffs)
+  ⚠ …3054298200  out_of_sync (4 diffs)
+  · Batch done — 120/688 tokens
+  ⚠ …3398955906  out_of_sync (5 diffs)
+  ⚠ …0434974238  out_of_sync (4 diffs)
+  ⚠ …7981237465  out_of_sync (4 diffs)
+  ⚠ …6788227911  out_of_sync (4 diffs)
+  ⚠ …6054419441  out_of_sync (5 diffs)
+  ⚠ …3341322671  out_of_sync (5 diffs)
+  ⚠ …1424473273  out_of_sync (5 diffs)
+  ✗ …7832839167  The read operation timed out
+  ⚠ …3511321389  out_of_sync (4 diffs)
+  ⚠ …8466564520  out_of_sync (5 diffs)
+  · Batch done — 130/688 tokens
+  ⚠ …2573826023  out_of_sync (5 diffs)
+  ⚠ …3288473160  out_of_sync (5 diffs)
+  ⚠ …0724334226  out_of_sync (5 diffs)
+  ⚠ …6622786485  out_of_sync (4 diffs)
+  ⚠ …3662908492  out_of_sync (5 diffs)
+  ⚠ …4301005579  out_of_sync (5 diffs)
+  ⚠ …3403300642  out_of_sync (4 diffs)
+  ⚠ …2701057405  out_of_sync (4 diffs)
+  ⚠ …4499991000  out_of_sync (4 diffs)
+  ⚠ …1452469782  out_of_sync (4 diffs)
+  · Batch done — 140/688 tokens
+  ⚠ …6368560272  out_of_sync (5 diffs)
+  ⚠ …0230979572  out_of_sync (5 diffs)
+  ✓ …5076859247  in_sync
+  ✗ …4099326886  The read operation timed out
+  ⚠ …9025921291  out_of_sync (5 diffs)
+  ⚠ …0782924460  out_of_sync (4 diffs)
+  ⚠ …6432076832  out_of_sync (4 diffs)
+  ⚠ …1017685143  out_of_sync (5 diffs)
+  ⚠ …2378525905  out_of_sync (4 diffs)
+  ⚠ …0793655354  out_of_sync (4 diffs)
+  · Batch done — 150/688 tokens
+  ⚠ …8083650332  out_of_sync (5 diffs)
+  ⚠ …3832206007  out_of_sync (4 diffs)
+  ⚠ …4500663212  out_of_sync (4 diffs)
+  ⚠ …8614635889  out_of_sync (5 diffs)
+  ⚠ …8127780526  out_of_sync (5 diffs)
+  ✓ …6115926266  in_sync
+  ⚠ …8662921909  out_of_sync (5 diffs)
+  ⚠ …8231867342  out_of_sync (5 diffs)
+  ⚠ …5390766045  out_of_sync (5 diffs)
+  ⚠ …5400456840  out_of_sync (5 diffs)
+  · Batch done — 160/688 tokens
+  ⚠ …1651830886  out_of_sync (5 diffs)
+  ⚠ …4008536521  out_of_sync (4 diffs)
+  ⚠ …3793705918  out_of_sync (5 diffs)
+  ✓ …2534647030  in_sync
+  ⚠ …8168547462  out_of_sync (5 diffs)
+  ✗ …6782609491  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …7575051232  out_of_sync (5 diffs)
+  ⚠ …1051686765  out_of_sync (4 diffs)
+  ⚠ …3965715546  out_of_sync (4 diffs)
+  ⚠ …5739096749  out_of_sync (4 diffs)
+  · Batch done — 170/688 tokens
+  ⚠ …4418848262  out_of_sync (5 diffs)
+  ✓ …6081265003  in_sync
+  ⚠ …5327701654  out_of_sync (5 diffs)
+  ⚠ …9861855545  out_of_sync (5 diffs)
+  ⚠ …3857936640  out_of_sync (4 diffs)
+  ⚠ …0943948517  out_of_sync (4 diffs)
+  ⚠ …6776771060  out_of_sync (4 diffs)
+  ⚠ …2743258661  out_of_sync (4 diffs)
+  ⚠ …3485162097  out_of_sync (5 diffs)
+  ⚠ …2918442581  out_of_sync (4 diffs)
+  · Batch done — 180/688 tokens
+  ⚠ …5171784346  out_of_sync (4 diffs)
+  ✓ …9105229300  in_sync
+  ⚠ …3255753955  out_of_sync (4 diffs)
+  ⚠ …4650514782  out_of_sync (4 diffs)
+  ✓ …8627069773  in_sync
+  ✗ …9970613779  The read operation timed out
+  ✓ …5506299477  in_sync
+  ⚠ …9903056945  out_of_sync (4 diffs)
+  ⚠ …9107369228  out_of_sync (4 diffs)
+  ⚠ …9305082747  out_of_sync (4 diffs)
+  · Batch done — 190/688 tokens
+  ⚠ …5576103319  out_of_sync (5 diffs)
+  ✗ …0648145584  [Errno 60] Operation timed out
+  ⚠ …9437016458  out_of_sync (5 diffs)
+  ✗ …7120697593  The read operation timed out
+  ⚠ …3995737225  out_of_sync (5 diffs)
+  ⚠ …7679091459  out_of_sync (5 diffs)
+  ✗ …5271164913  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …7003925100  out_of_sync (4 diffs)
+  ⚠ …2517751120  out_of_sync (4 diffs)
+  ⚠ …1430715280  out_of_sync (5 diffs)
+  · Batch done — 200/688 tokens
+  ⚠ …5614505273  out_of_sync (5 diffs)
+  ⚠ …7039863023  out_of_sync (4 diffs)
+  ⚠ …1961744424  out_of_sync (4 diffs)
+  ⚠ …8738720273  out_of_sync (4 diffs)
+  ⚠ …7963586088  out_of_sync (5 diffs)
+  ⚠ …9229142505  out_of_sync (5 diffs)
+  ⚠ …1690098750  out_of_sync (4 diffs)
+  ⚠ …6657867896  out_of_sync (5 diffs)
+  ⚠ …5574408025  out_of_sync (4 diffs)
+  ⚠ …6037095397  out_of_sync (5 diffs)
+  · Batch done — 210/688 tokens
+  ⚠ …2896823543  out_of_sync (4 diffs)
+  ⚠ …7513665696  out_of_sync (4 diffs)
+  ⚠ …7815154882  out_of_sync (5 diffs)
+  ⚠ …9054931429  out_of_sync (5 diffs)
+  ⚠ …8638779637  out_of_sync (4 diffs)
+  ⚠ …0645506723  out_of_sync (5 diffs)
+  ⚠ …6291663096  out_of_sync (5 diffs)
+  ⚠ …3462234183  out_of_sync (4 diffs)
+  ⚠ …3747929641  out_of_sync (4 diffs)
+  ⚠ …7816000447  out_of_sync (5 diffs)
+  · Batch done — 220/688 tokens
+  ⚠ …5618481432  out_of_sync (5 diffs)
+  ⚠ …5816997270  out_of_sync (5 diffs)
+  ⚠ …8357469942  out_of_sync (5 diffs)
+  ⚠ …3492767019  out_of_sync (5 diffs)
+  ✗ …4514236994  The read operation timed out
+  ⚠ …7075730970  out_of_sync (5 diffs)
+  ⚠ …0356911815  out_of_sync (4 diffs)
+  ⚠ …9855620275  out_of_sync (5 diffs)
+  ⚠ …7586024983  out_of_sync (5 diffs)
+  ⚠ …3588784275  out_of_sync (5 diffs)
+  · Batch done — 230/688 tokens
+  ⚠ …4286317405  out_of_sync (4 diffs)
+  ⚠ …5478263966  out_of_sync (4 diffs)
+  ⚠ …3831021159  out_of_sync (4 diffs)
+  ⚠ …4014233575  out_of_sync (5 diffs)
+  ⚠ …4432810866  out_of_sync (5 diffs)
+  ⚠ …7902959760  out_of_sync (5 diffs)
+  ⚠ …4265431800  out_of_sync (5 diffs)
+  ⚠ …6383770541  out_of_sync (4 diffs)
+  ⚠ …3269318566  out_of_sync (4 diffs)
+  ⚠ …1322591713  out_of_sync (5 diffs)
+  · Batch done — 240/688 tokens
+  ⚠ …0456619947  out_of_sync (5 diffs)
+  ⚠ …2688533108  out_of_sync (4 diffs)
+  ⚠ …9423892914  out_of_sync (5 diffs)
+  ⚠ …6929041223  out_of_sync (4 diffs)
+  ⚠ …3323127960  out_of_sync (4 diffs)
+  ⚠ …5408266041  out_of_sync (5 diffs)
+  ⚠ …2498953397  out_of_sync (4 diffs)
+  ⚠ …7259846829  out_of_sync (5 diffs)
+  ⚠ …2002662157  out_of_sync (4 diffs)
+  ⚠ …9861918388  out_of_sync (5 diffs)
+  · Batch done — 250/688 tokens
+  ⚠ …0427076606  out_of_sync (5 diffs)
+  ⚠ …2492064926  out_of_sync (5 diffs)
+  ⚠ …5204282877  out_of_sync (4 diffs)
+  ⚠ …5356851959  out_of_sync (5 diffs)
+  ⚠ …4149908203  out_of_sync (5 diffs)
+  ⚠ …9384918416  out_of_sync (4 diffs)
+  ⚠ …0465375816  out_of_sync (4 diffs)
+  ⚠ …5378588736  out_of_sync (5 diffs)
+  ⚠ …7252883402  out_of_sync (5 diffs)
+  ✗ …7476764330  <urlopen error [Errno 60] Operation timed out>
+  · Batch done — 260/688 tokens
+  ✗ …9980216607  [Errno 60] Operation timed out
+  ⚠ …0200751610  out_of_sync (4 diffs)
+  ⚠ …8636207965  out_of_sync (5 diffs)
+  ⚠ …5286771477  out_of_sync (5 diffs)
+  ⚠ …5873422912  out_of_sync (5 diffs)
+  ⚠ …1936534893  out_of_sync (5 diffs)
+  ⚠ …9642969398  out_of_sync (5 diffs)
+  ⚠ …9864301769  out_of_sync (4 diffs)
+  ⚠ …8873115183  out_of_sync (5 diffs)
+  ⚠ …5059461722  out_of_sync (5 diffs)
+  · Batch done — 270/688 tokens
+  ⚠ …7573095374  out_of_sync (4 diffs)
+  ⚠ …5053838071  out_of_sync (5 diffs)
+  ⚠ …2921415121  out_of_sync (4 diffs)
+  ⚠ …9917057067  out_of_sync (4 diffs)
+  ⚠ …3341789915  out_of_sync (5 diffs)
+  ⚠ …2763689914  out_of_sync (5 diffs)
+  ✗ …2055949152  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …7762617764  out_of_sync (4 diffs)
+  ✗ …8258965582  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …0962321109  out_of_sync (5 diffs)
+  · Batch done — 280/688 tokens
+  ⚠ …4586547856  out_of_sync (5 diffs)
+  ⚠ …2647086850  out_of_sync (4 diffs)
+  ⚠ …5141781129  out_of_sync (4 diffs)
+  ⚠ …7757680736  out_of_sync (5 diffs)
+  ⚠ …8881912041  out_of_sync (5 diffs)
+  ⚠ …9472731894  out_of_sync (4 diffs)
+  ⚠ …3126662179  out_of_sync (4 diffs)
+  ⚠ …4605809095  out_of_sync (4 diffs)
+  ⚠ …8947195196  out_of_sync (4 diffs)
+  ⚠ …2346637051  out_of_sync (5 diffs)
+  · Batch done — 290/688 tokens
+  ⚠ …9222068510  out_of_sync (5 diffs)
+  ⚠ …9733906330  out_of_sync (5 diffs)
+  ⚠ …0159052867  out_of_sync (5 diffs)
+  ⚠ …6361320605  out_of_sync (4 diffs)
+  ⚠ …0037488218  out_of_sync (4 diffs)
+  ✗ …9297760281  The read operation timed out
+  ⚠ …3752671596  out_of_sync (5 diffs)
+  ⚠ …9161651535  out_of_sync (5 diffs)
+  ✗ …5084759933  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …6496324318  out_of_sync (4 diffs)
+  · Batch done — 300/688 tokens
+  ⚠ …6761122429  out_of_sync (4 diffs)
+  ⚠ …9101350051  out_of_sync (5 diffs)
+  ⚠ …0364266020  out_of_sync (5 diffs)
+  ⚠ …7723597191  out_of_sync (5 diffs)
+  ⚠ …2409892190  out_of_sync (4 diffs)
+  ⚠ …2963295423  out_of_sync (5 diffs)
+  ⚠ …2148049509  out_of_sync (5 diffs)
+  ⚠ …5613117073  out_of_sync (5 diffs)
+  ⚠ …3707658272  out_of_sync (5 diffs)
+  ✗ …7884779629  The read operation timed out
+  · Batch done — 310/688 tokens
+  ⚠ …5717815117  out_of_sync (4 diffs)
+  ⚠ …3510492667  out_of_sync (4 diffs)
+  ✓ …4049893674  in_sync
+  ⚠ …9040332825  out_of_sync (4 diffs)
+  ⚠ …3150111814  out_of_sync (5 diffs)
+  ✓ …5358754712  in_sync
+  ⚠ …2909759490  out_of_sync (4 diffs)
+  ✗ …1655557149  [Errno 60] Operation timed out
+  ⚠ …8525731344  out_of_sync (5 diffs)
+  ✗ …0630477435  <urlopen error [Errno 60] Operation timed out>
+  · Batch done — 320/688 tokens
+  ⚠ …7006496429  out_of_sync (5 diffs)
+  ⚠ …7264395094  out_of_sync (5 diffs)
+  ⚠ …0874040015  out_of_sync (5 diffs)
+  ⚠ …6459228043  out_of_sync (4 diffs)
+  ⚠ …8098560375  out_of_sync (4 diffs)
+  ⚠ …9282396542  out_of_sync (4 diffs)
+  ⚠ …1088814077  out_of_sync (4 diffs)
+  ⚠ …2352759659  out_of_sync (4 diffs)
+  ⚠ …6047076241  out_of_sync (4 diffs)
+  ⚠ …6547635804  out_of_sync (5 diffs)
+  · Batch done — 330/688 tokens
+  ⚠ …9835168768  out_of_sync (4 diffs)
+  ⚠ …7884430541  out_of_sync (4 diffs)
+  ⚠ …3919853430  out_of_sync (5 diffs)
+  ⚠ …8288501083  out_of_sync (4 diffs)
+  ⚠ …4676814460  out_of_sync (4 diffs)
+  ⚠ …4163370078  out_of_sync (5 diffs)
+  ⚠ …2059558599  out_of_sync (5 diffs)
+  ⚠ …7891765263  out_of_sync (5 diffs)
+  ⚠ …0289342446  out_of_sync (5 diffs)
+  ⚠ …3733091271  out_of_sync (5 diffs)
+  · Batch done — 340/688 tokens
+  ⚠ …2427944649  out_of_sync (5 diffs)
+  ⚠ …8519056035  out_of_sync (4 diffs)
+  ⚠ …6694234764  out_of_sync (4 diffs)
+  ⚠ …2314383167  out_of_sync (4 diffs)
+  ⚠ …2179493779  out_of_sync (4 diffs)
+  ⚠ …2164339303  out_of_sync (5 diffs)
+  ⚠ …6791726389  out_of_sync (5 diffs)
+  ⚠ …5839858626  out_of_sync (5 diffs)
+  ⚠ …5194503079  out_of_sync (5 diffs)
+  ⚠ …4590474567  out_of_sync (5 diffs)
+  · Batch done — 350/688 tokens
+  ⚠ …6673409260  out_of_sync (4 diffs)
+  ⚠ …6961942902  out_of_sync (4 diffs)
+  ✗ …3558597438  The read operation timed out
+  ⚠ …1371388219  out_of_sync (4 diffs)
+  ⚠ …6929068445  out_of_sync (4 diffs)
+  ⚠ …4902424648  out_of_sync (5 diffs)
+  ⚠ …7690265071  out_of_sync (4 diffs)
+  ⚠ …2053517327  out_of_sync (4 diffs)
+  ⚠ …8736185255  out_of_sync (5 diffs)
+  ⚠ …6049648776  out_of_sync (5 diffs)
+  · Batch done — 360/688 tokens
+  ✓ …9925050864  in_sync
+  ✓ …0884639056  in_sync
+  ⚠ …2295951241  out_of_sync (5 diffs)
+  ⚠ …4586830708  out_of_sync (4 diffs)
+  ⚠ …5432797517  out_of_sync (4 diffs)
+  ⚠ …2045132434  out_of_sync (4 diffs)
+  ⚠ …1875466055  out_of_sync (5 diffs)
+  ⚠ …5787355560  out_of_sync (5 diffs)
+  ⚠ …9713064007  out_of_sync (4 diffs)
+  ✓ …8127045961  in_sync
+  · Batch done — 370/688 tokens
+  ⚠ …5498083171  out_of_sync (5 diffs)
+  ⚠ …1663650381  out_of_sync (5 diffs)
+  ⚠ …6888123643  out_of_sync (5 diffs)
+  ⚠ …3596429464  out_of_sync (5 diffs)
+  ⚠ …0241771783  out_of_sync (4 diffs)
+  ✗ …0082163304  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …5180192578  out_of_sync (4 diffs)
+  ⚠ …6725090429  out_of_sync (4 diffs)
+  ⚠ …4289186870  out_of_sync (4 diffs)
+  ⚠ …0220642770  out_of_sync (4 diffs)
+  · Batch done — 380/688 tokens
+  ⚠ …5146856275  out_of_sync (5 diffs)
+  ⚠ …3478531125  out_of_sync (5 diffs)
+  ⚠ …4668661033  out_of_sync (5 diffs)
+  ⚠ …8844721425  out_of_sync (5 diffs)
+  ⚠ …9509837115  out_of_sync (5 diffs)
+  ✗ …1991691059  [Errno 60] Operation timed out
+  ⚠ …8570875394  out_of_sync (5 diffs)
+  ⚠ …4726981172  out_of_sync (5 diffs)
+  ⚠ …8066687807  out_of_sync (5 diffs)
+  ✗ …4371996239  [Errno 60] Operation timed out
+  · Batch done — 390/688 tokens
+  ⚠ …4358866005  out_of_sync (4 diffs)
+  ⚠ …5766135581  out_of_sync (4 diffs)
+  ✗ …8205718831  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …4490250660  out_of_sync (4 diffs)
+  ⚠ …0396012543  out_of_sync (5 diffs)
+  ⚠ …6676667375  out_of_sync (5 diffs)
+  ⚠ …2948939140  out_of_sync (5 diffs)
+  ⚠ …3484915698  out_of_sync (4 diffs)
+  ⚠ …2813514416  out_of_sync (5 diffs)
+  ⚠ …6700555648  out_of_sync (4 diffs)
+  · Batch done — 400/688 tokens
+  ⚠ …9323950144  out_of_sync (4 diffs)
+  ⚠ …1852104346  out_of_sync (5 diffs)
+  ⚠ …6653730506  out_of_sync (5 diffs)
+  ⚠ …8239479305  out_of_sync (4 diffs)
+  ⚠ …1802700970  out_of_sync (4 diffs)
+  ⚠ …0404843150  out_of_sync (5 diffs)
+  ⚠ …9256881534  out_of_sync (5 diffs)
+  ⚠ …2202324004  out_of_sync (5 diffs)
+  ⚠ …8186109063  out_of_sync (5 diffs)
+  ⚠ …5094437194  out_of_sync (5 diffs)
+  · Batch done — 410/688 tokens
+  ⚠ …0536744453  out_of_sync (5 diffs)
+  ⚠ …7308359696  out_of_sync (5 diffs)
+  ⚠ …6066889432  out_of_sync (5 diffs)
+  ⚠ …0429149444  out_of_sync (5 diffs)
+  ⚠ …5904527581  out_of_sync (5 diffs)
+  ⚠ …3569883513  out_of_sync (5 diffs)
+  ✓ …9203437382  in_sync
+  ⚠ …7319306072  out_of_sync (5 diffs)
+  ⚠ …6560302514  out_of_sync (5 diffs)
+  ⚠ …3066736767  out_of_sync (5 diffs)
+  · Batch done — 420/688 tokens
+  ⚠ …3500032105  out_of_sync (4 diffs)
+  ⚠ …7740710431  out_of_sync (4 diffs)
+  ⚠ …4284047464  out_of_sync (5 diffs)
+  ✓ …5023780815  in_sync
+  ⚠ …2572119404  out_of_sync (5 diffs)
+  ⚠ …6964000811  out_of_sync (5 diffs)
+  ✓ …1389077303  in_sync
+  ⚠ …4834556686  out_of_sync (5 diffs)
+  ⚠ …8108856667  out_of_sync (5 diffs)
+  ⚠ …0277746720  out_of_sync (5 diffs)
+  · Batch done — 430/688 tokens
+  ⚠ …2843696868  out_of_sync (5 diffs)
+  ⚠ …9034420283  out_of_sync (5 diffs)
+  ⚠ …4642536528  out_of_sync (5 diffs)
+  ⚠ …8061076264  out_of_sync (5 diffs)
+  ⚠ …3644481915  out_of_sync (5 diffs)
+  ⚠ …6126938178  out_of_sync (5 diffs)
+  ✗ …5495055770  Remote end closed connection without response
+  ⚠ …7990807788  out_of_sync (4 diffs)
+  ⚠ …9769460892  out_of_sync (4 diffs)
+  ⚠ …7461945559  out_of_sync (5 diffs)
+  · Batch done — 440/688 tokens
+  ⚠ …0446138355  out_of_sync (5 diffs)
+  ⚠ …0784361294  out_of_sync (4 diffs)
+  ⚠ …0736908018  out_of_sync (5 diffs)
+  ⚠ …3994671614  out_of_sync (4 diffs)
+  ⚠ …0980906719  out_of_sync (5 diffs)
+  ⚠ …4504547106  out_of_sync (5 diffs)
+  ⚠ …1739268579  out_of_sync (5 diffs)
+  ⚠ …7329520409  out_of_sync (5 diffs)
+  ⚠ …9871979519  out_of_sync (4 diffs)
+  ⚠ …2273369188  out_of_sync (4 diffs)
+  · Batch done — 450/688 tokens
+  ⚠ …0004153540  out_of_sync (5 diffs)
+  ⚠ …0695453620  out_of_sync (5 diffs)
+  ⚠ …7753700624  out_of_sync (4 diffs)
+  ⚠ …9954248982  out_of_sync (5 diffs)
+  ⚠ …1413385382  out_of_sync (5 diffs)
+  ⚠ …6773319071  out_of_sync (5 diffs)
+  ✓ …0073303991  in_sync
+  ✗ …3414823911  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …7896978823  out_of_sync (5 diffs)
+  ✓ …4388071955  in_sync
+  · Batch done — 460/688 tokens
+  ⚠ …9041857398  out_of_sync (5 diffs)
+  ⚠ …7166058456  out_of_sync (5 diffs)
+  ⚠ …9704874578  out_of_sync (5 diffs)
+  ⚠ …9689002828  out_of_sync (5 diffs)
+  ✓ …8559382329  in_sync
+  ✓ …1925601498  in_sync
+  ✗ …6897721858  The read operation timed out
+  ⚠ …1728260289  out_of_sync (5 diffs)
+  ⚠ …7359143956  out_of_sync (5 diffs)
+  ⚠ …5652125853  out_of_sync (5 diffs)
+  · Batch done — 470/688 tokens
+  ⚠ …8216345872  out_of_sync (5 diffs)
+  ⚠ …2311958156  out_of_sync (5 diffs)
+  ✗ …2265325803  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …2772300832  out_of_sync (5 diffs)
+  ⚠ …0371656433  out_of_sync (5 diffs)
+  ⚠ …5889925945  out_of_sync (5 diffs)
+  ⚠ …3824227525  out_of_sync (5 diffs)
+  ✗ …7448317539  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …8787031640  out_of_sync (5 diffs)
+  ✓ …7562681119  in_sync
+  · Batch done — 480/688 tokens
+  ⚠ …8883783522  out_of_sync (4 diffs)
+  ⚠ …1232579892  out_of_sync (5 diffs)
+  ✓ …0065260163  in_sync
+  ✗ …5441440163  Remote end closed connection without response
+  ✗ …7354009424  [Errno 60] Operation timed out
+  ⚠ …6800116562  out_of_sync (4 diffs)
+  ⚠ …9174362639  out_of_sync (5 diffs)
+  ⚠ …8313077171  out_of_sync (4 diffs)
+  ⚠ …5600638198  out_of_sync (4 diffs)
+  ⚠ …2655597871  out_of_sync (4 diffs)
+  · Batch done — 490/688 tokens
+  ⚠ …1003688270  out_of_sync (5 diffs)
+  ⚠ …3966861444  out_of_sync (4 diffs)
+  ✗ …8843744083  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …7176713803  out_of_sync (4 diffs)
+  ⚠ …6176250429  out_of_sync (5 diffs)
+  ⚠ …6940596324  out_of_sync (4 diffs)
+  ⚠ …8974497955  out_of_sync (4 diffs)
+  ⚠ …0737288481  out_of_sync (4 diffs)
+  ⚠ …0332336931  out_of_sync (4 diffs)
+  ⚠ …3187115216  out_of_sync (5 diffs)
+  · Batch done — 500/688 tokens
+  ⚠ …1956932621  out_of_sync (5 diffs)
+  ⚠ …0476663602  out_of_sync (4 diffs)
+  ⚠ …1391376632  out_of_sync (5 diffs)
+  ⚠ …9161324753  out_of_sync (5 diffs)
+  ⚠ …5245429611  out_of_sync (4 diffs)
+  ⚠ …6936856300  out_of_sync (5 diffs)
+  ✓ …1312681151  in_sync
+  ⚠ …0255129016  out_of_sync (5 diffs)
+  ⚠ …2941991106  out_of_sync (4 diffs)
+  ⚠ …1901834908  out_of_sync (4 diffs)
+  · Batch done — 510/688 tokens
+  ⚠ …2687860092  out_of_sync (4 diffs)
+  ⚠ …5018037672  out_of_sync (4 diffs)
+  ⚠ …3045967676  out_of_sync (4 diffs)
+  ⚠ …8988741359  out_of_sync (4 diffs)
+  ⚠ …0244542267  out_of_sync (4 diffs)
+  ⚠ …5881579614  out_of_sync (4 diffs)
+  ✗ …6107468246  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …1208580142  out_of_sync (5 diffs)
+  ⚠ …5065647569  out_of_sync (5 diffs)
+  ⚠ …3470657211  out_of_sync (5 diffs)
+  · Batch done — 520/688 tokens
+  ⚠ …7983073687  out_of_sync (4 diffs)
+  ⚠ …5228262105  out_of_sync (4 diffs)
+  ⚠ …3771267007  out_of_sync (5 diffs)
+  ⚠ …9959291936  out_of_sync (4 diffs)
+  ⚠ …1738034637  out_of_sync (5 diffs)
+  ⚠ …8614625847  out_of_sync (5 diffs)
+  ⚠ …2130551403  out_of_sync (5 diffs)
+  ⚠ …3362220644  out_of_sync (4 diffs)
+  ✗ …7539075524  <urlopen error [Errno 60] Operation timed out>
+  ✗ …9631397906  <urlopen error [Errno 60] Operation timed out>
+  · Batch done — 530/688 tokens
+  ⚠ …9482318870  out_of_sync (5 diffs)
+  ⚠ …4406704624  out_of_sync (5 diffs)
+  ⚠ …6942348459  out_of_sync (5 diffs)
+  ⚠ …7670616939  out_of_sync (5 diffs)
+  ⚠ …3874148583  out_of_sync (5 diffs)
+  ⚠ …5984696095  out_of_sync (5 diffs)
+  ⚠ …8319355364  out_of_sync (5 diffs)
+  ⚠ …9477594093  out_of_sync (4 diffs)
+  ⚠ …4305466902  out_of_sync (5 diffs)
+  ✗ …1262636362  The read operation timed out
+  · Batch done — 540/688 tokens
+  ⚠ …1408884719  out_of_sync (5 diffs)
+  ⚠ …2297300965  out_of_sync (5 diffs)
+  ⚠ …7500677597  out_of_sync (4 diffs)
+  ⚠ …8385421385  out_of_sync (4 diffs)
+  ⚠ …4410862844  out_of_sync (4 diffs)
+  ⚠ …4022216434  out_of_sync (5 diffs)
+  ⚠ …0533010734  out_of_sync (5 diffs)
+  ⚠ …3805808140  out_of_sync (5 diffs)
+  ⚠ …0119335270  out_of_sync (5 diffs)
+  ⚠ …6058653712  out_of_sync (5 diffs)
+  · Batch done — 550/688 tokens
+  ⚠ …7721216098  out_of_sync (4 diffs)
+  ✗ …8117905252  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …0199808060  out_of_sync (5 diffs)
+  ⚠ …6061133417  out_of_sync (5 diffs)
+  ⚠ …7168184716  out_of_sync (4 diffs)
+  ⚠ …0125342921  out_of_sync (4 diffs)
+  ⚠ …0537730804  out_of_sync (5 diffs)
+  ⚠ …7887309678  out_of_sync (5 diffs)
+  ⚠ …0929062255  out_of_sync (4 diffs)
+  ⚠ …2377355265  out_of_sync (5 diffs)
+  · Batch done — 560/688 tokens
+  ⚠ …2906187670  out_of_sync (5 diffs)
+  ⚠ …4626824253  out_of_sync (5 diffs)
+  ⚠ …5101665260  out_of_sync (4 diffs)
+  ⚠ …1390162366  out_of_sync (4 diffs)
+  ⚠ …5313222157  out_of_sync (5 diffs)
+  ⚠ …6172201132  out_of_sync (4 diffs)
+  ⚠ …2305285628  out_of_sync (5 diffs)
+  ⚠ …0905905586  out_of_sync (5 diffs)
+  ✓ …9693222700  in_sync
+  ✓ …7602166440  in_sync
+  · Batch done — 570/688 tokens
+  ⚠ …8835590761  out_of_sync (5 diffs)
+  ⚠ …1565426332  out_of_sync (4 diffs)
+  ⚠ …9473533235  out_of_sync (5 diffs)
+  ⚠ …6954750243  out_of_sync (5 diffs)
+  ⚠ …7829748864  out_of_sync (4 diffs)
+  ⚠ …8984526697  out_of_sync (5 diffs)
+  ⚠ …2352084625  out_of_sync (5 diffs)
+  ⚠ …6360904987  out_of_sync (4 diffs)
+  ⚠ …0660374983  out_of_sync (4 diffs)
+  ✗ …7185313172  <urlopen error [Errno 60] Operation timed out>
+  · Batch done — 580/688 tokens
+  ⚠ …0082906873  out_of_sync (5 diffs)
+  ⚠ …0045987788  out_of_sync (4 diffs)
+  ⚠ …1751472445  out_of_sync (4 diffs)
+  ⚠ …1222976760  out_of_sync (5 diffs)
+  ⚠ …7638928073  out_of_sync (4 diffs)
+  ⚠ …0666406173  out_of_sync (5 diffs)
+  ⚠ …8699620589  out_of_sync (5 diffs)
+  ⚠ …7028375775  out_of_sync (5 diffs)
+  ⚠ …0487959262  out_of_sync (4 diffs)
+  ⚠ …2879058415  out_of_sync (4 diffs)
+  · Batch done — 590/688 tokens
+  ⚠ …5704256849  out_of_sync (4 diffs)
+  ⚠ …1136836665  out_of_sync (4 diffs)
+  ⚠ …2039038975  out_of_sync (4 diffs)
+  ⚠ …1826103048  out_of_sync (5 diffs)
+  ⚠ …8542918230  out_of_sync (5 diffs)
+  ⚠ …2337855517  out_of_sync (4 diffs)
+  ⚠ …1618696947  out_of_sync (5 diffs)
+  ⚠ …7194537782  out_of_sync (5 diffs)
+  ⚠ …6091514164  out_of_sync (4 diffs)
+  ⚠ …8456461174  out_of_sync (4 diffs)
+  · Batch done — 600/688 tokens
+  ⚠ …2689394207  out_of_sync (4 diffs)
+  ⚠ …1662622334  out_of_sync (4 diffs)
+  ⚠ …1292047767  out_of_sync (4 diffs)
+  ⚠ …2974750046  out_of_sync (4 diffs)
+  ✗ …0375433784  <urlopen error [Errno 60] Operation timed out>
+  ⚠ …2711879698  out_of_sync (4 diffs)
+  ⚠ …6498157114  out_of_sync (5 diffs)
+  ⚠ …6202060141  out_of_sync (4 diffs)
+  ⚠ …4272291799  out_of_sync (4 diffs)
+  ⚠ …3977178777  out_of_sync (5 diffs)
+  · Batch done — 610/688 tokens
+  ⚠ …2856415119  out_of_sync (5 diffs)
+  ⚠ …7634943738  out_of_sync (5 diffs)
+  ⚠ …7222540243  out_of_sync (5 diffs)
+  ⚠ …3784942631  out_of_sync (5 diffs)
+  ⚠ …9619595790  out_of_sync (5 diffs)
+  ⚠ …9501352381  out_of_sync (5 diffs)
+  ⚠ …3619315869  out_of_sync (5 diffs)
+  ⚠ …1988975104  out_of_sync (4 diffs)
+  ⚠ …5433017408  out_of_sync (5 diffs)
+  ⚠ …3762744883  out_of_sync (5 diffs)
+  · Batch done — 620/688 tokens
+  ⚠ …8015398010  out_of_sync (4 diffs)
+  ⚠ …2634265086  out_of_sync (4 diffs)
+  ⚠ …0064062656  out_of_sync (5 diffs)
+  ⚠ …3127094576  out_of_sync (5 diffs)
+  ⚠ …2727446198  out_of_sync (5 diffs)
+  ⚠ …5727720494  out_of_sync (5 diffs)
+  ⚠ …7346142645  out_of_sync (4 diffs)
+  ⚠ …9250719948  out_of_sync (4 diffs)
+  ⚠ …5642170581  out_of_sync (4 diffs)
+  ⚠ …2847430444  out_of_sync (4 diffs)
+  · Batch done — 630/688 tokens
+  ⚠ …8469953790  out_of_sync (4 diffs)
+  ⚠ …9505939278  out_of_sync (5 diffs)
+  ⚠ …2790144049  out_of_sync (5 diffs)
+  ⚠ …6594790613  out_of_sync (5 diffs)
+  ⚠ …4141318660  out_of_sync (5 diffs)
+  ⚠ …7901280978  out_of_sync (5 diffs)
+  ⚠ …3119971172  out_of_sync (5 diffs)
+  ⚠ …1009376953  out_of_sync (5 diffs)
+  ⚠ …9055197094  out_of_sync (5 diffs)
+  ⚠ …1507422983  out_of_sync (5 diffs)
+  · Batch done — 640/688 tokens
+  ⚠ …3340711490  out_of_sync (5 diffs)
+  ⚠ …3546226976  out_of_sync (5 diffs)
+  ⚠ …1190846125  out_of_sync (4 diffs)
+  ⚠ …4320864435  out_of_sync (5 diffs)
+  ⚠ …1024057211  out_of_sync (4 diffs)
+  ⚠ …9531828117  out_of_sync (5 diffs)
+  ✗ …0967256796  [Errno 60] Operation timed out
+  ⚠ …1041925255  out_of_sync (5 diffs)
+  ⚠ …0394399292  out_of_sync (5 diffs)
+  ✗ …7915168106  <urlopen error [Errno 60] Operation timed out>
+  · Batch done — 650/688 tokens
+  ⚠ …9525010573  out_of_sync (5 diffs)
+  ⚠ …9886760467  out_of_sync (5 diffs)
+  ⚠ …0562997818  out_of_sync (5 diffs)
+  ⚠ …0941329045  out_of_sync (5 diffs)
+  ⚠ …0509151365  out_of_sync (5 diffs)
+  ⚠ …0053512357  out_of_sync (5 diffs)
+  ✗ …2509573741  <urlopen error [Errno 60] Operation timed out>
+  ✗ …6363463972  The read operation timed out
+  ⚠ …5779806444  out_of_sync (5 diffs)
+  ⚠ …5512235664  out_of_sync (5 diffs)
+  · Batch done — 660/688 tokens
+  ⚠ …2042601239  out_of_sync (5 diffs)
+  ✓ …7812955838  in_sync
+  ⚠ …5751021885  out_of_sync (5 diffs)
+  ⚠ …7483202650  out_of_sync (5 diffs)
+  ⚠ …1830859771  out_of_sync (5 diffs)
+  ⚠ …5508835401  out_of_sync (4 diffs)
+  ⚠ …5080474820  out_of_sync (5 diffs)
+  ✓ …5035329654  in_sync
+  ⚠ …3779685628  out_of_sync (5 diffs)
+  ⚠ …5592098821  out_of_sync (4 diffs)
+  · Batch done — 670/688 tokens
+  ⚠ …3066280482  out_of_sync (5 diffs)
+  ⚠ …6558956739  out_of_sync (5 diffs)
+  ⚠ …0559085292  out_of_sync (5 diffs)
+  ⚠ …7879593281  out_of_sync (5 diffs)
+  ⚠ …4166391944  out_of_sync (5 diffs)
+  ⚠ …7426590918  out_of_sync (5 diffs)
+  ⚠ …4472484479  out_of_sync (5 diffs)
+  ⚠ …2879064010  out_of_sync (5 diffs)
+  ⚠ …2989787918  out_of_sync (5 diffs)
+  ⚠ …1246372625  out_of_sync (5 diffs)
+  · Batch done — 680/688 tokens
+  ⚠ …2731660818  out_of_sync (5 diffs)
+  ⚠ …4995696086  out_of_sync (4 diffs)
+  ✓ …6297154293  in_sync
+  ⚠ …1596472422  out_of_sync (4 diffs)
+  ⚠ …3691905351  out_of_sync (4 diffs)
+  ⚠ …4545345644  out_of_sync (3 diffs)
+  ⚠ …4911370088  out_of_sync (4 diffs)
+  ⚠ …0712145402  out_of_sync (3 diffs)
+  · Batch done — 688/688 tokens
+
+── Crawl results ───────────────────────
+  in_sync            32
+  out_of_sync        610
+  errors             46
+  Progress file      progress.json
+  Report file        report.json
+  Report contents    610 out_of_sync, 46 errors
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Refresh — Selenium
+══════════════════════════════════════════════════
+
+── Run config ──────────────────────────
+  Source             report.json
+  Out-of-sync        610
+  Crawl errors       46
+  Tokens             656
+  Limit per account  100 tokens
+  Delay              5.0s between tokens
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Refresh quota (today) ───────────────
+  refresh1           100/100 left (used 0, since not started)
+  refresh2           100/100 left (used 0, since not started)
+  refresh3           100/100 left (used 0, since not started)
+  refresh4           100/100 left (used 0, since not started)
+  refresh5           100/100 left (used 0, since not started)
+  refresh6           100/100 left (used 0, since not started)
+  refresh7           100/100 left (used 0, since not started)
+  refresh8           100/100 left (used 0, since not started)
+  refresh9           100/100 left (used 0, since not started)
+  refresh10          100/100 left (used 0, since not started)
+  refresh11          100/100 left (used 0, since not started)
+  refresh12          100/100 left (used 0, since not started)
+  refresh13          100/100 left (used 0, since not started)
+  refresh14          100/100 left (used 0, since not started)
+  refresh15          100/100 left (used 0, since not started)
+  refresh16          100/100 left (used 0, since not started)
+  refresh17          100/100 left (used 0, since not started)
+  refresh18          100/100 left (used 0, since not started)
+  refresh19          100/100 left (used 0, since not started)
+  refresh20          100/100 left (used 0, since not started)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …4436224210
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/75306436547812161327828258695915926358561186878088083979873603527664436224210
+  ✓ NFT page loaded  …4436224210
+  ✓ Session ready  refresh1  (100/100 left, started 2026-07-17T10:56:11Z)
+  · Refreshing …4436224210  (1/656)  (account: refresh1)
+  ✓ …4436224210  refresh clicked
+  Quota              99/100 remaining for refresh1
+  · Refreshing …4652956509  (2/656)  (account: refresh1)
+  ✓ …4652956509  refresh clicked
+  Quota              98/100 remaining for refresh1
+  · Refreshing …2433056117  (3/656)  (account: refresh1)
+  ✓ …2433056117  refresh clicked
+  Quota              97/100 remaining for refresh1
+  · Refreshing …9895489227  (4/656)  (account: refresh1)
+  ✓ …9895489227  refresh clicked
+  Quota              96/100 remaining for refresh1
+  · Refreshing …8157238248  (5/656)  (account: refresh1)
+  ✓ …8157238248  refresh clicked
+  Quota              95/100 remaining for refresh1
+  · Refreshing …7685038888  (6/656)  (account: refresh1)
+  ✓ …7685038888  refresh clicked
+  Quota              94/100 remaining for refresh1
+  · Refreshing …4841300172  (7/656)  (account: refresh1)
+  ✓ …4841300172  refresh clicked
+  Quota              93/100 remaining for refresh1
+  · Refreshing …7687727946  (8/656)  (account: refresh1)
+  ✓ …7687727946  refresh clicked
+  Quota              92/100 remaining for refresh1
+  · Refreshing …2103920315  (9/656)  (account: refresh1)
+  ✓ …2103920315  refresh clicked
+  Quota              91/100 remaining for refresh1
+  · Refreshing …2642094623  (10/656)  (account: refresh1)
+  ✓ …2642094623  refresh clicked
+  Quota              90/100 remaining for refresh1
+  · Refreshing …9957155937  (11/656)  (account: refresh1)
+  ✓ …9957155937  refresh clicked
+  Quota              89/100 remaining for refresh1
+  · Refreshing …2704904882  (12/656)  (account: refresh1)
+  ✓ …2704904882  refresh clicked
+  Quota              88/100 remaining for refresh1
+  · Refreshing …5433807169  (13/656)  (account: refresh1)
+  ✓ …5433807169  refresh clicked
+  Quota              87/100 remaining for refresh1
+  · Refreshing …6620502309  (14/656)  (account: refresh1)
+  ✓ …6620502309  refresh clicked
+  Quota              86/100 remaining for refresh1
+  · Refreshing …3772825904  (15/656)  (account: refresh1)
+  ✓ …3772825904  refresh clicked
+  Quota              85/100 remaining for refresh1
+  · Refreshing …6657043384  (16/656)  (account: refresh1)
+  ✓ …6657043384  refresh clicked
+  Quota              84/100 remaining for refresh1
+  · Refreshing …0051930857  (17/656)  (account: refresh1)
+  ✓ …0051930857  refresh clicked
+  Quota              83/100 remaining for refresh1
+  · Refreshing …9561324223  (18/656)  (account: refresh1)
+  ✓ …9561324223  refresh clicked
+  Quota              82/100 remaining for refresh1
+  · Refreshing …1381240249  (19/656)  (account: refresh1)
+  ✓ …1381240249  refresh clicked
+  Quota              81/100 remaining for refresh1
+  · Refreshing …3093496226  (20/656)  (account: refresh1)
+  ⚠ Browser error (ReadTimeoutError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ⚠ Reloading login page after connection error
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …3093496226
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/98668026335412780539453975728554491979533994208329995797161435417043093496226
+  ✓ NFT page loaded  …3093496226
+  ✓ Session ready  refresh1  (81/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …3093496226  refresh clicked
+  Quota              80/100 remaining for refresh1
+  · Refreshing …2344087651  (21/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …2344087651
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/30329405597862050615410581021062847270306549585693562881792426059282344087651
+  ✓ NFT page loaded  …2344087651
+  ✓ Session ready  refresh1  (80/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …2344087651  refresh clicked
+  Quota              79/100 remaining for refresh1
+  · Refreshing …8544754650  (22/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …8544754650
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/3087151970856132120301466452583059894026269581959638693174583806308544754650
+  ✓ NFT page loaded  …8544754650
+  ✓ Session ready  refresh1  (79/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …8544754650  refresh clicked
+  Quota              78/100 remaining for refresh1
+  · Refreshing …7575051512  (23/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …7575051512
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/38084343278188716353035048891492092408922209730358438115037104382337575051512
+  ✓ NFT page loaded  …7575051512
+  ✓ Session ready  refresh1  (78/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …7575051512  refresh clicked
+  Quota              77/100 remaining for refresh1
+  · Refreshing …4435981715  (24/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …4435981715
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/105639183959489681808266164455685357773337695754844352697645551529324435981715
+  ✓ NFT page loaded  …4435981715
+  ✓ Session ready  refresh1  (77/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …4435981715  refresh clicked
+  Quota              76/100 remaining for refresh1
+  · Refreshing …0442033051  (25/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …0442033051
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/50725052611948407856600911794074466306152110128778731129164404183260442033051
+  ✓ NFT page loaded  …0442033051
+  ✓ Session ready  refresh1  (76/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …0442033051  refresh clicked
+  Quota              75/100 remaining for refresh1
+  · Refreshing …2737149660  (26/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …2737149660
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/72750617296040741118129142705071878206212423287931806941258617136562737149660
+  ✓ NFT page loaded  …2737149660
+  ✓ Session ready  refresh1  (75/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …2737149660  refresh clicked
+  Quota              74/100 remaining for refresh1
+  · Refreshing …6025135418  (27/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …6025135418
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/39240825422904251920515995306079089671498990226818787473195417124906025135418
+  ✓ NFT page loaded  …6025135418
+  ✓ Session ready  refresh1  (74/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …6025135418  refresh clicked
+  Quota              73/100 remaining for refresh1
+  · Refreshing …5213161465  (28/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …5213161465
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/53836151835166657302748455920023353566900307469855971194410518386135213161465
+  ✓ NFT page loaded  …5213161465
+  ✓ Session ready  refresh1  (73/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …5213161465  refresh clicked
+  Quota              72/100 remaining for refresh1
+  · Refreshing …8627652016  (29/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …8627652016
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/43439772781598931847287713506460939484418019542326785773201225882708627652016
+  ✓ NFT page loaded  …8627652016
+  ✓ Session ready  refresh1  (72/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …8627652016  refresh clicked
+  Quota              71/100 remaining for refresh1
+  · Refreshing …4595282100  (30/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …4595282100
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/51221010789353103991857699106032749486323392020138780294486242882314595282100
+  ✓ NFT page loaded  …4595282100
+  ✓ Session ready  refresh1  (71/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …4595282100  refresh clicked
+  Quota              70/100 remaining for refresh1
+  · Refreshing …4473764466  (31/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …4473764466
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/80983017529961516405464064508851845220644926806966255119310121236034473764466
+  ✓ NFT page loaded  …4473764466
+  ✓ Session ready  refresh1  (70/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …4473764466  refresh clicked
+  Quota              69/100 remaining for refresh1
+  · Refreshing …5336500853  (32/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …5336500853
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/104635714523084920308080809185816617587582910733543569253410154215405336500853
+  ✓ NFT page loaded  …5336500853
+  ✓ Session ready  refresh1  (69/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …5336500853  refresh clicked
+  Quota              68/100 remaining for refresh1
+  · Refreshing …3905466864  (33/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …3905466864
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/99956529685114695674701406701722788211233625191780595322355927479333905466864
+  ✓ NFT page loaded  …3905466864
+  ✓ Session ready  refresh1  (68/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …3905466864  refresh clicked
+  Quota              67/100 remaining for refresh1
+  · Refreshing …7029466759  (34/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …7029466759
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/5425306053669982648483977581192173239751438371066499196217980028287029466759
+  ✓ NFT page loaded  …7029466759
+  ✓ Session ready  refresh1  (67/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …7029466759  refresh clicked
+  Quota              66/100 remaining for refresh1
+  · Refreshing …8510617069  (35/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …8510617069
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/77381129763433580810184736236236058074318067757679672781677088479868510617069
+  ✓ NFT page loaded  …8510617069
+  ✓ Session ready  refresh1  (66/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …8510617069  refresh clicked
+  Quota              65/100 remaining for refresh1
+  · Refreshing …3688295761  (36/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …3688295761
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/45752828165689690795545447546173364433619210212668732691266128427313688295761
+  ✓ NFT page loaded  …3688295761
+  ✓ Session ready  refresh1  (65/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …3688295761  refresh clicked
+  Quota              64/100 remaining for refresh1
+  · Refreshing …7046562953  (37/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …7046562953
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/87206637450396762549205009683990423263337765114189416142306919619737046562953
+  ✓ NFT page loaded  …7046562953
+  ✓ Session ready  refresh1  (64/100 left, started 2026-07-17T10:56:11Z)
+  ✓ …7046562953  refresh clicked
+  Quota              63/100 remaining for refresh1
+  · Refreshing …5239881682  (38/656)  (account: refresh1)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …5239881682
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/28296182880888012213201935501948170516493414045593041893632481652215239881682
+  ✓ NFT page loaded  …5239881682
+  ✓ Session ready  refresh1  (63/100 left, started 2026-07-17T10:56:11Z)
+  ⚠ Rotated to refresh2
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …5239881682
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/28296182880888012213201935501948170516493414045593041893632481652215239881682
+  ✓ NFT page loaded  …5239881682
+  ✓ Session ready  refresh2  (100/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …5239881682  refresh clicked
+  Quota              99/100 remaining for refresh2
+  · Refreshing …4750766166  (39/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …4750766166
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/29602903338939233408654400837979075697507420070429981895019850642054750766166
+  ✓ NFT page loaded  …4750766166
+  ✓ Session ready  refresh2  (99/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …4750766166  refresh clicked
+  Quota              98/100 remaining for refresh2
+  · Refreshing …7944217778  (40/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …7944217778
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/97081849321078791254244677274790412778179321635908118159261743022417944217778
+  ✓ NFT page loaded  …7944217778
+  ✓ Session ready  refresh2  (98/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …7944217778  refresh clicked
+  Quota              97/100 remaining for refresh2
+  · Refreshing …1581147374  (41/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …1581147374
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/88622015003599083183518878545869500718460226727967484815002771764151581147374
+  ✓ NFT page loaded  …1581147374
+  ✓ Session ready  refresh2  (97/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …1581147374  refresh clicked
+  Quota              96/100 remaining for refresh2
+  · Refreshing …8152912840  (42/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …8152912840
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/6000138787614161245667337711730381119691796302104620279389292039008152912840
+  ✓ NFT page loaded  …8152912840
+  ✓ Session ready  refresh2  (96/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …8152912840  refresh clicked
+  Quota              95/100 remaining for refresh2
+  · Refreshing …1304671325  (43/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …1304671325
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/28690226833257388320714845317829450038104860730264133112353487922621304671325
+  ✓ NFT page loaded  …1304671325
+  ✓ Session ready  refresh2  (95/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …1304671325  refresh clicked
+  Quota              94/100 remaining for refresh2
+  · Refreshing …0358462944  (44/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …0358462944
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/25983999873457577078443075005299269899150407713658886402814214527030358462944
+  ✓ NFT page loaded  …0358462944
+  ✓ Session ready  refresh2  (94/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …0358462944  refresh clicked
+  Quota              93/100 remaining for refresh2
+  · Refreshing …4731028083  (45/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …4731028083
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/66769372594684842429190201243718608548213262044672452260428491176854731028083
+  ✓ NFT page loaded  …4731028083
+  ✓ Session ready  refresh2  (93/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …4731028083  refresh clicked
+  Quota              92/100 remaining for refresh2
+  · Refreshing …6133830587  (46/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …6133830587
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/101048056463142834032830806711760681695948020337099480639355933679436133830587
+  ✓ NFT page loaded  …6133830587
+  ✓ Session ready  refresh2  (92/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …6133830587  refresh clicked
+  Quota              91/100 remaining for refresh2
+  · Refreshing …2524016797  (47/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …2524016797
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/14801669202487731507963814273074452683526824364436373283175027502524016797
+  ✓ NFT page loaded  …2524016797
+  ✓ Session ready  refresh2  (91/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …2524016797  refresh clicked
+  Quota              90/100 remaining for refresh2
+  · Refreshing …0028766957  (48/656)  (account: refresh2)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …0028766957
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/41340650798985371021273907054192019566486204633153787460881284204490028766957
+  ✓ NFT page loaded  …0028766957
+  ✓ Session ready  refresh2  (90/100 left, started 2026-07-17T11:20:24Z)
+  ✓ …0028766957  refresh clicked
+  Quota              89/100 remaining for refresh2
+  · Refreshing …2183897388  (49/656)  (account: refresh2)
+  ⚠ Rotated to refresh3
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …2183897388
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/24041952006939076890520674976228856937813376158826763945794508046292183897388
+  ✓ NFT page loaded  …2183897388
+  ✓ Session ready  refresh3  (100/100 left, started 2026-07-17T11:32:28Z)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …2183897388
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/24041952006939076890520674976228856937813376158826763945794508046292183897388
+  ✓ NFT page loaded  …2183897388
+  ✓ Session ready  refresh3  (100/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …2183897388  refresh clicked
+  Quota              99/100 remaining for refresh3
+  · Refreshing …3238293156  (50/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …3238293156
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48805064401109186832232660411653998608769786845688191446029604240823238293156
+  ✓ NFT page loaded  …3238293156
+  ✓ Session ready  refresh3  (99/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …3238293156  refresh clicked
+  Quota              98/100 remaining for refresh3
+  · Refreshing …9617834067  (51/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …9617834067
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/97166046226095585599445351534623987633611104647523648567761094168229617834067
+  ✓ NFT page loaded  …9617834067
+  ✓ Session ready  refresh3  (98/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …9617834067  refresh clicked
+  Quota              97/100 remaining for refresh3
+  · Refreshing …6135139997  (52/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …6135139997
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/9988405594513070838790740024086162037953522965209180043436505490136135139997
+  ✓ NFT page loaded  …6135139997
+  ✓ Session ready  refresh3  (97/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …6135139997  refresh clicked
+  Quota              96/100 remaining for refresh3
+  · Refreshing …7672658320  (53/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …7672658320
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/382397811044953482494452655721228982262602311698828482077309375237672658320
+  ✓ NFT page loaded  …7672658320
+  ✓ Session ready  refresh3  (96/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …7672658320  refresh clicked
+  Quota              95/100 remaining for refresh3
+  · Refreshing …8719584969  (54/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …8719584969
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/46260920671954678236701527285504359788442208885609797749279634434558719584969
+  ✓ NFT page loaded  …8719584969
+  ✓ Session ready  refresh3  (95/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …8719584969  refresh clicked
+  Quota              94/100 remaining for refresh3
+  · Refreshing …0640688641  (55/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …0640688641
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/71634938853525963804386515469935758835093560304126957857573955292780640688641
+  ✓ NFT page loaded  …0640688641
+  ✓ Session ready  refresh3  (94/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …0640688641  refresh clicked
+  Quota              93/100 remaining for refresh3
+  · Refreshing …9296769316  (56/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …9296769316
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/46536216652459907785799590548621490075215373531455270892253048671589296769316
+  ✓ NFT page loaded  …9296769316
+  ✓ Session ready  refresh3  (93/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …9296769316  refresh clicked
+  Quota              92/100 remaining for refresh3
+  · Refreshing …8084278977  (57/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …8084278977
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/9335241438420190316477139902568589232304830228736527668939411326828084278977
+  ✓ NFT page loaded  …8084278977
+  ✓ Session ready  refresh3  (92/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …8084278977  refresh clicked
+  Quota              91/100 remaining for refresh3
+  · Refreshing …5614453601  (58/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5614453601
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/115113609159600847550700599619422135893101763882535244184927517195225614453601
+  ✓ NFT page loaded  …5614453601
+  ✓ Session ready  refresh3  (91/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5614453601  refresh clicked
+  Quota              90/100 remaining for refresh3
+  · Refreshing …4369515739  (59/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …4369515739
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/38229616904462415486093447649543016930673944088000460051114001940414369515739
+  ✓ NFT page loaded  …4369515739
+  ✓ Session ready  refresh3  (90/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …4369515739  refresh clicked
+  Quota              89/100 remaining for refresh3
+  · Refreshing …5098403565  (60/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5098403565
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/7358253492041057050499975845045392175630486905301986037614105579835098403565
+  ✓ NFT page loaded  …5098403565
+  ✓ Session ready  refresh3  (89/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5098403565  refresh clicked
+  Quota              88/100 remaining for refresh3
+  · Refreshing …5479664393  (61/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5479664393
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/28439955309710252050352731973736750393708713268082564439552897124415479664393
+  ✓ NFT page loaded  …5479664393
+  ✓ Session ready  refresh3  (88/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5479664393  refresh clicked
+  Quota              87/100 remaining for refresh3
+  · Refreshing …3199856772  (62/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …3199856772
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/62773215075711096178598314172925337819937860885324794114283887475083199856772
+  ✓ NFT page loaded  …3199856772
+  ✓ Session ready  refresh3  (87/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …3199856772  refresh clicked
+  Quota              86/100 remaining for refresh3
+  · Refreshing …4291846752  (63/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …4291846752
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/49298792485450426834024615882772745215369396677790692631700891281334291846752
+  ✓ NFT page loaded  …4291846752
+  ✓ Session ready  refresh3  (86/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …4291846752  refresh clicked
+  Quota              85/100 remaining for refresh3
+  · Refreshing …2309904920  (64/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …2309904920
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/109469124238596578648866274042117312419472181813188054103659688290362309904920
+  ✓ NFT page loaded  …2309904920
+  ✓ Session ready  refresh3  (85/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …2309904920  refresh clicked
+  Quota              84/100 remaining for refresh3
+  · Refreshing …5060738341  (65/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5060738341
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/109679663623323722840690091614419021749730683830807412282622364477365060738341
+  ✓ NFT page loaded  …5060738341
+  ✓ Session ready  refresh3  (84/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5060738341  refresh clicked
+  Quota              83/100 remaining for refresh3
+  · Refreshing …4043147274  (66/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …4043147274
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/38216420180855985057701752568136126147787500820738315023330048498704043147274
+  ✓ NFT page loaded  …4043147274
+  ✓ Session ready  refresh3  (83/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …4043147274  refresh clicked
+  Quota              82/100 remaining for refresh3
+  · Refreshing …1288089239  (67/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …1288089239
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/60886294835305859116376621131043075381670341879007352198719878939551288089239
+  ✓ NFT page loaded  …1288089239
+  ✓ Session ready  refresh3  (82/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …1288089239  refresh clicked
+  Quota              81/100 remaining for refresh3
+  · Refreshing …4985423650  (68/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …4985423650
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/36138091181687566713871225506244930378403421650058465035795674279764985423650
+  ✓ NFT page loaded  …4985423650
+  ✓ Session ready  refresh3  (81/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …4985423650  refresh clicked
+  Quota              80/100 remaining for refresh3
+  · Refreshing …3526567714  (69/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …3526567714
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48763081833165237903913961413247269095083790281438221054421100450983526567714
+  ✓ NFT page loaded  …3526567714
+  ✓ Session ready  refresh3  (80/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …3526567714  refresh clicked
+  Quota              79/100 remaining for refresh3
+  · Refreshing …5252599185  (70/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5252599185
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/56076955840050773368813730985320518822006710539020452015058451266795252599185
+  ✓ NFT page loaded  …5252599185
+  ✓ Session ready  refresh3  (79/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5252599185  refresh clicked
+  Quota              78/100 remaining for refresh3
+  · Refreshing …3049622698  (71/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …3049622698
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/32004771294570958536103082694055728854171088683671779410985385554863049622698
+  ✓ NFT page loaded  …3049622698
+  ✓ Session ready  refresh3  (78/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …3049622698  refresh clicked
+  Quota              77/100 remaining for refresh3
+  · Refreshing …7515097305  (72/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …7515097305
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/102333459249396444422015774624601886174094989745683945968310921228347515097305
+  ✓ NFT page loaded  …7515097305
+  ✓ Session ready  refresh3  (77/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …7515097305  refresh clicked
+  Quota              76/100 remaining for refresh3
+  · Refreshing …3245716268  (73/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …3245716268
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/26330302950858390178224158908321251314148256634381869197042900822743245716268
+  ✓ NFT page loaded  …3245716268
+  ✓ Session ready  refresh3  (76/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …3245716268  refresh clicked
+  Quota              75/100 remaining for refresh3
+  · Refreshing …5048337954  (74/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5048337954
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/1892722473901534484441824255926680979982818460511497163754319874655048337954
+  ✓ NFT page loaded  …5048337954
+  ✓ Session ready  refresh3  (75/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5048337954  refresh clicked
+  Quota              74/100 remaining for refresh3
+  · Refreshing …7850478645  (75/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …7850478645
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/44243528300465757938139145672385637012808895543534388293288050798207850478645
+  ✓ NFT page loaded  …7850478645
+  ✓ Session ready  refresh3  (74/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …7850478645  refresh clicked
+  Quota              73/100 remaining for refresh3
+  · Refreshing …4321880453  (76/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …4321880453
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/73505490437218323653213485254707350593537980509728019805985588684324321880453
+  ✓ NFT page loaded  …4321880453
+  ✓ Session ready  refresh3  (73/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …4321880453  refresh clicked
+  Quota              72/100 remaining for refresh3
+  · Refreshing …5636276145  (77/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5636276145
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/34997229367240226310684475018547902125019957103108627327974233102095636276145
+  ✓ NFT page loaded  …5636276145
+  ✓ Session ready  refresh3  (72/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5636276145  refresh clicked
+  Quota              71/100 remaining for refresh3
+  · Refreshing …0686488023  (78/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …0686488023
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/27031436788382931835926708417470978823368279250049635675106407220180686488023
+  ✓ NFT page loaded  …0686488023
+  ✓ Session ready  refresh3  (71/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …0686488023  refresh clicked
+  Quota              70/100 remaining for refresh3
+  · Refreshing …7797550640  (79/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …7797550640
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/13886325420798230954296506136520296962127062966809726779668172137747797550640
+  ✓ NFT page loaded  …7797550640
+  ✓ Session ready  refresh3  (70/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …7797550640  refresh clicked
+  Quota              69/100 remaining for refresh3
+  · Refreshing …5713249737  (80/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …5713249737
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/77452788491596413980084259616493371517289315262958197168904202939085713249737
+  ✓ NFT page loaded  …5713249737
+  ✓ Session ready  refresh3  (69/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …5713249737  refresh clicked
+  Quota              68/100 remaining for refresh3
+  · Refreshing …9363454032  (81/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …9363454032
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/37656025854645828718419525658585129670271171285772361888173349984399363454032
+  ✓ NFT page loaded  …9363454032
+  ✓ Session ready  refresh3  (68/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …9363454032  refresh clicked
+  Quota              67/100 remaining for refresh3
+  · Refreshing …2698735213  (82/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …2698735213
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/104583168479099037349026463428134150321778201963981968744117926838762698735213
+  ✓ NFT page loaded  …2698735213
+  ✓ Session ready  refresh3  (67/100 left, started 2026-07-17T11:32:28Z)
+  ✓ …2698735213  refresh clicked
+  Quota              66/100 remaining for refresh3
+  · Refreshing …6668175471  (83/656)  (account: refresh3)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …6668175471
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/98977051733454238061378014271335338195987015592068034074059733488376668175471
+  ✓ NFT page loaded  …6668175471
+  ✓ Session ready  refresh3  (66/100 left, started 2026-07-17T11:32:28Z)
+  ⚠ Rotated to refresh4
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6668175471
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/98977051733454238061378014271335338195987015592068034074059733488376668175471
+  ✓ NFT page loaded  …6668175471
+  ✓ Session ready  refresh4  (100/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6668175471  refresh clicked
+  Quota              99/100 remaining for refresh4
+  · Refreshing …6470284925  (84/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6470284925
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/39931991822103717751688160442392909071267025757134540237451362024336470284925
+  ✓ NFT page loaded  …6470284925
+  ✓ Session ready  refresh4  (99/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6470284925  refresh clicked
+  Quota              98/100 remaining for refresh4
+  · Refreshing …1120434314  (85/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …1120434314
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/26156837255758385625565453189213276178216721990181656485826799523151120434314
+  ✓ NFT page loaded  …1120434314
+  ✓ Session ready  refresh4  (98/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …1120434314  refresh clicked
+  Quota              97/100 remaining for refresh4
+  · Refreshing …6070568451  (86/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6070568451
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/53048943349380968412629401304811548063533248787863128822611277279806070568451
+  ✓ NFT page loaded  …6070568451
+  ✓ Session ready  refresh4  (97/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6070568451  refresh clicked
+  Quota              96/100 remaining for refresh4
+  · Refreshing …7958118078  (87/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …7958118078
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/58272781659018999327431556485096006067829397521589134314999819973217958118078
+  ✓ NFT page loaded  …7958118078
+  ✓ Session ready  refresh4  (96/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …7958118078  refresh clicked
+  Quota              95/100 remaining for refresh4
+  · Refreshing …4720782626  (88/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …4720782626
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/39483602267212939852998044515009379259572674518810302965589731524204720782626
+  ✓ NFT page loaded  …4720782626
+  ✓ Session ready  refresh4  (95/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …4720782626  refresh clicked
+  Quota              94/100 remaining for refresh4
+  · Refreshing …9912889235  (89/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …9912889235
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/62474324242505306397109992588676061695676672006393053993305338889119912889235
+  ✓ NFT page loaded  …9912889235
+  ✓ Session ready  refresh4  (94/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …9912889235  refresh clicked
+  Quota              93/100 remaining for refresh4
+  · Refreshing …9117217068  (90/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …9117217068
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/31765328701187934563601474551238552483359459866379821749422399618579117217068
+  ✓ NFT page loaded  …9117217068
+  ✓ Session ready  refresh4  (93/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …9117217068  refresh clicked
+  Quota              92/100 remaining for refresh4
+  · Refreshing …5368779609  (91/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …5368779609
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/72927436897791337957874841997240633528602940502423368816515454908405368779609
+  ✓ NFT page loaded  …5368779609
+  ✓ Session ready  refresh4  (92/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …5368779609  refresh clicked
+  Quota              91/100 remaining for refresh4
+  · Refreshing …0062586316  (92/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …0062586316
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/42066233219693935947062714616141515890326993483023896831827831481830062586316
+  ✓ NFT page loaded  …0062586316
+  ✓ Session ready  refresh4  (91/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …0062586316  refresh clicked
+  Quota              90/100 remaining for refresh4
+  · Refreshing …9107373285  (93/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …9107373285
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/100201450662959418153774044447776890106413724951344369141191951013569107373285
+  ✓ NFT page loaded  …9107373285
+  ✓ Session ready  refresh4  (90/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …9107373285  refresh clicked
+  Quota              89/100 remaining for refresh4
+  · Refreshing …5837990590  (94/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …5837990590
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/112012618351164354133888163716772052208737134740580822595241168866895837990590
+  ✓ NFT page loaded  …5837990590
+  ✓ Session ready  refresh4  (89/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …5837990590  refresh clicked
+  Quota              88/100 remaining for refresh4
+  · Refreshing …6512969734  (95/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6512969734
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/57992934234848819521227058187014272629131616971069890298921636320576512969734
+  ✓ NFT page loaded  …6512969734
+  ✓ Session ready  refresh4  (88/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6512969734  refresh clicked
+  Quota              87/100 remaining for refresh4
+  · Refreshing …2577532687  (96/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …2577532687
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/19422697653391258243956854404208529208320926699408106147180255032262577532687
+  ✓ NFT page loaded  …2577532687
+  ✓ Session ready  refresh4  (87/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …2577532687  refresh clicked
+  Quota              86/100 remaining for refresh4
+  · Refreshing …4398656010  (97/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …4398656010
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/8980886900320033829950021548445389565786725860878067258051885988404398656010
+  ✓ NFT page loaded  …4398656010
+  ✓ Session ready  refresh4  (86/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …4398656010  refresh clicked
+  Quota              85/100 remaining for refresh4
+  · Refreshing …1795598489  (98/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …1795598489
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/49150766803324354662105954966626996036050231579914687588662339416221795598489
+  ✓ NFT page loaded  …1795598489
+  ✓ Session ready  refresh4  (85/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …1795598489  refresh clicked
+  Quota              84/100 remaining for refresh4
+  · Refreshing …9132353249  (99/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …9132353249
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/51877563541374660981184064337219782760691737555707324390076000759269132353249
+  ✓ NFT page loaded  …9132353249
+  ✓ Session ready  refresh4  (84/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …9132353249  refresh clicked
+  Quota              83/100 remaining for refresh4
+  · Refreshing …8078558155  (100/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …8078558155
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/32415421380322721407012669064627893317191627254094062054874309482288078558155
+  ✓ NFT page loaded  …8078558155
+  ✓ Session ready  refresh4  (83/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …8078558155  refresh clicked
+  Quota              82/100 remaining for refresh4
+  · Refreshing …1838680135  (101/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …1838680135
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/25770985563281592526673799010913136579527046095549558532675851337771838680135
+  ✓ NFT page loaded  …1838680135
+  ✓ Session ready  refresh4  (82/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …1838680135  refresh clicked
+  Quota              81/100 remaining for refresh4
+  · Refreshing …7180993784  (102/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …7180993784
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/6264956181913513064418183013092007258358877299291192161195298730507180993784
+  ✓ NFT page loaded  …7180993784
+  ✓ Session ready  refresh4  (81/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …7180993784  refresh clicked
+  Quota              80/100 remaining for refresh4
+  · Refreshing …4922271882  (103/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …4922271882
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/5001579896033443250622626172222344084891545098146793227737560678184922271882
+  ✓ NFT page loaded  …4922271882
+  ✓ Session ready  refresh4  (80/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …4922271882  refresh clicked
+  Quota              79/100 remaining for refresh4
+  · Refreshing …5210828127  (104/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …5210828127
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/28523242305281986931974758799363595630706613550037238712783828176875210828127
+  ✓ NFT page loaded  …5210828127
+  ✓ Session ready  refresh4  (79/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …5210828127  refresh clicked
+  Quota              78/100 remaining for refresh4
+  · Refreshing …8883510786  (105/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …8883510786
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/14776014350818289751339919407419535894647377032555659439624703282988883510786
+  ✓ NFT page loaded  …8883510786
+  ✓ Session ready  refresh4  (78/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …8883510786  refresh clicked
+  Quota              77/100 remaining for refresh4
+  · Refreshing …7787034551  (106/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …7787034551
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/43046497844130680873873671615635897764749143009142024955734141875377787034551
+  ✓ NFT page loaded  …7787034551
+  ✓ Session ready  refresh4  (77/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …7787034551  refresh clicked
+  Quota              76/100 remaining for refresh4
+  · Refreshing …3264599287  (107/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3264599287
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/90281108195431472550664819735623535812345169452120693224094131058473264599287
+  ✓ NFT page loaded  …3264599287
+  ✓ Session ready  refresh4  (76/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3264599287  refresh clicked
+  Quota              75/100 remaining for refresh4
+  · Refreshing …5158034008  (108/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …5158034008
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/9342584518032842860997676557222917066475396669121732827186727320675158034008
+  ✓ NFT page loaded  …5158034008
+  ✓ Session ready  refresh4  (75/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …5158034008  refresh clicked
+  Quota              74/100 remaining for refresh4
+  · Refreshing …2950552546  (109/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …2950552546
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/13138720239079773871797255798971863292884619440706519388604557786642950552546
+  ✓ NFT page loaded  …2950552546
+  ✓ Session ready  refresh4  (74/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …2950552546  refresh clicked
+  Quota              73/100 remaining for refresh4
+  · Refreshing …3054298200  (110/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3054298200
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/81745423877090522736186978093221708538208959858751798326139381145593054298200
+  ✓ NFT page loaded  …3054298200
+  ✓ Session ready  refresh4  (73/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3054298200  refresh clicked
+  Quota              72/100 remaining for refresh4
+  · Refreshing …3398955906  (111/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3398955906
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/88543874540140889747336831064794791137809540787008623314882801238453398955906
+  ✓ NFT page loaded  …3398955906
+  ✓ Session ready  refresh4  (72/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3398955906  refresh clicked
+  Quota              71/100 remaining for refresh4
+  · Refreshing …0434974238  (112/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …0434974238
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/105908868860672016685710804253753127845493478060830221940456615480140434974238
+  ✓ NFT page loaded  …0434974238
+  ✓ Session ready  refresh4  (71/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …0434974238  refresh clicked
+  Quota              70/100 remaining for refresh4
+  · Refreshing …7981237465  (113/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …7981237465
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/22544143214229927369638292084355752284981067364639338507887208863517981237465
+  ✓ NFT page loaded  …7981237465
+  ✓ Session ready  refresh4  (70/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …7981237465  refresh clicked
+  Quota              69/100 remaining for refresh4
+  · Refreshing …6788227911  (114/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6788227911
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/25021444693265433304135018211326898412518583314579954723714639611946788227911
+  ✓ NFT page loaded  …6788227911
+  ✓ Session ready  refresh4  (69/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6788227911  refresh clicked
+  Quota              68/100 remaining for refresh4
+  · Refreshing …6054419441  (115/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6054419441
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/68806766232509634198878227685633547762614991786669167065907595712446054419441
+  ✓ NFT page loaded  …6054419441
+  ✓ Session ready  refresh4  (68/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6054419441  refresh clicked
+  Quota              67/100 remaining for refresh4
+  · Refreshing …3341322671  (116/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3341322671
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/82510099777458294474165378682477728646313327775447136933859171075053341322671
+  ✓ NFT page loaded  …3341322671
+  ✓ Session ready  refresh4  (67/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3341322671  refresh clicked
+  Quota              66/100 remaining for refresh4
+  · Refreshing …1424473273  (117/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …1424473273
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/52352303686249308442890600334614164781802710494385198063345246245421424473273
+  ✓ NFT page loaded  …1424473273
+  ✓ Session ready  refresh4  (66/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …1424473273  refresh clicked
+  Quota              65/100 remaining for refresh4
+  · Refreshing …3511321389  (118/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3511321389
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/83408707154997226567478761576835006387474116322693002403360950637783511321389
+  ✓ NFT page loaded  …3511321389
+  ✓ Session ready  refresh4  (65/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3511321389  refresh clicked
+  Quota              64/100 remaining for refresh4
+  · Refreshing …8466564520  (119/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …8466564520
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/56040835245029257446952883318177029330584277425318015490152400080568466564520
+  ✓ NFT page loaded  …8466564520
+  ✓ Session ready  refresh4  (64/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …8466564520  refresh clicked
+  Quota              63/100 remaining for refresh4
+  · Refreshing …2573826023  (120/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …2573826023
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/76524487365107758016002236099054838072755452373499768386030902140332573826023
+  ✓ NFT page loaded  …2573826023
+  ✓ Session ready  refresh4  (63/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …2573826023  refresh clicked
+  Quota              62/100 remaining for refresh4
+  · Refreshing …3288473160  (121/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3288473160
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/55760752864399860658721626405902789492643245986716591676289952526313288473160
+  ✓ NFT page loaded  …3288473160
+  ✓ Session ready  refresh4  (62/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3288473160  refresh clicked
+  Quota              61/100 remaining for refresh4
+  · Refreshing …0724334226  (122/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …0724334226
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/60090996154961840473378300354399874419935079553111157722834381669160724334226
+  ✓ NFT page loaded  …0724334226
+  ✓ Session ready  refresh4  (61/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …0724334226  refresh clicked
+  Quota              60/100 remaining for refresh4
+  · Refreshing …6622786485  (123/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6622786485
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/56458821730153337323133157041096042924536215295677507302832051706326622786485
+  ✓ NFT page loaded  …6622786485
+  ✓ Session ready  refresh4  (60/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6622786485  refresh clicked
+  Quota              59/100 remaining for refresh4
+  · Refreshing …3662908492  (124/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3662908492
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/86966020759637581836646589416723176246965948378992282238539347717723662908492
+  ✓ NFT page loaded  …3662908492
+  ✓ Session ready  refresh4  (59/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3662908492  refresh clicked
+  Quota              58/100 remaining for refresh4
+  · Refreshing …4301005579  (125/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …4301005579
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/52003463084179971450073013949256585401566496391381895080000390434404301005579
+  ✓ NFT page loaded  …4301005579
+  ✓ Session ready  refresh4  (58/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …4301005579  refresh clicked
+  Quota              57/100 remaining for refresh4
+  · Refreshing …3403300642  (126/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3403300642
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/31254848844021412095938861029724955388308570667639720607232467144423403300642
+  ✓ NFT page loaded  …3403300642
+  ✓ Session ready  refresh4  (57/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3403300642  refresh clicked
+  Quota              56/100 remaining for refresh4
+  · Refreshing …2701057405  (127/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …2701057405
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/32919167834153433619327126128784931528031853330488822357924956902612701057405
+  ✓ NFT page loaded  …2701057405
+  ✓ Session ready  refresh4  (56/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …2701057405  refresh clicked
+  Quota              55/100 remaining for refresh4
+  · Refreshing …4499991000  (128/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …4499991000
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/84913583386936038699649028169413128770031528400238487188293299415114499991000
+  ✓ NFT page loaded  …4499991000
+  ✓ Session ready  refresh4  (55/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …4499991000  refresh clicked
+  Quota              54/100 remaining for refresh4
+  · Refreshing …1452469782  (129/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …1452469782
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/40088014343120137372564350872736310986843474794130703962068003889661452469782
+  ✓ NFT page loaded  …1452469782
+  ✓ Session ready  refresh4  (54/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …1452469782  refresh clicked
+  Quota              53/100 remaining for refresh4
+  · Refreshing …6368560272  (130/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6368560272
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/106036258709234571008694403730085032068107093257383963149453813458466368560272
+  ✓ NFT page loaded  …6368560272
+  ✓ Session ready  refresh4  (53/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6368560272  refresh clicked
+  Quota              52/100 remaining for refresh4
+  · Refreshing …0230979572  (131/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …0230979572
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/30272311186087928550885416047546693259349199081661188257716929156560230979572
+  ✓ NFT page loaded  …0230979572
+  ✓ Session ready  refresh4  (52/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …0230979572  refresh clicked
+  Quota              51/100 remaining for refresh4
+  · Refreshing …9025921291  (132/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …9025921291
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/26839627570806933385452830785445749590915281581137512261272590480999025921291
+  ✓ NFT page loaded  …9025921291
+  ✓ Session ready  refresh4  (51/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …9025921291  refresh clicked
+  Quota              50/100 remaining for refresh4
+  · Refreshing …0782924460  (133/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …0782924460
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/12827714876409059142053973129906446256717583840998231829580343983590782924460
+  ✓ NFT page loaded  …0782924460
+  ✓ Session ready  refresh4  (50/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …0782924460  refresh clicked
+  Quota              49/100 remaining for refresh4
+  · Refreshing …6432076832  (134/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …6432076832
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/17331086039539987841191972618285859482735678196158820411522487009696432076832
+  ✓ NFT page loaded  …6432076832
+  ✓ Session ready  refresh4  (49/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …6432076832  refresh clicked
+  Quota              48/100 remaining for refresh4
+  · Refreshing …1017685143  (135/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+Chrome driver init failed (attempt 1/3): <urlopen error [Errno 60] Operation timed out>
+Retrying in 5.0s...
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …1017685143
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/89592547386253508031337986532943633359663053755972636086748810312211017685143
+  ✓ NFT page loaded  …1017685143
+  ✓ Session ready  refresh4  (48/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …1017685143  refresh clicked
+  Quota              47/100 remaining for refresh4
+  · Refreshing …2378525905  (136/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …2378525905
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/42970667600405733136817048297791878145488475586003926301723463769792378525905
+  ✓ NFT page loaded  …2378525905
+  ✓ Session ready  refresh4  (47/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …2378525905  refresh clicked
+  Quota              46/100 remaining for refresh4
+  · Refreshing …0793655354  (137/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …0793655354
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/42184909244944124378108027172937549598217645358546390324426737041150793655354
+  ✓ NFT page loaded  …0793655354
+  ✓ Session ready  refresh4  (46/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …0793655354  refresh clicked
+  Quota              45/100 remaining for refresh4
+  · Refreshing …8083650332  (138/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …8083650332
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/6019898177266769526827377030731952329924892246573850201286307281198083650332
+  ✓ NFT page loaded  …8083650332
+  ✓ Session ready  refresh4  (45/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …8083650332  refresh clicked
+  Quota              44/100 remaining for refresh4
+  · Refreshing …3832206007  (139/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …3832206007
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/27413036296909750082659238264738930116649711450643657030251787839453832206007
+  ✓ NFT page loaded  …3832206007
+  ✓ Session ready  refresh4  (44/100 left, started 2026-07-17T12:10:37Z)
+  ✓ …3832206007  refresh clicked
+  Quota              43/100 remaining for refresh4
+  · Refreshing …4500663212  (140/656)  (account: refresh4)
+  ⚠ Browser error (MaxRetryError) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+Chrome driver init failed (attempt 1/3): [Errno 24] Too many open files
+Retrying in 5.0s...
+Chrome driver init failed (attempt 2/3): [Errno 24] Too many open files
+Retrying in 5.0s...
+Traceback (most recent call last):
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1252, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 1012, in _send_output
+    self.send(msg)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py", line 952, in send
+    self.connect()
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='localhost', port=57320): Failed to establish a new connection: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 267, in refresh_token_with_browser_recovery
+    return refresh_token(token_id, wait)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 530, in refresh_token
+    click_refresh_metadata(browser, wait)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 435, in click_refresh_metadata
+    refresh_btn = wait.until(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/support/wait.py", line 129, in until
+    value = method(self._driver)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/support/expected_conditions.py", line 104, in _predicate
+    return driver.find_element(*locator)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/remote/webdriver.py", line 926, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/remote/webdriver.py", line 455, in execute
+    response = cast(RemoteConnection, self.command_executor).execute(driver_command, params)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/remote/remote_connection.py", line 405, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/remote/remote_connection.py", line 429, in _request
+    response = self._conn.request(method, url, body=body, headers=headers, timeout=self._client_config.timeout)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/_request_methods.py", line 143, in request
+    return self.request_encode_body(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/_request_methods.py", line 278, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/poolmanager.py", line 457, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 871, in urlopen
+    return self.urlopen(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 871, in urlopen
+    return self.urlopen(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 871, in urlopen
+    return self.urlopen(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=57320): Max retries exceeded with url: /session/a81d379ef0d77ce9b514e569c9b6effa/element (Caused by NewConnectionError("HTTPConnection(host='localhost', port=57320): Failed to establish a new connection: [Errno 61] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 636, in <module>
+    main()
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 610, in main
+    result = refresh_token_with_browser_recovery(token_id, wait)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 278, in refresh_token_with_browser_recovery
+    wait = restart_browser_session(token_id)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 259, in restart_browser_session
+    ensure_active_account_session(token_id=token_id)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 353, in ensure_active_account_session
+    login_active_account(token_id=token_id)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 289, in login_active_account
+    browser = ensure_driver()
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/refresh-metadata/refresh.py", line 222, in ensure_driver
+    driver = login.create_driver()
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/accounts/login.py", line 114, in create_driver
+    raise RuntimeError(f"Could not start Chrome after {DRIVER_RETRIES} attempts: {last_error}")
+RuntimeError: Could not start Chrome after 3 attempts: [Errno 24] Too many open files
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 688 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      688
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  · Re-logging in 1 account(s) via Selenium (steps 1→2→3)
+  · First tokenId  75306436547812161327828258695915926358561186878088083979873603527664436224210  (from tokens.csv)
+  · [1/1] refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan  (Default)
+  · Chrome version_main  150
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …4436224210
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/75306436547812161327828258695915926358561186878088083979873603527664436224210
+  ✓ NFT page loaded  …4436224210
+  · Step 3/3  Capture cookie + userAgent  refresh1
+  ✓ Captured  10 cookies  cf_clearance=True  session=True
+  ✓ Saved to account state  refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+
+── Step 5: Refresh out-of-sync + crawl-error tokens (Selenium) 
+  Out-of-sync        610
+  Crawl errors       46
+  To refresh         656
+  Accounts needed    7
+  Account pool       refresh1,refresh2,refresh3,refresh4,refresh5,refresh6,refresh7,refresh8,refresh9,refresh10,refresh11,refresh12,refresh13,refresh14,refresh15,refresh16,refresh17,refresh18,refresh19,refresh20
+
+  ▸ refresh-metadata/refresh.py
+Traceback (most recent call last):
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/run_workflow.py", line 187, in <module>
+    main()
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/run_workflow.py", line 181, in main
+    run_phase("refresh-metadata/refresh.py", [sys.executable, "refresh-metadata/refresh.py"], env=refresh_env)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/run_workflow.py", line 45, in run_phase
+    subprocess.run(cmd, cwd=SCRIPT_DIR, env=merged, check=True)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Library/Developer/CommandLineTools/usr/bin/python3', 'refresh-metadata/refresh.py']' returned non-zero exit status 1.
+=== exit 1 at Fri Jul 17 21:03:19 HKT 2026 ===
+=== git push log: Fri Jul 17 21:03:19 HKT 2026 ===
