@@ -126,13 +126,21 @@ def main():
         substep("Fetch shared token sheet (CSV export)")
         try:
             fetched, sheet_id, gid = fetch_tokens()
-            ok(f"Pulled {fetched} token ids from sheet {sheet_id} (gid={gid})")
+            if fetched == 0:
+                ok(f"Sheet is empty (header only) — wrote tokens.csv from sheet {sheet_id} (gid={gid})")
+            else:
+                ok(f"Pulled {fetched} token ids from sheet {sheet_id} (gid={gid})")
         except Exception as exc:  # network / sharing / format failures
             fail(f"Sheet fetch failed: {exc}")
             raise SystemExit("Aborting — could not refresh tokens.csv (use --skip-fetch to run on the local file)")
 
     token_count = count_token_ids()
     print_inputs(token_count)
+
+    if token_count == 0:
+        ok("No token ids in tokens.csv — skipping crawl and refresh")
+        banner("Workflow complete")
+        return
 
     logged_accounts = set()
 

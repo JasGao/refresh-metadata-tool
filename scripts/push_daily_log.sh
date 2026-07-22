@@ -6,6 +6,7 @@ set -euo pipefail
 REPO_DIR="${1:?repo dir required}"
 LOG_FILE="${2:?log file required}"
 EXIT_CODE="${3:-0}"
+PYTHON_BIN="${4:-python3}"
 
 if [ "${REFRESH_GIT_PUSH:-1}" = "0" ]; then
   echo "REFRESH_GIT_PUSH=0 — skipping git push"
@@ -27,6 +28,40 @@ if [ ! -f "$LOG_FILE" ]; then
   exit 0
 fi
 
+TOKEN_COUNT="$(
+  "$PYTHON_BIN" -c "
+import sys
+sys.path.insert(0, '${REPO_DIR}')
+from lib.tokenids import count_token_ids
+print(count_token_ids())
+" 2>/dev/null || echo 0
+)"
+
+LOG_BASENAME="$(basename "$LOG_FILE" .log)"
+RUN_DATE=""
+if [[ "$LOG_BASENAME" =~ ^daily-([0-9]{8})- ]]; then
+  RUN_DATE="${BASH_REMATCH[1]}"
+elif [[ "$LOG_BASENAME" =~ ^([0-9]{8})- ]]; then
+  RUN_DATE="${BASH_REMATCH[1]}"
+fi
+if [ -z "$RUN_DATE" ]; then
+  RUN_DATE="$(date +%Y%m%d)"
+fi
+
+if [ "$EXIT_CODE" -eq 0 ] || [ "$TOKEN_COUNT" -eq 0 ]; then
+  RUN_STATUS="success"
+else
+  RUN_STATUS="failed"
+fi
+
+COMMIT_TITLE="${RUN_DATE}-${TOKEN_COUNT}rows-${RUN_STATUS}"
+FINAL_LOG="$REPO_DIR/logs/${COMMIT_TITLE}.log"
+
+if [ "$LOG_FILE" != "$FINAL_LOG" ]; then
+  mv "$LOG_FILE" "$FINAL_LOG"
+  LOG_FILE="$FINAL_LOG"
+fi
+
 rel_log="${LOG_FILE#"$REPO_DIR"/}"
 git -C "$REPO_DIR" add -- "$rel_log"
 
@@ -35,9 +70,8 @@ if git -C "$REPO_DIR" diff --staged --quiet; then
   exit 0
 fi
 
-ts="$(basename "$LOG_FILE" .log)"
 if ! git -C "$REPO_DIR" commit -m "$(cat <<EOF
-daily run log: $ts (exit $EXIT_CODE)
+${COMMIT_TITLE}
 EOF
 )"; then
   echo "git commit failed — skipping push"
@@ -51,12 +85,12 @@ push_log() {
 }
 
 if push_log; then
-  echo "pushed log to origin/$branch"
+  echo "pushed log to origin/$branch (${COMMIT_TITLE})"
 elif [ -n "${GIT_SSH_COMMAND:-}" ]; then
   echo "git push failed on port 22 — retrying via ssh.github.com:443"
   export GIT_SSH_COMMAND="${GIT_SSH_COMMAND} -p 443 -o Hostname=ssh.github.com"
   if push_log; then
-    echo "pushed log to origin/$branch (via port 443)"
+    echo "pushed log to origin/$branch (${COMMIT_TITLE}, via port 443)"
   else
     echo "git push failed — log committed locally only"
   fi

@@ -77,7 +77,8 @@ def fetch_tokens(dest=None):
     """Download the sheet and overwrite tokens.csv. Returns the token count.
 
     A .bak copy of the previous file is kept so a bad fetch is recoverable.
-    Raises RuntimeError if the response is not a usable token CSV.
+    An empty sheet (header only) writes tokens.csv with just the header and returns 0.
+    Raises RuntimeError if the HTTP response is not a usable CSV export.
     """
     dest = dest or TOKEN_IDS_FILE
     sheet_id, gid = _resolve_ref()
@@ -99,9 +100,6 @@ def fetch_tokens(dest=None):
         )
 
     ids = _normalize_ids(response.text)
-    if not ids:
-        raise RuntimeError("Sheet returned no token ids (empty after header).")
-
     if os.path.exists(dest):
         backup = f"{dest}.bak"
         with open(dest, "r") as src, open(backup, "w") as bak:
@@ -110,7 +108,8 @@ def fetch_tokens(dest=None):
     tmp = f"{dest}.tmp"
     with open(tmp, "w") as file:
         file.write(HEADER + "\n")
-        file.write("\n".join(ids) + "\n")
+        if ids:
+            file.write("\n".join(ids) + "\n")
     os.replace(tmp, dest)
 
     return len(ids), sheet_id, gid

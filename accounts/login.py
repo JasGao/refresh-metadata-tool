@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import time
@@ -84,7 +85,64 @@ def chrome_version_main():
     return detected
 
 
+def cleanup_stale_chromedrivers(exclude_pid=None):
+    """Kill orphaned chromedriver processes left after crashes."""
+    try:
+        output = subprocess.check_output(
+            ["pgrep", "-x", "chromedriver"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return 0
+
+    killed = 0
+    for line in output.strip().splitlines():
+        if not line.strip().isdigit():
+            continue
+        pid = int(line.strip())
+        if exclude_pid and pid == exclude_pid:
+            continue
+        try:
+            os.kill(pid, signal.SIGTERM)
+            killed += 1
+        except ProcessLookupError:
+            continue
+
+    if killed:
+        time.sleep(0.5)
+        warn(f"Cleaned up {killed} stale chromedriver process(es)")
+
+    return killed
+
+
+def terminate_driver(driver):
+    """Quit Selenium and ensure the chromedriver service process is gone."""
+    service_pid = None
+    if driver is not None:
+        try:
+            service = getattr(driver, "service", None)
+            if service and getattr(service, "process", None):
+                service_pid = service.process.pid
+        except Exception:
+            pass
+        try:
+            driver.quit()
+        except Exception:
+            pass
+        if service_pid:
+            for sig in (signal.SIGTERM, signal.SIGKILL):
+                try:
+                    os.kill(service_pid, sig)
+                except ProcessLookupError:
+                    break
+                time.sleep(0.2)
+
+    cleanup_stale_chromedrivers(exclude_pid=service_pid)
+
+
 def create_driver():
+    cleanup_stale_chromedrivers()
     version_main = chrome_version_main()
     last_error = None
 
@@ -125,10 +183,45 @@ def driver_is_alive(driver):
 def quit_driver(driver):
     if driver is None:
         return
+    terminate_driver(driver)
+
+
+def logged_in_username(driver):
     try:
-        driver.quit()
+        for cookie in driver.get_cookies():
+            if cookie.get("name") == "bscscan_username":
+                value = (cookie.get("value") or "").strip()
+                if value:
+                    return value
     except Exception:
-        pass
+        return None
+    return None
+
+
+def try_recover_chrome_profile(driver, username, token_id=None):
+    """Reuse a BscScan session already stored in the Chrome user-data profile."""
+    if not driver_is_alive(driver):
+        return False
+
+    info(f"Checking Chrome profile session for {username}")
+    try:
+        driver.get(MYACCOUNT_URL)
+        time.sleep(STEP_DELAY_SECONDS)
+        dismiss_cookie_banner(driver)
+        if not on_myaccount_page(driver) and not is_logged_in(driver):
+            return False
+
+        logged_as = logged_in_username(driver)
+        if logged_as and logged_as.lower() != username.lower():
+            warn(f"Chrome profile signed in as {logged_as}, need {username}")
+            return False
+
+        ok(f"Session recovered from Chrome profile  {username}")
+        if token_id:
+            visit_nft_page(driver, token_id)
+        return True
+    except WebDriverException:
+        return False
 
 
 def reset_browser_session(driver):

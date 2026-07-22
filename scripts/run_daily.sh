@@ -16,6 +16,7 @@ PYTHON_BIN="${REFRESH_PYTHON:-python3}"
 # launchd starts jobs with a minimal PATH; add the usual Homebrew/system
 # locations so python3, chromedriver, etc. resolve.
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${PATH:-}"
+export PYTHONUNBUFFERED=1
 export HOME="${HOME:-$(/usr/bin/whoami | xargs -I{} /bin/sh -c 'eval echo ~{}')}"
 export USER="${USER:-$(/usr/bin/whoami)}"
 
@@ -62,6 +63,13 @@ LOG="$REPO_DIR/logs/daily-$(date +%Y%m%d-%H%M%S).log"
 
 cd "$REPO_DIR" || { echo "cannot cd to $REPO_DIR"; exit 1; }
 
+# Stale chromedriver processes from crashed runs can leak file descriptors.
+if command -v pgrep >/dev/null 2>&1; then
+  while read -r pid; do
+    [ -n "$pid" ] && kill "$pid" 2>/dev/null || true
+  done < <(pgrep -x chromedriver 2>/dev/null || true)
+fi
+
 wait_for_network || true
 setup_git_ssh
 
@@ -78,7 +86,7 @@ code=0
 
 {
   echo "=== git push log: $(date) ==="
-  bash "$REPO_DIR/scripts/push_daily_log.sh" "$REPO_DIR" "$LOG" "$code"
+  bash "$REPO_DIR/scripts/push_daily_log.sh" "$REPO_DIR" "$LOG" "$code" "$PYTHON_BIN"
 } >>"$LOG" 2>&1
 
 exit $code

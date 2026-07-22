@@ -29,7 +29,10 @@ import sys
 import time
 
 from selenium.common.exceptions import (
+    InvalidSessionIdException,
+    NoSuchElementException,
     NoSuchWindowException,
+    StaleElementReferenceException,
     TimeoutException,
     WebDriverException,
 )
@@ -57,6 +60,16 @@ STEP_DELAY_SECONDS = login.STEP_DELAY_SECONDS
 
 REFRESH_BUTTON = "#ContentPlaceHolder1_btnModalRefreshMetadata"
 BROWSER_RESTART_ATTEMPTS = 2
+CONNECTION_ERROR_MARKERS = (
+    "connection refused",
+    "connection reset",
+    "chrome not reachable",
+    "invalid session id",
+    "failed to establish a new connection",
+    "max retries exceeded",
+    "read timed out",
+    "httpconnectionpool",
+)
 
 pool = AccountPool()
 active_account = None
@@ -113,11 +126,14 @@ def nft_url(token_id):
 
 
 def is_browser_connection_error(error):
-    """Selenium/ChromeDriver communication failures (incl. urllib3 read timeouts)."""
-    if isinstance(error, WebDriverException):
+    """True only when Selenium lost contact with Chrome/chromedriver."""
+    if isinstance(error, (InvalidSessionIdException, NoSuchWindowException)):
         return True
     if isinstance(error, (TimeoutError, socket.timeout)):
         return True
+    if isinstance(error, (TimeoutException, NoSuchElementException, StaleElementReferenceException)):
+        return False
+
     try:
         from urllib3.exceptions import (
             ConnectTimeoutError,
@@ -131,14 +147,12 @@ def is_browser_connection_error(error):
     except ImportError:
         pass
 
+    if isinstance(error, WebDriverException):
+        message = str(error).lower()
+        return any(marker in message for marker in CONNECTION_ERROR_MARKERS)
+
     message = str(error).lower()
-    return (
-        "timeout" in message
-        or "timed out" in message
-        or "connection refused" in message
-        or "connection reset" in message
-        or "chrome not reachable" in message
-    )
+    return any(marker in message for marker in CONNECTION_ERROR_MARKERS)
 
 
 def is_cloudflare_page(driver):
@@ -226,11 +240,45 @@ def ensure_driver():
 def quit_driver():
     global driver
     if driver is not None:
-        try:
-            driver.quit()
-        except Exception:
-            pass  # browser already gone — nothing to clean up
+        login.terminate_driver(driver)
         driver = None
+
+
+def _persist_session(browser, username):
+    cookies = login.cookie_string(browser)
+    user_agent = browser.execute_script("return navigator.userAgent") or ""
+    pool.save_session(username, cookies, user_agent, clear_exhaustion=False)
+    usage = pool.mark_refresh_usage_started(username, limit=TOKENS_PER_ACCOUNT)
+    started = usage.get("startedAt", "")
+    ok(
+        f"Session ready  {username}  "
+        f"({usage['remaining']}/{usage['limit']} left, started {started})"
+    )
+
+
+def ensure_driver_ready(token_id):
+    """Ping chromedriver; restart and recover the profile session if it died."""
+    global driver
+    if driver is not None and login.driver_is_alive(driver):
+        return driver
+    warn("Chrome driver not responding — restarting")
+    recover_browser_session(token_id)
+    return ensure_driver()
+
+
+def recover_browser_session(token_id):
+    """Restart Chrome and prefer profile recovery over Turnstile login."""
+    quit_driver()
+    login.cleanup_stale_chromedrivers()
+    browser = ensure_driver()
+    username = active_account["username"]
+    if login.try_recover_chrome_profile(browser, username, token_id=token_id):
+        _persist_session(browser, username)
+        return WebDriverWait(browser, 30)
+
+    warn(f"Chrome profile session unavailable for {username} — full login required")
+    login_active_account(token_id=token_id, force_full_login=True)
+    return WebDriverWait(ensure_driver(), 30)
 
 
 def try_saved_cookie_login(browser, username, token_id=None):
@@ -255,9 +303,7 @@ def navigate_browser(browser, url):
 
 
 def restart_browser_session(token_id):
-    quit_driver()
-    ensure_active_account_session(token_id=token_id)
-    return WebDriverWait(ensure_driver(), 30)
+    return recover_browser_session(token_id)
 
 
 def refresh_token_with_browser_recovery(token_id, wait):
@@ -285,10 +331,19 @@ def refresh_token_with_browser_recovery(token_id, wait):
     }
 
 
-def login_active_account(token_id=None):
+def login_active_account(token_id=None, force_full_login=False):
     browser = ensure_driver()
     username = active_account["username"]
     password = active_account["password"]
+
+    if not force_full_login:
+        if login.try_recover_chrome_profile(browser, username, token_id=token_id):
+            _persist_session(browser, username)
+            return
+        if try_saved_cookie_login(browser, username, token_id=token_id):
+            _persist_session(browser, username)
+            return
+
     info(f"Logging in  {username}")
 
     used_cookie_login = False
@@ -299,7 +354,7 @@ def login_active_account(token_id=None):
                 quit_driver()
                 browser = ensure_driver()
 
-            if try_saved_cookie_login(browser, username, token_id=token_id):
+            if not force_full_login and try_saved_cookie_login(browser, username, token_id=token_id):
                 used_cookie_login = True
                 break
 
@@ -317,15 +372,7 @@ def login_active_account(token_id=None):
 
     if token_id and not used_cookie_login:
         login.visit_nft_page(browser, token_id)
-    cookies = login.cookie_string(browser)
-    user_agent = browser.execute_script("return navigator.userAgent") or ""
-    pool.save_session(username, cookies, user_agent, clear_exhaustion=False)
-    usage = pool.mark_refresh_usage_started(username, limit=TOKENS_PER_ACCOUNT)
-    started = usage.get("startedAt", "")
-    ok(
-        f"Session ready  {username}  "
-        f"({usage['remaining']}/{usage['limit']} left, started {started})"
-    )
+    _persist_session(browser, username)
 
 
 def ensure_active_account_session(token_id=None):
@@ -350,7 +397,12 @@ def ensure_active_account_session(token_id=None):
         )
         return
 
-    login_active_account(token_id=token_id)
+    browser = ensure_driver()
+    if login.try_recover_chrome_profile(browser, username, token_id=token_id):
+        _persist_session(browser, username)
+        return
+
+    login_active_account(token_id=token_id, force_full_login=True)
 
 
 def rotate_account(mark_exhausted=None, warm_token_id=None):
@@ -480,7 +532,7 @@ def refresh_token(token_id, wait, retries=0):
                 ),
             }
 
-        browser = ensure_driver()
+        browser = ensure_driver_ready(token_id)
         url = nft_url(token_id)
         navigate_browser(browser, url)
         time.sleep(STEP_DELAY_SECONDS)
