@@ -52,7 +52,6 @@ from lib.paths import CRAWL_REPORT_FILE, migrate_legacy_paths
 from lib.report_tokens import load_refresh_token_ids, refresh_target_counts
 from lib.tokenids import REFRESH_TOKENS_PER_COOKIE
 
-CONTRACT = login.CONTRACT
 REPORT_FILE = CRAWL_REPORT_FILE
 DELAY_SECONDS = float(os.environ.get("BSCSCAN_REFRESH_DELAY", "5"))
 TOKENS_PER_ACCOUNT = int(os.environ.get("REFRESH_TOKENS_PER_COOKIE", str(REFRESH_TOKENS_PER_COOKIE)))
@@ -60,6 +59,8 @@ STEP_DELAY_SECONDS = login.STEP_DELAY_SECONDS
 
 REFRESH_BUTTON = "#ContentPlaceHolder1_btnModalRefreshMetadata"
 BROWSER_RESTART_ATTEMPTS = 2
+DRIVER_RESTART_DELAY = float(os.environ.get("BSCSCAN_DRIVER_RESTART_DELAY", "3"))
+BROWSER_RESTART_EVERY = int(os.environ.get("BSCSCAN_BROWSER_RESTART_EVERY", "19"))
 CONNECTION_ERROR_MARKERS = (
     "connection refused",
     "connection reset",
@@ -69,11 +70,27 @@ CONNECTION_ERROR_MARKERS = (
     "max retries exceeded",
     "read timed out",
     "httpconnectionpool",
+    "timed out receiving message from renderer",
+)
+PAGE_LOAD_TIMEOUT_MARKERS = (
+    "timed out receiving message from renderer",
+)
+SESSION_LOST_MARKERS = (
+    "refresh metadata button stayed disabled",
+    "account not recognized as logged in",
 )
 
 pool = AccountPool()
 active_account = None
 driver = None
+wait = None
+
+
+def sync_wait():
+    """Rebuild WebDriverWait after chromedriver is replaced."""
+    global wait
+    wait = WebDriverWait(ensure_driver(), 30)
+    return wait
 
 
 def load_tokens(report_path=REPORT_FILE, csv_path=None):
@@ -121,8 +138,11 @@ def slice_from_token(tokens, from_token):
     )
 
 
-def nft_url(token_id):
-    return login.nft_page_url(token_id)
+def is_page_load_timeout(error):
+    if not isinstance(error, TimeoutException):
+        return False
+    message = str(error).lower()
+    return any(marker in message for marker in PAGE_LOAD_TIMEOUT_MARKERS)
 
 
 def is_browser_connection_error(error):
@@ -131,7 +151,9 @@ def is_browser_connection_error(error):
         return True
     if isinstance(error, (TimeoutError, socket.timeout)):
         return True
-    if isinstance(error, (TimeoutException, NoSuchElementException, StaleElementReferenceException)):
+    if is_page_load_timeout(error):
+        return True
+    if isinstance(error, (NoSuchElementException, StaleElementReferenceException)):
         return False
 
     try:
@@ -155,6 +177,11 @@ def is_browser_connection_error(error):
     return any(marker in message for marker in CONNECTION_ERROR_MARKERS)
 
 
+def is_session_lost_error(error):
+    message = str(error).lower()
+    return any(marker in message for marker in SESSION_LOST_MARKERS)
+
+
 def is_cloudflare_page(driver):
     page = driver.page_source
     url = driver.current_url.lower()
@@ -163,13 +190,6 @@ def is_cloudflare_page(driver):
         or "challenges.cloudflare.com" in url
         or "verify you are human" in page.lower()
         or ("troubleshoot" in page.lower() and "cloudflare" in page.lower())
-    )
-
-
-def is_rate_limited(driver):
-    return (
-        is_rate_limited_text(driver.page_source)
-        or len(driver.find_elements(By.CSS_SELECTOR, "div.alert-danger")) > 0
     )
 
 
@@ -233,7 +253,10 @@ def init_account():
 def ensure_driver():
     global driver
     if driver is None:
-        driver = login.create_driver()
+        username = active_account["username"] if active_account else None
+        if username:
+            login.set_active_chrome_user(username)
+        driver = login.create_driver(username=username)
     return driver
 
 
@@ -245,11 +268,13 @@ def quit_driver():
 
 
 def _persist_session(browser, username):
-    cookies = login.cookie_string(browser)
+    cookies = login.capture_session_cookies(browser)
     user_agent = browser.execute_script("return navigator.userAgent") or ""
-    pool.save_session(username, cookies, user_agent, clear_exhaustion=False)
+    pool.save_session(username, cookies, user_agent, clear_exhaustion=True)
     usage = pool.mark_refresh_usage_started(username, limit=TOKENS_PER_ACCOUNT)
     started = usage.get("startedAt", "")
+    if not cookie_has_auth(cookies):
+        warn(f"Saved cookie for {username} may not restore login after browser restart")
     ok(
         f"Session ready  {username}  "
         f"({usage['remaining']}/{usage['limit']} left, started {started})"
@@ -258,59 +283,91 @@ def _persist_session(browser, username):
 
 def ensure_driver_ready(token_id):
     """Ping chromedriver; restart and recover the profile session if it died."""
-    global driver
+    global driver, wait
     if driver is not None and login.driver_is_alive(driver):
         return driver
     warn("Chrome driver not responding — restarting")
-    recover_browser_session(token_id)
+    wait = recover_browser_session(token_id)
     return ensure_driver()
 
 
-def recover_browser_session(token_id):
-    """Restart Chrome and prefer profile recovery over Turnstile login."""
+def _teardown_chrome(username):
+    login.set_active_chrome_user(username)
     quit_driver()
+    login.cleanup_stale_chrome_browsers(login.chrome_user_data_dir(username))
     login.cleanup_stale_chromedrivers()
-    browser = ensure_driver()
-    username = active_account["username"]
+    time.sleep(DRIVER_RESTART_DELAY)
+
+
+def restore_browser_session(browser, username, token_id=None):
+    """Restore a logged-in session after Chrome restart — profile, then cookies, then full login."""
     if login.try_recover_chrome_profile(browser, username, token_id=token_id):
         _persist_session(browser, username)
-        return WebDriverWait(browser, 30)
+        return sync_wait()
 
-    warn(f"Chrome profile session unavailable for {username} — full login required")
-    login_active_account(token_id=token_id, force_full_login=True)
-    return WebDriverWait(ensure_driver(), 30)
+    if try_saved_cookie_login(browser, username, token_id=token_id):
+        _persist_session(browser, username)
+        return sync_wait()
+
+    warn(f"Saved session unavailable for {username} — full login required")
+    login_active_account(token_id=token_id)
+    return wait
+
+
+def recover_browser_session(token_id):
+    """Restart Chrome and prefer profile/cookie recovery over Turnstile login."""
+    username = active_account["username"]
+    _teardown_chrome(username)
+    browser = ensure_driver()
+    return restore_browser_session(browser, username, token_id=token_id)
 
 
 def try_saved_cookie_login(browser, username, token_id=None):
     cookie = pool.get_cookie(username)
-    if not cookie or not cookie_has_auth(cookie):
+    if not cookie:
+        return False
+    if not cookie_has_auth(cookie):
+        warn(f"Saved cookie for {username} is missing session markers")
         return False
     info(f"Trying saved cookies for {username} before Selenium login")
-    apply_cookies(browser, cookie)
-    if login.confirm_logged_in(browser):
+    try:
+        apply_cookies(browser, cookie)
+    except WebDriverException as error:
+        warn(f"Could not apply saved cookies for {username} — {error}")
+        return False
+    if login.confirm_logged_in_as(browser, username):
         ok(f"Logged in via saved cookies  {username}")
         if token_id:
-            login.visit_nft_page(browser, token_id)
+            try:
+                login.visit_nft_page(browser, token_id)
+            except RuntimeError:
+                return False
         return True
     warn(f"Saved cookies did not restore session for {username}")
     return False
 
 
 def navigate_browser(browser, url):
-    browser.get(url)
+    try:
+        browser.get(url)
+    except TimeoutException as error:
+        if not is_page_load_timeout(error):
+            raise
+        warn("Page load timed out — stopping load and continuing")
+        try:
+            browser.execute_script("window.stop();")
+        except Exception:
+            pass
     if login.is_browser_error_page(browser):
         raise RuntimeError("Browser connection error loading page")
 
 
-def restart_browser_session(token_id):
-    return recover_browser_session(token_id)
-
-
-def refresh_token_with_browser_recovery(token_id, wait):
+def refresh_token_with_browser_recovery(token_id):
+    global wait
     last_error = None
     for attempt in range(1, BROWSER_RESTART_ATTEMPTS + 1):
         try:
-            return refresh_token(token_id, wait)
+            return refresh_token(token_id)
         except Exception as error:
             if not is_browser_connection_error(error):
                 raise
@@ -321,7 +378,7 @@ def refresh_token_with_browser_recovery(token_id, wait):
                 f"Browser error ({type(error).__name__}) — "
                 f"restarting Chrome ({attempt}/{BROWSER_RESTART_ATTEMPTS})"
             )
-            wait = restart_browser_session(token_id)
+            wait = recover_browser_session(token_id)
     return {
         "status": "error",
         "error": (
@@ -331,32 +388,19 @@ def refresh_token_with_browser_recovery(token_id, wait):
     }
 
 
-def login_active_account(token_id=None, force_full_login=False):
+def login_active_account(token_id=None):
+    """Full Selenium login (Turnstile) for the active account."""
     browser = ensure_driver()
     username = active_account["username"]
     password = active_account["password"]
-
-    if not force_full_login:
-        if login.try_recover_chrome_profile(browser, username, token_id=token_id):
-            _persist_session(browser, username)
-            return
-        if try_saved_cookie_login(browser, username, token_id=token_id):
-            _persist_session(browser, username)
-            return
-
     info(f"Logging in  {username}")
 
-    used_cookie_login = False
     for attempt in range(1, login.DRIVER_RETRIES + 1):
         try:
             if not login.driver_is_alive(browser):
                 warn(f"Browser window closed — restarting Chrome ({attempt}/{login.DRIVER_RETRIES})")
                 quit_driver()
                 browser = ensure_driver()
-
-            if not force_full_login and try_saved_cookie_login(browser, username, token_id=token_id):
-                used_cookie_login = True
-                break
 
             login.reset_browser_session(browser)
             login.selenium_login(browser, username, password)
@@ -370,14 +414,14 @@ def login_active_account(token_id=None, force_full_login=False):
     else:
         raise RuntimeError(f"Could not log in {username} — browser kept closing")
 
-    if token_id and not used_cookie_login:
+    if token_id:
         login.visit_nft_page(browser, token_id)
     _persist_session(browser, username)
+    sync_wait()
 
 
 def ensure_active_account_session(token_id=None):
     username = active_account["username"]
-    usage = pool.get_refresh_usage(username, limit=TOKENS_PER_ACCOUNT)
 
     if pool.can_reuse_refresh_session(username, limit=TOKENS_PER_ACCOUNT):
         pool.mark_refresh_usage_started(username, limit=TOKENS_PER_ACCOUNT)
@@ -388,24 +432,32 @@ def ensure_active_account_session(token_id=None):
             f"({usage['remaining']}/{usage['limit']} left, started {started})"
         )
         browser = ensure_driver()
-        apply_cookies(browser, pool.get_cookie(username))
-        if token_id:
-            login.visit_nft_page(browser, token_id)
-        ok(
-            f"Session ready  {username}  "
-            f"({usage['remaining']}/{usage['limit']} left, started {started})"
-        )
-        return
+        if try_saved_cookie_login(browser, username, token_id=token_id):
+            ok(
+                f"Session ready  {username}  "
+                f"({usage['remaining']}/{usage['limit']} left, started {started})"
+            )
+            sync_wait()
+            return
+        warn(f"Saved session expired for {username} — restoring login")
+        quit_driver()
 
     browser = ensure_driver()
-    if login.try_recover_chrome_profile(browser, username, token_id=token_id):
-        _persist_session(browser, username)
-        return
+    restore_browser_session(browser, username, token_id=token_id)
 
-    login_active_account(token_id=token_id, force_full_login=True)
+
+def switch_active_account_session(token_id=None):
+    """Log out the current browser user and sign in as active_account."""
+    username = active_account["username"]
+    info(f"Switching browser session to {username}")
+    _teardown_chrome(username)
+    browser = ensure_driver()
+    login.reset_browser_session(browser)
+    return restore_browser_session(browser, username, token_id=token_id)
 
 
 def rotate_account(mark_exhausted=None, warm_token_id=None):
+    global wait
     global active_account
     if mark_exhausted and active_account:
         pool.mark_exhausted(active_account["username"], mark_exhausted)
@@ -420,7 +472,7 @@ def rotate_account(mark_exhausted=None, warm_token_id=None):
 
     active_account = next_account
     warn(f"Rotated to {next_account['username']}")
-    ensure_active_account_session(token_id=warm_token_id)
+    wait = switch_active_account_session(token_id=warm_token_id)
     return next_account
 
 
@@ -431,7 +483,7 @@ def note_token_processed():
     kv("Quota", f"{usage['remaining']}/{usage['limit']} remaining for {active_account['username']}")
     if usage["remaining"] <= 0:
         info("Refresh quota used up — rotating account")
-        rotate_account(mark_exhausted=USAGE_REFRESH)
+        rotate_account()
 
 
 def ensure_active_quota():
@@ -442,11 +494,29 @@ def ensure_active_quota():
     if usage["remaining"] > 0:
         return
     info(f"Refresh quota already used up for {active_account['username']} — rotating account")
-    if not rotate_account(mark_exhausted=USAGE_REFRESH):
+    if not rotate_account():
         raise SystemExit("No available accounts in pool. (all refresh quotas exhausted)")
 
 
-def click_refresh_metadata(driver, wait):
+def _cloudflare_failure(when=""):
+    account = active_account["username"] if active_account else "?"
+    suffix = f" {when}".rstrip()
+    return {
+        "status": "error",
+        "error": (
+            f"Cloudflare blocked {account}{suffix} — re-login: "
+            f"python3 accounts/login.py --account {account}"
+        ),
+    }
+
+
+def _rotate_on_cloudflare(warm_token_id, when=""):
+    if rotate_account(warm_token_id=warm_token_id):
+        return None
+    return _cloudflare_failure(when)
+
+
+def click_refresh_metadata(driver):
     """Open the NFT actions dropdown, then click Refresh Metadata."""
     clicked_dropdown = False
 
@@ -517,10 +587,12 @@ def click_refresh_metadata(driver, wait):
     time.sleep(STEP_DELAY_SECONDS)
 
 
-def refresh_token(token_id, wait, retries=0):
+def refresh_token(token_id, retries=0, session_retries=0):
+    global wait
     # Retry on Cloudflare/rate-limits by rotating accounts.
     # Recursion replaced with a loop to avoid stack growth.
     max_retries = len(pool.pool_usernames())
+    max_session_retries = 2
     while True:
         if retries >= max_retries:
             account = active_account["username"] if active_account else "?"
@@ -533,25 +605,18 @@ def refresh_token(token_id, wait, retries=0):
             }
 
         browser = ensure_driver_ready(token_id)
-        url = nft_url(token_id)
-        navigate_browser(browser, url)
+        navigate_browser(browser, login.nft_page_url(token_id))
         time.sleep(STEP_DELAY_SECONDS)
         login.dismiss_cookie_banner(browser)
 
         if is_cloudflare_page(browser):
-            if not rotate_account(warm_token_id=token_id):
-                account = active_account["username"] if active_account else "?"
-                return {
-                    "status": "error",
-                    "error": (
-                        f"Cloudflare blocked {account} — re-login: "
-                        f"python3 accounts/login.py --account {account}"
-                    ),
-                }
+            blocked = _rotate_on_cloudflare(token_id)
+            if blocked:
+                return blocked
             retries += 1
             continue
 
-        if is_rate_limited(browser):
+        if is_rate_limited_text(browser.page_source):
             if not rotate_account(mark_exhausted=USAGE_REFRESH, warm_token_id=token_id):
                 return {"status": "rate_limited", "error": "Daily limit hit — no more accounts in pool"}
             retries += 1
@@ -559,15 +624,9 @@ def refresh_token(token_id, wait, retries=0):
 
         if not login.nft_page_ready(browser):
             if is_cloudflare_page(browser):
-                if not rotate_account(warm_token_id=token_id):
-                    account = active_account["username"] if active_account else "?"
-                    return {
-                        "status": "error",
-                        "error": (
-                            f"Cloudflare blocked {account} — re-login: "
-                            f"python3 accounts/login.py --account {account}"
-                        ),
-                    }
+                blocked = _rotate_on_cloudflare(token_id)
+                if blocked:
+                    return blocked
                 retries += 1
                 continue
             return {
@@ -578,9 +637,41 @@ def refresh_token(token_id, wait, retries=0):
                 ),
             }
 
+        if not login.is_logged_in(browser):
+            if session_retries >= max_session_retries:
+                return {
+                    "status": "error",
+                    "error": (
+                        f"Session lost for {active_account['username']} — "
+                        f"re-login: python3 accounts/login.py --account {active_account['username']}"
+                    ),
+                }
+            session_retries += 1
+            warn(f"Not logged in — restoring session for {active_account['username']}")
+            wait = recover_browser_session(token_id)
+            continue
+
         try:
-            click_refresh_metadata(browser, wait)
+            click_refresh_metadata(browser)
         except TimeoutException as error:
+            return {
+                "status": "error",
+                "error": f"Refresh Metadata button not found — {error}",
+            }
+        except RuntimeError as error:
+            if is_session_lost_error(error):
+                if session_retries >= max_session_retries:
+                    return {
+                        "status": "error",
+                        "error": (
+                            f"Session lost for {active_account['username']} — "
+                            f"re-login: python3 accounts/login.py --account {active_account['username']}"
+                        ),
+                    }
+                session_retries += 1
+                warn(f"Session lost — restoring login for {active_account['username']}")
+                wait = recover_browser_session(token_id)
+                continue
             return {
                 "status": "error",
                 "error": f"Refresh Metadata button not found — {error}",
@@ -594,19 +685,13 @@ def refresh_token(token_id, wait, retries=0):
             }
 
         if is_cloudflare_page(browser):
-            if not rotate_account(warm_token_id=token_id):
-                account = active_account["username"] if active_account else "?"
-                return {
-                    "status": "error",
-                    "error": (
-                        f"Cloudflare blocked {account} after refresh click — re-login: "
-                        f"python3 accounts/login.py --account {account}"
-                    ),
-                }
+            blocked = _rotate_on_cloudflare(token_id, when="after refresh click")
+            if blocked:
+                return blocked
             retries += 1
             continue
 
-        if is_rate_limited(browser):
+        if is_rate_limited_text(browser.page_source):
             if not rotate_account(mark_exhausted=USAGE_REFRESH, warm_token_id=token_id):
                 return {"status": "rate_limited", "error": "Daily limit hit — no more accounts in pool"}
             retries += 1
@@ -650,21 +735,33 @@ def main():
     init_account()
     try:
         ensure_active_account_session(token_id=tokens[0])
-        wait = WebDriverWait(ensure_driver(), 30)
+        sync_wait()
 
         ok_count = fail_count = 0
+        tokens_since_browser_restart = 0
         total = len(tokens)
         for index, token_id in enumerate(tokens):
             ensure_active_quota()
             current = index + 1
             label = short_token(token_id)
             info(f"Refreshing {label}  ({current}/{total})  (account: {active_account['username']})")
-            result = refresh_token_with_browser_recovery(token_id, wait)
+            result = refresh_token_with_browser_recovery(token_id)
 
             if result["status"] == "ok":
                 ok(f"{label}  refresh clicked")
                 ok_count += 1
                 note_token_processed()
+                tokens_since_browser_restart += 1
+                if (
+                    BROWSER_RESTART_EVERY > 0
+                    and tokens_since_browser_restart >= BROWSER_RESTART_EVERY
+                    and index + 1 < len(tokens)
+                ):
+                    info(
+                        f"Proactive browser restart after {tokens_since_browser_restart} tokens"
+                    )
+                    wait = recover_browser_session(tokens[index + 1])
+                    tokens_since_browser_restart = 0
             elif result["status"] == "rate_limited":
                 fail(f"{label}  {result.get('error', 'rate limit')}")
                 fail_count += 1

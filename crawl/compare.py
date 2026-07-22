@@ -167,7 +167,7 @@ def parse_bscscan_props(html):
 
 
 def fetch_bscscan(token_id):
-    # Retry on Cloudflare/rate-limits until rotation exhausts the pool
+    # Retry on Cloudflare/rate-limits/503 until rotation exhausts the pool
     # (recursion replaced with a loop to avoid stack growth).
     while True:
         with cookie_lock:
@@ -176,6 +176,9 @@ def fetch_bscscan(token_id):
         try:
             html = http_get(url, headers=headers)
         except urllib.error.HTTPError as error:
+            if error.code == 503:
+                rotate_cookie("HTTP 503")
+                continue
             raise RuntimeError(f"BSCScan HTTP {error.code}") from error
 
         if 'id="collapseProperties"' not in html:

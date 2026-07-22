@@ -1,0 +1,52 @@
+=== refresh daily run: Mon Jul 13 18:39:14 HKT 2026 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/usr/bin/python3 (Python 3.9.6)
+args=<full pipeline>
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       19
+  Already done       0
+  Remaining          19
+  Concurrency        10
+  RPC                https://bsc-dataseed.binance.org
+  ✓ …6563955021  in_sync
+  ✗ …7920057544  Remote end closed connection without response
+  ✓ …9351908755  in_sync
+  ✓ …6780863049  in_sync
+  ✓ …5035577789  in_sync
+  ✓ …8678890934  in_sync
+  ✓ …1436441861  in_sync
+  ✗ …2882490219  <urlopen error [Errno 60] Operation timed out>
+  ✗ …8522622000  [Errno 60] Operation timed out
+  ✓ …3850113405  in_sync
+  · Batch done — 10/19 tokens
+  ✓ …6000443376  in_sync
+  ✓ …0551994306  in_sync
+  ✓ …5027418700  in_sync
+  ✓ …5787572353  in_sync
+  ✓ …5896779627  in_sync
+  ✓ …1869769073  in_sync
+  ✓ …2703195487  in_sync
+  ✓ …8796071647  in_sync
+  ✓ …9084600267  in_sync
+  · Batch done — 19/19 tokens
+
+── Crawl results ───────────────────────
+  in_sync            16
+  out_of_sync        0
+  errors             3
+  Progress file      progress.json
+  Report file        report.json
+  Report contents    0 out_of_sync, 3 errors
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(

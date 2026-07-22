@@ -43,15 +43,34 @@ def first_token_id():
 
 DRIVER_RETRIES = int(os.environ.get("BSCSCAN_DRIVER_RETRIES", "3"))
 DRIVER_RETRY_DELAY = float(os.environ.get("BSCSCAN_DRIVER_RETRY_DELAY", "5"))
-CHROME_USER_DATA = os.environ.get("BSCSCAN_CHROME_USER_DATA", "").strip()
+CHROME_USER_DATA = os.environ.get(
+    "BSCSCAN_CHROME_USER_DATA",
+    os.path.expanduser("~/.refresh/chrome-bscscan"),
+).strip()
 CHROME_PROFILE = os.environ.get("BSCSCAN_CHROME_PROFILE", "Default").strip() or "Default"
+_active_chrome_user = None
 
 
-def chrome_options():
+def set_active_chrome_user(username):
+    global _active_chrome_user
+    _active_chrome_user = username
+
+
+def chrome_user_data_dir(username=None):
+    username = username or _active_chrome_user
+    if not CHROME_USER_DATA:
+        return ""
+    if username:
+        return os.path.join(CHROME_USER_DATA, "profiles", username)
+    return CHROME_USER_DATA
+
+
+def chrome_options(username=None):
     options = uc.ChromeOptions()
-    if CHROME_USER_DATA:
-        os.makedirs(CHROME_USER_DATA, exist_ok=True)
-        options.add_argument(f"--user-data-dir={CHROME_USER_DATA}")
+    user_data = chrome_user_data_dir(username)
+    if user_data:
+        os.makedirs(user_data, exist_ok=True)
+        options.add_argument(f"--user-data-dir={user_data}")
         options.add_argument(f"--profile-directory={CHROME_PROFILE}")
     return options
 
@@ -83,6 +102,42 @@ def chrome_version_main():
         return int(version)
     detected = detect_chrome_version()
     return detected
+
+
+def cleanup_stale_chrome_browsers(user_data_dir=None):
+    """Kill orphaned Chrome processes tied to our user-data profile."""
+    profile_dir = (user_data_dir or chrome_user_data_dir()).strip()
+    if not profile_dir:
+        return 0
+
+    try:
+        output = subprocess.check_output(
+            ["pgrep", "-f", profile_dir],
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return 0
+
+    killed = 0
+    current_pid = os.getpid()
+    for line in output.strip().splitlines():
+        if not line.strip().isdigit():
+            continue
+        pid = int(line.strip())
+        if pid == current_pid:
+            continue
+        try:
+            os.kill(pid, signal.SIGTERM)
+            killed += 1
+        except ProcessLookupError:
+            continue
+
+    if killed:
+        time.sleep(1)
+        warn(f"Cleaned up {killed} stale Chrome process(es)")
+
+    return killed
 
 
 def cleanup_stale_chromedrivers(exclude_pid=None):
@@ -138,21 +193,37 @@ def terminate_driver(driver):
                     break
                 time.sleep(0.2)
 
+    cleanup_stale_chrome_browsers(chrome_user_data_dir())
     cleanup_stale_chromedrivers(exclude_pid=service_pid)
 
 
-def create_driver():
+def capture_session_cookies(driver):
+    """Read cookies from My Account so auth markers are included when present."""
+    try:
+        driver.get(MYACCOUNT_URL)
+        time.sleep(STEP_DELAY_SECONDS)
+        dismiss_cookie_banner(driver)
+    except WebDriverException:
+        pass
+    return cookie_string(driver)
+
+
+def create_driver(username=None):
+    if username:
+        set_active_chrome_user(username)
+    user_data = chrome_user_data_dir(username)
+    cleanup_stale_chrome_browsers(user_data)
     cleanup_stale_chromedrivers()
     version_main = chrome_version_main()
     last_error = None
 
-    if CHROME_USER_DATA:
-        info(f"Chrome profile  {CHROME_USER_DATA}  ({CHROME_PROFILE})")
+    if user_data:
+        info(f"Chrome profile  {user_data}  ({CHROME_PROFILE})")
     if version_main:
         info(f"Chrome version_main  {version_main}")
 
     for attempt in range(1, DRIVER_RETRIES + 1):
-        options = chrome_options()
+        options = chrome_options(username)
         try:
             if version_main:
                 driver = uc.Chrome(options=options, version_main=version_main)
@@ -194,7 +265,15 @@ def logged_in_username(driver):
                 if value:
                     return value
     except Exception:
-        return None
+        pass
+
+    try:
+        if on_myaccount_page(driver):
+            value = field_value(driver, "#ContentPlaceHolder1_txtUserName")
+            if value:
+                return value
+    except Exception:
+        pass
     return None
 
 
@@ -212,7 +291,9 @@ def try_recover_chrome_profile(driver, username, token_id=None):
             return False
 
         logged_as = logged_in_username(driver)
-        if logged_as and logged_as.lower() != username.lower():
+        if not logged_as:
+            return False
+        if logged_as.lower() != username.lower():
             warn(f"Chrome profile signed in as {logged_as}, need {username}")
             return False
 
@@ -349,6 +430,19 @@ def confirm_logged_in(driver):
     time.sleep(STEP_DELAY_SECONDS)
     dismiss_cookie_banner(driver)
     return on_myaccount_page(driver)
+
+
+def confirm_logged_in_as(driver, username):
+    if not confirm_logged_in(driver):
+        return False
+    logged_as = logged_in_username(driver)
+    if not logged_as:
+        warn(f"Could not verify logged-in username (expected {username})")
+        return False
+    if logged_as.lower() != username.lower():
+        warn(f"Logged in as {logged_as}, expected {username}")
+        return False
+    return True
 
 
 def poll_until_logged_in(driver, username, timeout=30):
@@ -633,7 +727,7 @@ def capture_session(driver, username):
     """Step 3: Read cookie + userAgent from the current (NFT) page."""
     info(f"Step 3/3  Capture cookie + userAgent  {username}")
 
-    cookies = cookie_string(driver)
+    cookies = capture_session_cookies(driver)
     if not cookies:
         raise RuntimeError(f"No cookies captured for {username}")
 
@@ -652,7 +746,7 @@ def capture_session(driver, username):
 def capture_account(pool, username, password, token_id, driver=None):
     owns_driver = driver is None
     if owns_driver:
-        driver = create_driver()
+        driver = create_driver(username=username)
 
     try:
         for attempt in range(1, DRIVER_RETRIES + 1):
@@ -662,7 +756,7 @@ def capture_account(pool, username, password, token_id, driver=None):
                         raise RuntimeError("Shared browser window closed — cannot recover")
                     warn(f"Browser window closed — restarting Chrome ({attempt}/{DRIVER_RETRIES})")
                     quit_driver(driver)
-                    driver = create_driver()
+                    driver = create_driver(username=username)
 
                 reset_browser_session(driver)
                 selenium_login(driver, username, password)
@@ -676,7 +770,7 @@ def capture_account(pool, username, password, token_id, driver=None):
                     raise
                 warn(f"Browser window closed — restarting Chrome ({attempt}/{DRIVER_RETRIES})")
                 quit_driver(driver)
-                driver = create_driver()
+                driver = create_driver(username=username)
 
         raise RuntimeError(f"Could not capture session for {username} — browser kept closing")
     finally:
@@ -761,17 +855,12 @@ def main():
         raise SystemExit("No accounts configured.")
 
     print(f"Logging in {len(targets)} account(s)...")
-    driver = create_driver() if len(targets) > 1 else None
-    try:
-        for index, username in enumerate(targets):
-            creds = pool.get_credentials(username)
-            print(f"[{index + 1}/{len(targets)}] {username}")
-            capture_account(pool, username, creds["password"], args.token_id, driver=driver)
-            if index + 1 < len(targets):
-                time.sleep(ACCOUNT_GAP_SECONDS)
-    finally:
-        if driver is not None:
-            driver.quit()
+    for index, username in enumerate(targets):
+        creds = pool.get_credentials(username)
+        print(f"[{index + 1}/{len(targets)}] {username}")
+        capture_account(pool, username, creds["password"], args.token_id, driver=None)
+        if index + 1 < len(targets):
+            time.sleep(ACCOUNT_GAP_SECONDS)
 
     missing = pool.missing_cookie_usernames()
     if missing:

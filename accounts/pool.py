@@ -33,7 +33,13 @@ REFRESH_USAGE_FIELD = "refreshUsage"
 
 
 def cookie_has_auth(cookie):
-    return bool(cookie) and any(marker in cookie for marker in AUTH_COOKIE_MARKERS)
+    if not cookie:
+        return False
+    if any(marker in cookie for marker in AUTH_COOKIE_MARKERS):
+        return True
+    # BscScan login is often carried by ASP.NET session + Cloudflare clearance only;
+    # Selenium's get_cookies() may omit bscscan_userid on some pages.
+    return "ASP.NET_SessionId=" in cookie and "cf_clearance=" in cookie and len(cookie) > 200
 
 
 def _now():
@@ -183,8 +189,6 @@ class AccountPool:
         tomorrow = _now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
         entry = self.session(username)
         entry[EXHAUSTED_FIELDS[usage]] = _iso(tomorrow)
-        if usage == USAGE_REFRESH:
-            self.mark_refresh_usage_exhausted(username)
         self.save()
         print(f"Marked {username} {usage}-exhausted until {entry[EXHAUSTED_FIELDS[usage]]}")
 
@@ -263,13 +267,6 @@ class AccountPool:
         self.save()
         return usage
 
-    def mark_refresh_usage_exhausted(self, username, limit=REFRESH_TOKENS_PER_COOKIE):
-        usage = self.init_refresh_usage(username, limit=limit)
-        usage["used"] = usage["limit"]
-        usage["remaining"] = 0
-        self.save()
-        return usage
-
     def init_pool_refresh_usage(self, usernames=None, limit=REFRESH_TOKENS_PER_COOKIE):
         names = usernames or self.pool_usernames()
         return {username: self.init_refresh_usage(username, limit=limit) for username in names}
@@ -281,6 +278,7 @@ class AccountPool:
         entry["lastLogin"] = _iso(_now())
         if clear_exhaustion:
             entry[EXHAUSTED_FIELDS[USAGE_CRAWL]] = None
+            entry[EXHAUSTED_FIELDS[USAGE_REFRESH]] = None
             entry[EXHAUSTED_FIELDS[USAGE_REFRESH_GET]] = None
             entry[EXHAUSTED_FIELDS[USAGE_REFRESH_POST]] = None
             entry.pop(REFRESH_EXHAUSTED_LEGACY, None)

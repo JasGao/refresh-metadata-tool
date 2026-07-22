@@ -87,19 +87,17 @@ def ensure_cookies(needed, logged_accounts=None):
 
     token_id = login.first_token_id()
     info(f"First tokenId  {token_id}  (from tokens.csv)")
-    driver = login.create_driver() if len(login_targets) > 1 else None
     try:
         for index, username in enumerate(login_targets):
             creds = pool.get_credentials(username)
             info(f"[{index + 1}/{len(login_targets)}] {username}")
-            login.capture_account(pool, username, creds["password"], token_id, driver=driver)
+            login.capture_account(pool, username, creds["password"], token_id, driver=None)
             if logged_accounts is not None:
                 logged_accounts.add(username)
             if index + 1 < len(login_targets):
                 time.sleep(login.ACCOUNT_GAP_SECONDS)
     finally:
-        if driver is not None:
-            driver.quit()
+        pass
 
     return logged_accounts or set(login_targets)
 
