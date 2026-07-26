@@ -1,0 +1,25 @@
+=== refresh daily run: Sun Jul 26 18:30:00 HKT 2026 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/usr/bin/python3 (Python 3.9.6)
+args=<full pipeline>
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Sheet is empty (header only) — wrote tokens.csv from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      0
+  ✓ No token ids in tokens.csv — skipping crawl and refresh
+
+══════════════════════════════════════════════════
+  Workflow complete
+══════════════════════════════════════════════════
+=== exit 0 at Sun Jul 26 18:30:01 HKT 2026 ===
+=== git push log: Sun Jul 26 18:30:01 HKT 2026 ===
