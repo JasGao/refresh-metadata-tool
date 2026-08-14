@@ -1,0 +1,794 @@
+=== refresh daily run: Fri Aug 14 18:30:00 HKT 2026 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/usr/bin/python3 (Python 3.9.6)
+args=<full pipeline>
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 196 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      196
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  · Re-logging in 1 account(s) via Selenium (steps 1→2→3)
+  · First tokenId  106637418809731435850581693175880487919355410386459730626769402831945799255598  (from tokens.csv)
+  · [1/1] refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  151
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …5799255598
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/106637418809731435850581693175880487919355410386459730626769402831945799255598
+  ✓ NFT page loaded  …5799255598
+  · Step 3/3  Capture cookie + userAgent  refresh1
+  ✓ Captured  10 cookies  cf_clearance=True  session=True
+  ✓ Saved to account state  refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       196
+  Already done       0
+  Remaining          196
+  Concurrency        10
+  RPC                https://bsc-dataseed.binance.org
+  ✓ …5799255598  in_sync
+  ⚠ …4488183960  out_of_sync (5 diffs)
+  ✓ …3285242057  in_sync
+  ✓ …8378830093  in_sync
+  ✗ …2948774905  <urlopen error [Errno 60] Operation timed out>
+  ✗ …6903557803  [Errno 60] Operation timed out
+  ⚠ …4314855635  out_of_sync (3 diffs)
+  ⚠ …3223509791  out_of_sync (3 diffs)
+  ⚠ …3813716607  out_of_sync (3 diffs)
+  ⚠ …6305369086  out_of_sync (3 diffs)
+  · Batch done — 10/196 tokens
+  ⚠ …6085192723  out_of_sync (3 diffs)
+  ⚠ …3353378885  out_of_sync (5 diffs)
+  ⚠ …4468741434  out_of_sync (3 diffs)
+  ⚠ …9923395729  out_of_sync (3 diffs)
+  ✗ …1904779838  [Errno 60] Operation timed out
+  ⚠ …5264092069  out_of_sync (3 diffs)
+  ✓ …8212273284  in_sync
+  ✓ …0598230232  in_sync
+  ✓ …2680823106  in_sync
+  ✓ …3012808462  in_sync
+  · Batch done — 20/196 tokens
+  ✓ …5930106911  in_sync
+  ✓ …7024068928  in_sync
+  ✓ …3096463363  in_sync
+  ✓ …4550636200  in_sync
+  ✓ …2699203592  in_sync
+  ✗ …7110177236  <urlopen error [Errno 60] Operation timed out>
+  ✓ …5237644042  in_sync
+  ✓ …8747965626  in_sync
+  ✓ …1813639252  in_sync
+  ✓ …1723008247  in_sync
+  · Batch done — 30/196 tokens
+  ✓ …6724993034  in_sync
+  ✓ …8735043197  in_sync
+  ✓ …0648128004  in_sync
+  ✓ …7618055221  in_sync
+  ✓ …0593733949  in_sync
+  ✗ …9786576201  [Errno 54] Connection reset by peer
+  ✓ …1997167442  in_sync
+  ✓ …2978494313  in_sync
+  ✓ …2825183891  in_sync
+  ✓ …3634329173  in_sync
+  · Batch done — 40/196 tokens
+  ✓ …3643473364  in_sync
+  ✓ …3319547806  in_sync
+  ✓ …8556195919  in_sync
+  ✓ …0232219988  in_sync
+  ✓ …3396449176  in_sync
+  ✓ …3888997108  in_sync
+  ✓ …1556593847  in_sync
+  ✓ …1403280754  in_sync
+  ✓ …1584316741  in_sync
+  ⚠ …3617010483  out_of_sync (4 diffs)
+  · Batch done — 50/196 tokens
+  ✓ …3503002809  in_sync
+  ✓ …0927866369  in_sync
+  ✓ …7525666943  in_sync
+  ✓ …7299632280  in_sync
+  ✓ …9090527351  in_sync
+  ✗ …2101316254  The read operation timed out
+  ⚠ …8785897926  out_of_sync (5 diffs)
+  ⚠ …3349016125  out_of_sync (4 diffs)
+  ⚠ …6843508306  out_of_sync (5 diffs)
+  ⚠ …9159968094  out_of_sync (5 diffs)
+  · Batch done — 60/196 tokens
+  ⚠ …8245213813  out_of_sync (5 diffs)
+  ⚠ …9620782079  out_of_sync (5 diffs)
+  ⚠ …6830016143  out_of_sync (6 diffs)
+  ✓ …9439262091  in_sync
+  ✓ …0861836655  in_sync
+  ✓ …5088604403  in_sync
+  ✓ …9026261991  in_sync
+  ✓ …2181187430  in_sync
+  ✓ …0682625367  in_sync
+  ✓ …9117417583  in_sync
+  · Batch done — 70/196 tokens
+  ✓ …5485069596  in_sync
+  ✓ …9991719635  in_sync
+  ✓ …8012652281  in_sync
+  ✓ …9809818800  in_sync
+  ✓ …3277442172  in_sync
+  ✓ …5363861257  in_sync
+  ✓ …7679009146  in_sync
+  ✓ …0001422520  in_sync
+  ✓ …6572563236  in_sync
+  ✓ …4166616555  in_sync
+  · Batch done — 80/196 tokens
+  ✗ …9221128546  The read operation timed out
+  ✓ …5645439827  in_sync
+  ✓ …2061103602  in_sync
+  ✓ …1985232199  in_sync
+  ✓ …2696153610  in_sync
+  ✓ …0763775552  in_sync
+  ✓ …9240614310  in_sync
+  ✓ …2093922501  in_sync
+  ✓ …3332413282  in_sync
+  ✓ …8449159253  in_sync
+  · Batch done — 90/196 tokens
+  ✓ …6857589119  in_sync
+  ✓ …1555837210  in_sync
+  ✓ …2538239862  in_sync
+  ✓ …5632022306  in_sync
+  ✓ …2097745956  in_sync
+  ✓ …3576943642  in_sync
+  ✓ …3996388234  in_sync
+  ✓ …5620615476  in_sync
+  ✓ …8235992151  in_sync
+  ✓ …2378426680  in_sync
+  · Batch done — 100/196 tokens
+  ✓ …9201794968  in_sync
+  ✓ …3624619860  in_sync
+  ✓ …1095032662  in_sync
+  ⚠ …0797721864  out_of_sync (5 diffs)
+  ⚠ …8844576985  out_of_sync (5 diffs)
+  ⚠ …4154328770  out_of_sync (5 diffs)
+  ⚠ …0058322147  out_of_sync (4 diffs)
+  ⚠ …3250558143  out_of_sync (4 diffs)
+  ⚠ …4860545656  out_of_sync (4 diffs)
+  ⚠ …2358742253  out_of_sync (4 diffs)
+  · Batch done — 110/196 tokens
+  ✓ …9182762698  in_sync
+  ⚠ …3110994316  out_of_sync (4 diffs)
+  ⚠ …8480794261  out_of_sync (4 diffs)
+  ✓ …4436799242  in_sync
+  ✓ …7313200558  in_sync
+  ⚠ …6298649113  out_of_sync (4 diffs)
+  ⚠ …8690371799  out_of_sync (4 diffs)
+  ⚠ …1938694076  out_of_sync (5 diffs)
+  ✓ …6183938479  in_sync
+  ⚠ …7868350197  out_of_sync (4 diffs)
+  · Batch done — 120/196 tokens
+  ⚠ …0753464924  out_of_sync (5 diffs)
+  ✓ …9874856800  in_sync
+  ⚠ …1157556715  out_of_sync (5 diffs)
+  ⚠ …6829993843  out_of_sync (5 diffs)
+  ⚠ …0501773137  out_of_sync (4 diffs)
+  ⚠ …3431737615  out_of_sync (4 diffs)
+  ⚠ …9560264176  out_of_sync (4 diffs)
+  ⚠ …1367857623  out_of_sync (5 diffs)
+  ⚠ …2250292703  out_of_sync (4 diffs)
+  ⚠ …5565521695  out_of_sync (4 diffs)
+  · Batch done — 130/196 tokens
+  ⚠ …9416181716  out_of_sync (5 diffs)
+  ⚠ …2823065834  out_of_sync (5 diffs)
+  ✗ …8066207827  [Errno 60] Operation timed out
+  ⚠ …4236188148  out_of_sync (5 diffs)
+  ✓ …8424658037  in_sync
+  ✗ …8437357583  <urlopen error [Errno 60] Operation timed out>
+  ✓ …4913898859  in_sync
+  ✓ …0952431326  in_sync
+  ✓ …0021729943  in_sync
+  ✓ …8672618143  in_sync
+  · Batch done — 140/196 tokens
+  ✓ …0847583601  in_sync
+  ✓ …7742640001  in_sync
+  ✓ …2499190116  in_sync
+  ✓ …8790763563  in_sync
+  ✗ …4947224773  <urlopen error [Errno 60] Operation timed out>
+  ✓ …1528921737  in_sync
+  ✓ …1130832767  in_sync
+  ✗ …5536532989  The read operation timed out
+  ✓ …3581796638  in_sync
+  ✓ …0610550767  in_sync
+  · Batch done — 150/196 tokens
+  ✓ …3492487777  in_sync
+  ✓ …3552203836  in_sync
+  ✗ …0606027907  The read operation timed out
+  ✓ …8901433247  in_sync
+  ⚠ …5130671916  out_of_sync (5 diffs)
+  ⚠ …2214998921  out_of_sync (5 diffs)
+  ⚠ …2017629145  out_of_sync (5 diffs)
+  ⚠ …4327740629  out_of_sync (5 diffs)
+  ⚠ …7333842706  out_of_sync (5 diffs)
+  ⚠ …8789327049  out_of_sync (5 diffs)
+  · Batch done — 160/196 tokens
+  ⚠ …1739708866  out_of_sync (5 diffs)
+  ⚠ …5280365770  out_of_sync (5 diffs)
+  ⚠ …3623086940  out_of_sync (5 diffs)
+  ⚠ …2526905674  out_of_sync (5 diffs)
+  ⚠ …9797448194  out_of_sync (4 diffs)
+  ⚠ …1963129534  out_of_sync (4 diffs)
+  ⚠ …0996480929  out_of_sync (5 diffs)
+  ⚠ …2042408878  out_of_sync (5 diffs)
+  ⚠ …6056731880  out_of_sync (5 diffs)
+  ⚠ …2722029773  out_of_sync (5 diffs)
+  · Batch done — 170/196 tokens
+  ⚠ …1031465429  out_of_sync (4 diffs)
+  ⚠ …4992324155  out_of_sync (5 diffs)
+  ⚠ …3801573609  out_of_sync (5 diffs)
+  ⚠ …8781719438  out_of_sync (4 diffs)
+  ✓ …1243324745  in_sync
+  ✓ …4987433500  in_sync
+  ✓ …2933077387  in_sync
+  ✓ …1698107451  in_sync
+  ✓ …9956051575  in_sync
+  ✓ …3974520256  in_sync
+  · Batch done — 180/196 tokens
+  ✓ …5386718777  in_sync
+  ✓ …7303979472  in_sync
+  ✓ …8755752784  in_sync
+  ✓ …9605323147  in_sync
+  ✓ …4308647682  in_sync
+  ✓ …2721924264  in_sync
+  ✓ …2186312519  in_sync
+  ✗ …5020816767  The read operation timed out
+  ✓ …5164615901  in_sync
+  ✓ …5369870787  in_sync
+  · Batch done — 190/196 tokens
+  ✓ …5270398058  in_sync
+  ✓ …3048889574  in_sync
+  ✓ …8090348971  in_sync
+  ✓ …1853737441  in_sync
+  ⚠ …1981609930  out_of_sync (4 diffs)
+  ✗ …9658945615  tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 196/196 tokens
+
+── Crawl results ───────────────────────
+  in_sync            118
+  out_of_sync        64
+  errors             14
+  Progress file      progress.json
+  Report file        report.json
+  Report contents    64 out_of_sync, 14 errors
+
+── Step 5: Refresh out-of-sync + crawl-error tokens (Selenium) 
+  Out-of-sync        64
+  Crawl errors       14
+  To refresh         78
+  Accounts needed    1
+  Account pool       refresh1,refresh2,refresh3,refresh4,refresh5,refresh6,refresh7,refresh8,refresh9,refresh10,refresh11,refresh12,refresh13,refresh14,refresh15,refresh16,refresh17,refresh18,refresh19,refresh20
+
+  ▸ refresh-metadata/refresh.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Refresh — Selenium
+══════════════════════════════════════════════════
+
+── Run config ──────────────────────────
+  Source             report.json
+  Out-of-sync        64
+  Crawl errors       14
+  Tokens             78
+  Limit per account  100 tokens
+  Delay              5.0s between tokens
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Refresh quota (today) ───────────────
+  refresh1           100/100 left (used 0, since not started)
+  refresh2           100/100 left (used 0, since not started)
+  refresh3           100/100 left (used 0, since not started)
+  refresh4           100/100 left (used 0, since not started)
+  refresh5           100/100 left (used 0, since not started)
+  refresh6           100/100 left (used 0, since not started)
+  refresh7           100/100 left (used 0, since not started)
+  refresh8           100/100 left (used 0, since not started)
+  refresh9           100/100 left (used 0, since not started)
+  refresh10          100/100 left (used 0, since not started)
+  refresh11          100/100 left (used 0, since not started)
+  refresh12          100/100 left (used 0, since not started)
+  refresh13          100/100 left (used 0, since not started)
+  refresh14          100/100 left (used 0, since not started)
+  refresh15          100/100 left (used 0, since not started)
+  refresh16          100/100 left (used 0, since not started)
+  refresh17          100/100 left (used 0, since not started)
+  refresh18          100/100 left (used 0, since not started)
+  refresh19          100/100 left (used 0, since not started)
+  refresh20          100/100 left (used 0, since not started)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh1
+  ⚠ Saved session unavailable for refresh1 — full login required
+  · Logging in  refresh1
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh1
+  ✓ Login successful  refresh1
+  · Step 2/3  Open first token NFT page  …4488183960
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/95090888975494931724886576392949466161204162679302142624730721725444488183960
+  ✓ NFT page loaded  …4488183960
+  ✓ Session ready  refresh1  (100/100 left, started 2026-08-14T10:39:36Z)
+  · Refreshing …4488183960  (1/78)  (account: refresh1)
+  ✓ …4488183960  refresh clicked
+  Quota              99/100 remaining for refresh1
+  · Refreshing …4314855635  (2/78)  (account: refresh1)
+  ✓ …4314855635  refresh clicked
+  Quota              98/100 remaining for refresh1
+  · Refreshing …3223509791  (3/78)  (account: refresh1)
+  ✓ …3223509791  refresh clicked
+  Quota              97/100 remaining for refresh1
+  · Refreshing …3813716607  (4/78)  (account: refresh1)
+  ✓ …3813716607  refresh clicked
+  Quota              96/100 remaining for refresh1
+  · Refreshing …6305369086  (5/78)  (account: refresh1)
+  ✓ …6305369086  refresh clicked
+  Quota              95/100 remaining for refresh1
+  · Refreshing …6085192723  (6/78)  (account: refresh1)
+  ✓ …6085192723  refresh clicked
+  Quota              94/100 remaining for refresh1
+  · Refreshing …3353378885  (7/78)  (account: refresh1)
+  ✓ …3353378885  refresh clicked
+  Quota              93/100 remaining for refresh1
+  · Refreshing …4468741434  (8/78)  (account: refresh1)
+  ✓ …4468741434  refresh clicked
+  Quota              92/100 remaining for refresh1
+  · Refreshing …9923395729  (9/78)  (account: refresh1)
+  ✓ …9923395729  refresh clicked
+  Quota              91/100 remaining for refresh1
+  · Refreshing …5264092069  (10/78)  (account: refresh1)
+  ✓ …5264092069  refresh clicked
+  Quota              90/100 remaining for refresh1
+  · Refreshing …3617010483  (11/78)  (account: refresh1)
+  ✓ …3617010483  refresh clicked
+  Quota              89/100 remaining for refresh1
+  · Refreshing …8785897926  (12/78)  (account: refresh1)
+  ⚠ Rotated to refresh2
+  · Switching browser session to refresh2
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh2  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh2
+  ⚠ Saved session unavailable for refresh2 — full login required
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …8785897926
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/67918892112442514977048323810804179975975390517854825339909796226898785897926
+  ✓ NFT page loaded  …8785897926
+  ✓ Session ready  refresh2  (100/100 left, started 2026-08-14T10:43:15Z)
+  ✓ …8785897926  refresh clicked
+  Quota              99/100 remaining for refresh2
+  · Refreshing …3349016125  (13/78)  (account: refresh2)
+  ✓ …3349016125  refresh clicked
+  Quota              98/100 remaining for refresh2
+  · Refreshing …6843508306  (14/78)  (account: refresh2)
+  ✓ …6843508306  refresh clicked
+  Quota              97/100 remaining for refresh2
+  · Refreshing …9159968094  (15/78)  (account: refresh2)
+  ✓ …9159968094  refresh clicked
+  Quota              96/100 remaining for refresh2
+  · Refreshing …8245213813  (16/78)  (account: refresh2)
+  ✓ …8245213813  refresh clicked
+  Quota              95/100 remaining for refresh2
+  · Refreshing …9620782079  (17/78)  (account: refresh2)
+  ✓ …9620782079  refresh clicked
+  Quota              94/100 remaining for refresh2
+  · Refreshing …6830016143  (18/78)  (account: refresh2)
+  ✓ …6830016143  refresh clicked
+  Quota              93/100 remaining for refresh2
+  · Refreshing …0797721864  (19/78)  (account: refresh2)
+  ✓ …0797721864  refresh clicked
+  Quota              92/100 remaining for refresh2
+  · Proactive browser restart after 19 tokens
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh2  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh2
+  · Trying saved cookies for refresh2 before Selenium login
+  ⚠ Could not verify logged-in username (expected refresh2)
+  ⚠ Saved cookies did not restore session for refresh2
+  ⚠ Saved session unavailable for refresh2 — full login required
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …8844576985
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/12814698049561826155241303774287867671946520609152503996745812740398844576985
+  ✓ NFT page loaded  …8844576985
+  ✓ Session ready  refresh2  (92/100 left, started 2026-08-14T10:43:15Z)
+  · Refreshing …8844576985  (20/78)  (account: refresh2)
+  ✓ …8844576985  refresh clicked
+  Quota              91/100 remaining for refresh2
+  · Refreshing …4154328770  (21/78)  (account: refresh2)
+  ✓ …4154328770  refresh clicked
+  Quota              90/100 remaining for refresh2
+  · Refreshing …0058322147  (22/78)  (account: refresh2)
+  ✓ …0058322147  refresh clicked
+  Quota              89/100 remaining for refresh2
+  · Refreshing …3250558143  (23/78)  (account: refresh2)
+  ✓ …3250558143  refresh clicked
+  Quota              88/100 remaining for refresh2
+  · Refreshing …4860545656  (24/78)  (account: refresh2)
+  ✓ …4860545656  refresh clicked
+  Quota              87/100 remaining for refresh2
+  · Refreshing …2358742253  (25/78)  (account: refresh2)
+  ✓ …2358742253  refresh clicked
+  Quota              86/100 remaining for refresh2
+  · Refreshing …3110994316  (26/78)  (account: refresh2)
+  ✓ …3110994316  refresh clicked
+  Quota              85/100 remaining for refresh2
+  · Refreshing …8480794261  (27/78)  (account: refresh2)
+  ✓ …8480794261  refresh clicked
+  Quota              84/100 remaining for refresh2
+  · Refreshing …6298649113  (28/78)  (account: refresh2)
+  ✓ …6298649113  refresh clicked
+  Quota              83/100 remaining for refresh2
+  · Refreshing …8690371799  (29/78)  (account: refresh2)
+  ✓ …8690371799  refresh clicked
+  Quota              82/100 remaining for refresh2
+  · Refreshing …1938694076  (30/78)  (account: refresh2)
+  ✓ …1938694076  refresh clicked
+  Quota              81/100 remaining for refresh2
+  · Refreshing …7868350197  (31/78)  (account: refresh2)
+  ✓ …7868350197  refresh clicked
+  Quota              80/100 remaining for refresh2
+  · Refreshing …0753464924  (32/78)  (account: refresh2)
+  ✓ …0753464924  refresh clicked
+  Quota              79/100 remaining for refresh2
+  · Refreshing …1157556715  (33/78)  (account: refresh2)
+  ✓ …1157556715  refresh clicked
+  Quota              78/100 remaining for refresh2
+  · Refreshing …6829993843  (34/78)  (account: refresh2)
+  ✓ …6829993843  refresh clicked
+  Quota              77/100 remaining for refresh2
+  · Refreshing …0501773137  (35/78)  (account: refresh2)
+  ✓ …0501773137  refresh clicked
+  Quota              76/100 remaining for refresh2
+  · Refreshing …3431737615  (36/78)  (account: refresh2)
+  ✓ …3431737615  refresh clicked
+  Quota              75/100 remaining for refresh2
+  · Refreshing …9560264176  (37/78)  (account: refresh2)
+  ✓ …9560264176  refresh clicked
+  Quota              74/100 remaining for refresh2
+  · Refreshing …1367857623  (38/78)  (account: refresh2)
+  ⚠ Page load timed out — stopping load and continuing
+  ⚠ Browser error (ReadTimeoutError) — restarting Chrome (1/2)
+  ⚠ Cleaned up 7 stale Chrome process(es)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh2  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh2
+  · Trying saved cookies for refresh2 before Selenium login
+  ⚠ Could not verify logged-in username (expected refresh2)
+  ⚠ Saved cookies did not restore session for refresh2
+  ⚠ Saved session unavailable for refresh2 — full login required
+  · Logging in  refresh2
+  · Step 1/3  Selenium login  refresh2
+  · Login attempt 1/5  refresh2
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh2
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh2
+  ✓ Login successful  refresh2
+  · Step 2/3  Open first token NFT page  …1367857623
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/83694752219321084298884495776151455412871308980446758164131182995501367857623
+  ✓ NFT page loaded  …1367857623
+  ✓ Session ready  refresh2  (74/100 left, started 2026-08-14T10:43:15Z)
+  ⚠ Rotated to refresh3
+  · Switching browser session to refresh3
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh3  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh3
+  ⚠ Saved session unavailable for refresh3 — full login required
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …1367857623
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/83694752219321084298884495776151455412871308980446758164131182995501367857623
+  ✓ NFT page loaded  …1367857623
+  ✓ Session ready  refresh3  (100/100 left, started 2026-08-14T10:55:26Z)
+  ✓ …1367857623  refresh clicked
+  Quota              99/100 remaining for refresh3
+  · Proactive browser restart after 19 tokens
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh3  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh3
+  · Trying saved cookies for refresh3 before Selenium login
+  ⚠ Could not verify logged-in username (expected refresh3)
+  ⚠ Saved cookies did not restore session for refresh3
+  ⚠ Saved session unavailable for refresh3 — full login required
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …2250292703
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/104399182314219272609853815477372291913898162327131832679020737590972250292703
+  ✓ NFT page loaded  …2250292703
+  ✓ Session ready  refresh3  (99/100 left, started 2026-08-14T10:55:26Z)
+  · Refreshing …2250292703  (39/78)  (account: refresh3)
+  ✓ …2250292703  refresh clicked
+  Quota              98/100 remaining for refresh3
+  · Refreshing …5565521695  (40/78)  (account: refresh3)
+  ✓ …5565521695  refresh clicked
+  Quota              97/100 remaining for refresh3
+  · Refreshing …9416181716  (41/78)  (account: refresh3)
+  ✓ …9416181716  refresh clicked
+  Quota              96/100 remaining for refresh3
+  · Refreshing …2823065834  (42/78)  (account: refresh3)
+  ✓ …2823065834  refresh clicked
+  Quota              95/100 remaining for refresh3
+  · Refreshing …4236188148  (43/78)  (account: refresh3)
+  ✓ …4236188148  refresh clicked
+  Quota              94/100 remaining for refresh3
+  · Refreshing …5130671916  (44/78)  (account: refresh3)
+  ✓ …5130671916  refresh clicked
+  Quota              93/100 remaining for refresh3
+  · Refreshing …2214998921  (45/78)  (account: refresh3)
+  ✓ …2214998921  refresh clicked
+  Quota              92/100 remaining for refresh3
+  · Refreshing …2017629145  (46/78)  (account: refresh3)
+  ✓ …2017629145  refresh clicked
+  Quota              91/100 remaining for refresh3
+  · Refreshing …4327740629  (47/78)  (account: refresh3)
+  ✓ …4327740629  refresh clicked
+  Quota              90/100 remaining for refresh3
+  · Refreshing …7333842706  (48/78)  (account: refresh3)
+  ✓ …7333842706  refresh clicked
+  Quota              89/100 remaining for refresh3
+  · Refreshing …8789327049  (49/78)  (account: refresh3)
+  ✓ …8789327049  refresh clicked
+  Quota              88/100 remaining for refresh3
+  · Refreshing …1739708866  (50/78)  (account: refresh3)
+  ✓ …1739708866  refresh clicked
+  Quota              87/100 remaining for refresh3
+  · Refreshing …5280365770  (51/78)  (account: refresh3)
+  ✓ …5280365770  refresh clicked
+  Quota              86/100 remaining for refresh3
+  · Refreshing …3623086940  (52/78)  (account: refresh3)
+  ✓ …3623086940  refresh clicked
+  Quota              85/100 remaining for refresh3
+  · Refreshing …2526905674  (53/78)  (account: refresh3)
+  ✓ …2526905674  refresh clicked
+  Quota              84/100 remaining for refresh3
+  · Refreshing …9797448194  (54/78)  (account: refresh3)
+  ✓ …9797448194  refresh clicked
+  Quota              83/100 remaining for refresh3
+  · Refreshing …1963129534  (55/78)  (account: refresh3)
+  ✓ …1963129534  refresh clicked
+  Quota              82/100 remaining for refresh3
+  · Refreshing …0996480929  (56/78)  (account: refresh3)
+  ✓ …0996480929  refresh clicked
+  Quota              81/100 remaining for refresh3
+  · Refreshing …2042408878  (57/78)  (account: refresh3)
+  ⚠ Page load timed out — stopping load and continuing
+  ⚠ Browser error (ReadTimeoutError) — restarting Chrome (1/2)
+  ⚠ Cleaned up 7 stale Chrome process(es)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh3  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh3
+  · Trying saved cookies for refresh3 before Selenium login
+  ⚠ Could not verify logged-in username (expected refresh3)
+  ⚠ Saved cookies did not restore session for refresh3
+  ⚠ Saved session unavailable for refresh3 — full login required
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …2042408878
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/6595663430342956126141774023194171621509010058977968396785806560582042408878
+  ✓ NFT page loaded  …2042408878
+  ✓ Session ready  refresh3  (81/100 left, started 2026-08-14T10:55:26Z)
+  ✓ …2042408878  refresh clicked
+  Quota              80/100 remaining for refresh3
+  · Proactive browser restart after 19 tokens
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh3  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh3
+  · Trying saved cookies for refresh3 before Selenium login
+  ⚠ Could not verify logged-in username (expected refresh3)
+  ⚠ Saved cookies did not restore session for refresh3
+  ⚠ Saved session unavailable for refresh3 — full login required
+  · Logging in  refresh3
+  · Step 1/3  Selenium login  refresh3
+  · Login attempt 1/5  refresh3
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh3
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh3
+  ✓ Login successful  refresh3
+  · Step 2/3  Open first token NFT page  …6056731880
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/86859918298853837314288308301745352455199849660867072625803208597326056731880
+  ✓ NFT page loaded  …6056731880
+  ✓ Session ready  refresh3  (80/100 left, started 2026-08-14T10:55:26Z)
+  · Refreshing …6056731880  (58/78)  (account: refresh3)
+  ✓ …6056731880  refresh clicked
+  Quota              79/100 remaining for refresh3
+  · Refreshing …2722029773  (59/78)  (account: refresh3)
+  ✓ …2722029773  refresh clicked
+  Quota              78/100 remaining for refresh3
+  · Refreshing …1031465429  (60/78)  (account: refresh3)
+  ✓ …1031465429  refresh clicked
+  Quota              77/100 remaining for refresh3
+  · Refreshing …4992324155  (61/78)  (account: refresh3)
+  ⚠ Rotated to refresh4
+  · Switching browser session to refresh4
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh4  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh4
+  ⚠ Saved session unavailable for refresh4 — full login required
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …4992324155
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48761409536886505231724601559947625606396609739401302894640473456784992324155
+  ✓ NFT page loaded  …4992324155
+  ✓ Session ready  refresh4  (100/100 left, started 2026-08-14T11:07:43Z)
+  ✓ …4992324155  refresh clicked
+  Quota              99/100 remaining for refresh4
+  · Refreshing …3801573609  (62/78)  (account: refresh4)
+  ✓ …3801573609  refresh clicked
+  Quota              98/100 remaining for refresh4
+  · Refreshing …8781719438  (63/78)  (account: refresh4)
+  ✓ …8781719438  refresh clicked
+  Quota              97/100 remaining for refresh4
+  · Refreshing …1981609930  (64/78)  (account: refresh4)
+  ✓ …1981609930  refresh clicked
+  Quota              96/100 remaining for refresh4
+  · Refreshing …2948774905  (65/78)  (account: refresh4)
+  ✓ …2948774905  refresh clicked
+  Quota              95/100 remaining for refresh4
+  · Refreshing …6903557803  (66/78)  (account: refresh4)
+  ✓ …6903557803  refresh clicked
+  Quota              94/100 remaining for refresh4
+  · Refreshing …1904779838  (67/78)  (account: refresh4)
+  ✓ …1904779838  refresh clicked
+  Quota              93/100 remaining for refresh4
+  · Refreshing …7110177236  (68/78)  (account: refresh4)
+  ✓ …7110177236  refresh clicked
+  Quota              92/100 remaining for refresh4
+  · Refreshing …9786576201  (69/78)  (account: refresh4)
+  ✓ …9786576201  refresh clicked
+  Quota              91/100 remaining for refresh4
+  · Refreshing …2101316254  (70/78)  (account: refresh4)
+  ✓ …2101316254  refresh clicked
+  Quota              90/100 remaining for refresh4
+  · Refreshing …9221128546  (71/78)  (account: refresh4)
+  ✓ …9221128546  refresh clicked
+  Quota              89/100 remaining for refresh4
+  · Refreshing …8066207827  (72/78)  (account: refresh4)
+  ✓ …8066207827  refresh clicked
+  Quota              88/100 remaining for refresh4
+  · Refreshing …8437357583  (73/78)  (account: refresh4)
+  ✓ …8437357583  refresh clicked
+  Quota              87/100 remaining for refresh4
+  · Refreshing …4947224773  (74/78)  (account: refresh4)
+  ✓ …4947224773  refresh clicked
+  Quota              86/100 remaining for refresh4
+  · Refreshing …5536532989  (75/78)  (account: refresh4)
+  ✓ …5536532989  refresh clicked
+  Quota              85/100 remaining for refresh4
+  · Refreshing …0606027907  (76/78)  (account: refresh4)
+  ✓ …0606027907  refresh clicked
+  Quota              84/100 remaining for refresh4
+  · Proactive browser restart after 19 tokens
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh4  (Default)
+  · Chrome version_main  151
+  · Checking Chrome profile session for refresh4
+  · Trying saved cookies for refresh4 before Selenium login
+  ⚠ Could not verify logged-in username (expected refresh4)
+  ⚠ Saved cookies did not restore session for refresh4
+  ⚠ Saved session unavailable for refresh4 — full login required
+  · Logging in  refresh4
+  · Step 1/3  Selenium login  refresh4
+  · Login attempt 1/5  refresh4
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh4
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ✓ Turnstile completed
+  · Clicking LOGIN...
+  ✓ Logged in as refresh4
+  ✓ Login successful  refresh4
+  · Step 2/3  Open first token NFT page  …5020816767
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/47267172649488787589228695771575210586760201385670387156072735630345020816767
+  ✓ NFT page loaded  …5020816767
+  ✓ Session ready  refresh4  (84/100 left, started 2026-08-14T11:07:43Z)
+  · Refreshing …5020816767  (77/78)  (account: refresh4)
+  ✓ …5020816767  refresh clicked
+  Quota              83/100 remaining for refresh4
+  · Refreshing …9658945615  (78/78)  (account: refresh4)
+  ✓ …9658945615  refresh clicked
+  Quota              82/100 remaining for refresh4
+
+── Refresh results ─────────────────────
+  Succeeded          78
+  Failed             0
+  Total              78
+
+══════════════════════════════════════════════════
+  Workflow complete
+══════════════════════════════════════════════════
+=== exit 0 at Fri Aug 14 19:12:51 HKT 2026 ===
+=== git push log: Fri Aug 14 19:12:51 HKT 2026 ===
