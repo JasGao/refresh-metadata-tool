@@ -1,0 +1,84 @@
+=== refresh daily run: Tue Sep  1 18:45:00 HKT 2026 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/usr/bin/python3 (Python 3.9.6)
+args=<full pipeline>
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 994 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      994
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  · Re-logging in 1 account(s) via Selenium (steps 1→2→3)
+  · First tokenId  47876886276522035232949208179728614647745103402552385350845601752911130817385  (from tokens.csv)
+  · [1/1] refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  152
+  · Step 1/3  Selenium login  refresh1
+  · Login attempt 1/5  refresh1
+  · Login page open  https://bscscan.com/login
+  ✓ Filled username/password for refresh1
+  · Waiting for Turnstile (complete captcha in browser if shown)...
+  ⚠ Turnstile not detected within 120s
+Traceback (most recent call last):
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/run_workflow.py", line 193, in <module>
+    main()
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/run_workflow.py", line 147, in main
+    logged_accounts = ensure_cookies(1) or logged_accounts
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/run_workflow.py", line 94, in ensure_cookies
+    login.capture_account(pool, username, creds["password"], token_id, driver=None)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/accounts/login.py", line 762, in capture_account
+    selenium_login(driver, username, password)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/accounts/login.py", line 697, in selenium_login
+    login(driver, username, password)
+  File "/Users/admin/refresh-metadata/refresh-metadata-tool/accounts/login.py", line 659, in login
+    driver.get(LOGIN_URL)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/undetected_chromedriver/__init__.py", line 665, in get
+    return super().get(url)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/remote/webdriver.py", line 483, in get
+    self.execute(Command.GET, {"url": url})
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/remote/webdriver.py", line 458, in execute
+    self.error_handler.check_response(response)
+  File "/Users/admin/Library/Python/3.9/lib/python/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  (Session info: chrome=152.0.7977.65)
+Stacktrace:
+0   undetected_chromedriver             0x000000011006cd4a undetected_chromedriver + 4087114
+1   undetected_chromedriver             0x000000010fcf50bb undetected_chromedriver + 450747
+2   undetected_chromedriver             0x000000010fcf20b9 undetected_chromedriver + 438457
+3   undetected_chromedriver             0x000000010fce317f undetected_chromedriver + 377215
+4   undetected_chromedriver             0x000000010fce4f76 undetected_chromedriver + 384886
+5   undetected_chromedriver             0x000000010fce366d undetected_chromedriver + 378477
+6   undetected_chromedriver             0x000000010fce2e20 undetected_chromedriver + 376352
+7   undetected_chromedriver             0x000000010fce29b6 undetected_chromedriver + 375222
+8   undetected_chromedriver             0x000000010fce05c9 undetected_chromedriver + 366025
+9   undetected_chromedriver             0x000000010fce0de0 undetected_chromedriver + 368096
+10  undetected_chromedriver             0x000000010fcf8b8d undetected_chromedriver + 465805
+11  undetected_chromedriver             0x000000010fd9299b undetected_chromedriver + 1096091
+12  undetected_chromedriver             0x000000010fd91ccf undetected_chromedriver + 1092815
+13  undetected_chromedriver             0x000000010fd3da50 undetected_chromedriver + 748112
+14  undetected_chromedriver             0x000000010fd3e7b1 undetected_chromedriver + 751537
+15  undetected_chromedriver             0x00000001100381b8 undetected_chromedriver + 3871160
+16  undetected_chromedriver             0x000000011003bce6 undetected_chromedriver + 3886310
+17  undetected_chromedriver             0x000000011001cffe undetected_chromedriver + 3760126
+18  undetected_chromedriver             0x000000011003c812 undetected_chromedriver + 3889170
+19  undetected_chromedriver             0x000000011000fcb0 undetected_chromedriver + 3706032
+20  undetected_chromedriver             0x000000011005a308 undetected_chromedriver + 4010760
+21  undetected_chromedriver             0x000000011005a49c undetected_chromedriver + 4011164
+22  undetected_chromedriver             0x000000011006c9f6 undetected_chromedriver + 4086262
+23  libsystem_pthread.dylib             0x00007ff802a7be05 _pthread_start + 115
+24  libsystem_pthread.dylib             0x00007ff802a77857 thread_start + 15
+
+=== exit 1 at Tue Sep  1 19:12:11 HKT 2026 ===
+=== git push log: Tue Sep  1 19:12:11 HKT 2026 ===
