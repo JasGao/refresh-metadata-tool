@@ -80,16 +80,46 @@ fi
 
 branch="$(git -C "$REPO_DIR" branch --show-current 2>/dev/null || echo main)"
 
+ensure_github_known_hosts() {
+  local known_hosts="${HOME}/.ssh/known_hosts"
+  mkdir -p "${HOME}/.ssh"
+  if [ ! -f "$known_hosts" ]; then
+    touch "$known_hosts"
+    chmod 600 "$known_hosts" 2>/dev/null || true
+  fi
+  if ! grep -qE '^github\.com ' "$known_hosts" 2>/dev/null; then
+    ssh-keyscan -t ed25519 github.com >>"$known_hosts" 2>/dev/null || true
+  fi
+  if ! grep -qE '^(\[ssh\.github\.com\]:443 |ssh\.github\.com )' "$known_hosts" 2>/dev/null; then
+    ssh-keyscan -t ed25519 -p 443 ssh.github.com >>"$known_hosts" 2>/dev/null || true
+  fi
+}
+
+sync_with_remote() {
+  if ! git -C "$REPO_DIR" fetch origin "$branch"; then
+    echo "git fetch failed — skipping push"
+    return 1
+  fi
+  if ! git -C "$REPO_DIR" rebase "origin/$branch"; then
+    echo "git rebase onto origin/$branch failed — aborting, log committed locally only"
+    git -C "$REPO_DIR" rebase --abort >/dev/null 2>&1 || true
+    return 1
+  fi
+  return 0
+}
+
 push_log() {
   git -C "$REPO_DIR" push origin "HEAD:refs/heads/$branch"
 }
 
-if push_log; then
+ensure_github_known_hosts
+
+if sync_with_remote && push_log; then
   echo "pushed log to origin/$branch (${COMMIT_TITLE})"
 elif [ -n "${GIT_SSH_COMMAND:-}" ]; then
   echo "git push failed on port 22 — retrying via ssh.github.com:443"
   export GIT_SSH_COMMAND="${GIT_SSH_COMMAND} -p 443 -o Hostname=ssh.github.com"
-  if push_log; then
+  if sync_with_remote && push_log; then
     echo "pushed log to origin/$branch (${COMMIT_TITLE}, via port 443)"
   else
     echo "git push failed — log committed locally only"
