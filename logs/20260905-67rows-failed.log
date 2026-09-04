@@ -1,0 +1,14 @@
+=== refresh run: 2026-09-05 00:10:19.769912 ===
+repo=/Users/jasmine/refresh
+python=/Applications/Xcode.app/Contents/Developer/usr/bin/python3 (3.9.6)
+args=<full pipeline>
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✗ Sheet fetch failed: HTTPSConnectionPool(host='docs.google.com', port=443): Max retries exceeded with url: /spreadsheets/d/1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w/export?format=csv&gid=0 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1054c12b0>, 'Connection to docs.google.com timed out. (connect timeout=30)'))
+=== exit 1 at 2026-09-05 00:10:49.785267 ===
