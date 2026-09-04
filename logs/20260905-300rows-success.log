@@ -1,0 +1,42 @@
+=== refresh run: 2026-09-05 02:00:44.366571 ===
+repo=/Users/jasmine/refresh
+python=/Applications/Xcode.app/Contents/Developer/usr/bin/python3 (3.9.6)
+args=<full pipeline>
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 300 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      300
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  ✓ Cookies still valid today: refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+
+── Step 5: Refresh out-of-sync + crawl-error tokens (Selenium) 
+  Out-of-sync        1
+  Crawl errors       3
+  To refresh         4
+  Accounts needed    1
+  Account pool       refresh3,refresh4,refresh5,refresh6,refresh7,refresh8,refresh9,refresh10,refresh11,refresh12,refresh13,refresh14,refresh15,refresh16,refresh17,refresh18,refresh19,refresh20
+
+  ▸ refresh-metadata/refresh.py
+
+══════════════════════════════════════════════════
+  Workflow complete
+══════════════════════════════════════════════════
+=== exit 0 at 2026-09-05 02:08:44.314378 ===
