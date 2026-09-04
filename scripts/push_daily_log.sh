@@ -1,12 +1,21 @@
 #!/bin/bash
-# Commit and push a daily run log to the remote repo.
-# Called by scripts/run_daily.sh after the workflow finishes.
+# Commit and push a run log to the remote repo.
+# Called by run_workflow.py after every scheduled or manual run.
 set -euo pipefail
 
 REPO_DIR="${1:?repo dir required}"
 LOG_FILE="${2:?log file required}"
 EXIT_CODE="${3:-0}"
 PYTHON_BIN="${4:-python3}"
+
+setup_git_ssh() {
+  local key="${HOME}/.ssh/id_ed25519"
+  if [ -z "${GIT_SSH_COMMAND:-}" ] && [ -f "$key" ]; then
+    export GIT_SSH_COMMAND="ssh -i ${key} -o IdentitiesOnly=yes -o UserKnownHostsFile=${HOME}/.ssh/known_hosts"
+  fi
+}
+
+setup_git_ssh
 
 if [ "${REFRESH_GIT_PUSH:-1}" = "0" ]; then
   echo "REFRESH_GIT_PUSH=0 — skipping git push"

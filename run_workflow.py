@@ -30,6 +30,7 @@ import accounts.login as login
 from accounts.pool import AccountPool
 from lib.fetch_tokens import fetch_tokens
 from lib.log_util import banner, fail, info, kv, ok, step, substep, summary, warn
+from lib.run_log import exit_code_from_system_exit, push_run_log, setup_run_log
 from lib.paths import CRAWL_REPORT_FILE, migrate_legacy_paths
 from lib.report_tokens import refresh_target_counts
 from lib.pool_config import account_env_for_refresh_tokens
@@ -190,4 +191,17 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    setup_run_log()
+    code = 0
+    try:
+        main()
+    except SystemExit as exc:
+        code = exit_code_from_system_exit(exc)
+        if code != 0:
+            raise
+    except Exception:
+        code = 1
+        raise
+    finally:
+        push_run_log(code)
+    sys.exit(code)

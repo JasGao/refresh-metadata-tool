@@ -59,7 +59,6 @@ if [ -f "$LOCAL_ENV" ]; then
 fi
 
 mkdir -p "$REPO_DIR/logs" "$BSCSCAN_CHROME_USER_DATA"
-LOG="$REPO_DIR/logs/daily-$(date +%Y%m%d-%H%M%S).log"
 
 cd "$REPO_DIR" || { echo "cannot cd to $REPO_DIR"; exit 1; }
 
@@ -73,20 +72,4 @@ fi
 wait_for_network || true
 setup_git_ssh
 
-code=0
-{
-  echo "=== refresh daily run: $(date) ==="
-  echo "repo=$REPO_DIR"
-  echo "python=$PYTHON_BIN ($($PYTHON_BIN --version 2>&1))"
-  echo "args=${*:-<full pipeline>}"
-  "$PYTHON_BIN" run_workflow.py "$@"
-  code=$?
-  echo "=== exit $code at $(date) ==="
-} >>"$LOG" 2>&1
-
-{
-  echo "=== git push log: $(date) ==="
-  bash "$REPO_DIR/scripts/push_daily_log.sh" "$REPO_DIR" "$LOG" "$code" "$PYTHON_BIN"
-} >>"$LOG" 2>&1
-
-exit $code
+exec "$PYTHON_BIN" run_workflow.py "$@"
