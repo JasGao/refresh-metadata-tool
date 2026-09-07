@@ -112,6 +112,16 @@ Set these in `scripts/schedule.local.env` or the shell.
 | `BSCSCAN_LOGIN_RETRIES` | `5` (in `run_daily.sh`) | Login attempts before giving up. |
 | `BSCSCAN_LOGIN_STEP_DELAY` | `2.5` | Settle pause after each navigation. |
 
+### Crawl network knobs
+
+| Env | Default | Meaning |
+|-----|---------|---------|
+| `CRAWL_RETRIES` | `3` | Attempts per HTTP call for transient errors (timeouts, resets, SSL EOF, HTTP 429/5xx). Before, one timeout put the token in the report as a crawl error and cost a Selenium refresh. |
+| `CRAWL_RETRY_DELAY` | `2` | Seconds between attempts (grows linearly). |
+| `CRAWL_HTTP_TIMEOUT` | `30` | Per-request timeout for BscScan, RPC, and metadata fetches. |
+
+Crawl errors in `report.json` and the logs are prefixed with the stage that failed: `bscscan:`, `rpc:`, or `metadata:`.
+
 Login now logs its own duration (`✓ Login successful  refresh1  (18.3s)`) and the Turnstile solve time.
 
 Each refresh line now logs its elapsed time (`✓ …1234567890  refresh clicked  (11.4s)`), so a stall is visible in `logs/`.

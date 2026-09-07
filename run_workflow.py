@@ -22,6 +22,7 @@ import os
 import subprocess
 import sys
 import time
+import traceback
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
@@ -42,8 +43,32 @@ REPORT_FILE = CRAWL_REPORT_FILE
 
 def run_phase(name, cmd, env=None):
     substep(name)
-    merged = {**os.environ, **(env or {})}
-    subprocess.run(cmd, cwd=SCRIPT_DIR, env=merged, check=True)
+    # Force line-buffered output in the child so its lines reach the log as
+    # they happen instead of in one burst at exit.
+    merged = {**os.environ, **(env or {}), "PYTHONUNBUFFERED": "1"}
+    # sys.stdout is a tee into logs/ (see lib/run_log.py). A child that inherits
+    # the raw terminal fd bypasses that tee, so every crawl/refresh line was
+    # missing from the pushed logs. Pipe the child's output through the tee.
+    proc = subprocess.Popen(
+        cmd,
+        cwd=SCRIPT_DIR,
+        env=merged,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        bufsize=1,
+    )
+    try:
+        for line in proc.stdout:
+            sys.stdout.write(line)
+            sys.stdout.flush()
+    finally:
+        proc.stdout.close()
+        code = proc.wait()
+    if code != 0:
+        raise subprocess.CalledProcessError(code, cmd)
 
 
 def print_inputs(token_count):
@@ -193,18 +218,21 @@ def main():
 if __name__ == "__main__":
     setup_run_log()
     code = 0
+    # Report the failure *before* push_run_log restores the streams — anything
+    # the interpreter prints after that (tracebacks, SystemExit messages) only
+    # reaches the terminal, never the pushed log.
     try:
         main()
     except SystemExit as exc:
         code = exit_code_from_system_exit(exc)
-        if code != 0:
-            raise
+        if code != 0 and exc.code is not None and not isinstance(exc.code, int):
+            print(exc.code, file=sys.stderr)
     except KeyboardInterrupt:
         code = 130  # otherwise an interrupted run is pushed as "-success"
-        raise
+        print("Interrupted (KeyboardInterrupt)", file=sys.stderr)
     except Exception:
         code = 1
-        raise
+        traceback.print_exc()
     finally:
         push_run_log(code)
     sys.exit(code)

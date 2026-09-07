@@ -15,9 +15,12 @@ Env:
 
 import argparse
 import html
+import http.client
 import json
 import os
 import re
+import socket
+import ssl
 import sys
 import threading
 import time
@@ -42,6 +45,16 @@ CONTRACT = "0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30"
 RPC_URL = os.environ.get("BNB_MAINNET_RPC_URL", "https://bsc-dataseed.binance.org")
 CONCURRENCY = 10
 DELAY_SECONDS = 1.5
+HTTP_TIMEOUT = float(os.environ.get("CRAWL_HTTP_TIMEOUT", "30"))
+# Transient network failures (timeouts, resets, SSL EOF) used to go straight
+# into the report as crawl errors, and every one of those then cost a Selenium
+# refresh even though the token was almost always in sync. Retry them first.
+RETRIES = int(os.environ.get("CRAWL_RETRIES", "3"))
+RETRY_DELAY_SECONDS = float(os.environ.get("CRAWL_RETRY_DELAY", "2"))
+TRANSIENT_ERRORS = (socket.timeout, TimeoutError, ConnectionError, ssl.SSLError, http.client.HTTPException)
+TRANSIENT_HTTP_CODES = (429, 500, 502, 503, 504)
+# BscScan 503 means "rotate account", not "retry" — leave it to fetch_bscscan.
+BSCSCAN_TRANSIENT_HTTP_CODES = (429, 500, 502, 504)
 
 pool = AccountPool()
 active_account = None
@@ -73,7 +86,7 @@ def norm(value):
 
 def http_get(url, headers=None):
     request = urllib.request.Request(url, headers=headers or {})
-    with urllib.request.urlopen(request, timeout=60) as response:
+    with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT) as response:
         return response.read().decode("utf-8", errors="replace")
 
 
@@ -85,8 +98,45 @@ def http_post_json(url, payload):
         headers={"content-type": "application/json"},
         method="POST",
     )
-    with urllib.request.urlopen(request, timeout=60) as response:
+    with urllib.request.urlopen(request, timeout=HTTP_TIMEOUT) as response:
         return json.loads(response.read().decode("utf-8"))
+
+
+def describe_error(error):
+    """Short, host-agnostic description for logs and the report."""
+    if isinstance(error, urllib.error.HTTPError):
+        return f"HTTP {error.code}"
+    if isinstance(error, urllib.error.URLError):
+        return str(error.reason)
+    return str(error) or type(error).__name__
+
+
+def is_transient_error(error, transient_codes=TRANSIENT_HTTP_CODES):
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code in transient_codes
+    if isinstance(error, urllib.error.URLError):
+        reason = error.reason
+        if isinstance(reason, TRANSIENT_ERRORS):
+            return True
+        text = str(reason).lower()
+        return "timed out" in text or "eof occurred" in text or "connection reset" in text
+    return isinstance(error, TRANSIENT_ERRORS)
+
+
+def with_retries(stage, label, fn, transient_codes=TRANSIENT_HTTP_CODES):
+    """Run fn(), retrying transient network errors RETRIES times with backoff.
+
+    Non-transient errors (and the final transient failure) propagate unchanged
+    so callers can still special-case e.g. BscScan HTTP 503.
+    """
+    for attempt in range(1, RETRIES + 1):
+        try:
+            return fn()
+        except Exception as error:
+            if attempt >= RETRIES or not is_transient_error(error, transient_codes):
+                raise
+            warn(f"{label}  {stage} retry {attempt}/{RETRIES - 1}: {describe_error(error)}", indent=4)
+            time.sleep(RETRY_DELAY_SECONDS * attempt)
 
 
 def init_account():
@@ -174,12 +224,20 @@ def fetch_bscscan(token_id):
             headers = {"user-agent": user_agent, "cookie": cookie}
         url = f"https://bscscan.com/nft/{CONTRACT}/{token_id}"
         try:
-            html = http_get(url, headers=headers)
+            html = with_retries(
+                "bscscan",
+                short_token(token_id),
+                lambda: http_get(url, headers=headers),
+                transient_codes=BSCSCAN_TRANSIENT_HTTP_CODES,
+            )
         except urllib.error.HTTPError as error:
             if error.code == 503:
                 rotate_cookie("HTTP 503")
                 continue
-            raise RuntimeError(f"BSCScan HTTP {error.code}") from error
+            raise RuntimeError(f"bscscan: HTTP {error.code}") from error
+        except (OSError, http.client.HTTPException) as error:
+            # URLError, timeouts, SSL EOF, connection resets all subclass OSError.
+            raise RuntimeError(f"bscscan: {describe_error(error)}") from error
 
         if 'id="collapseProperties"' not in html:
             if is_cloudflare_html(html):
@@ -188,22 +246,25 @@ def fetch_bscscan(token_id):
             if is_rate_limited_text(html):
                 rotate_cookie("rate limit", mark_exhausted=True)
                 continue
-            raise RuntimeError("BSCScan page missing properties (throttled?)")
+            raise RuntimeError("bscscan: page missing properties (throttled?)")
         return parse_bscscan_props(html)
 
 
-def eth_call(data):
+def eth_call(data, label=""):
     payload = {
         "jsonrpc": "2.0",
         "id": 1,
         "method": "eth_call",
         "params": [{"to": CONTRACT, "data": data}, "latest"],
     }
-    result = http_post_json(RPC_URL, payload)
+    try:
+        result = with_retries("rpc", label, lambda: http_post_json(RPC_URL, payload))
+    except (OSError, http.client.HTTPException, ValueError) as error:
+        raise RuntimeError(f"rpc: {describe_error(error)}") from error
     if result.get("error"):
         message = result["error"].get("message", "")
         short = ":".join(message.split(":")[:2])
-        raise RuntimeError(f"tokenURI revert: {short}")
+        raise RuntimeError(f"rpc: tokenURI revert: {short}")
     return result["result"]
 
 
@@ -214,11 +275,19 @@ def decode_abi_string(hex_result):
 
 
 def fetch_token_uri_attrs(token_id):
+    label = short_token(token_id)
     hex_id = format(int(token_id), "x").zfill(64)
-    uri = decode_abi_string(eth_call("0xc87b56dd" + hex_id))
+    uri = decode_abi_string(eth_call("0xc87b56dd" + hex_id, label=label))
     url = uri.replace("ipfs://", "https://ipfs.io/ipfs/")
-    meta = json.loads(http_get(url))
-    attributes = meta.get("attributes")
+    try:
+        body = with_retries("metadata", label, lambda: http_get(url))
+    except (OSError, http.client.HTTPException) as error:
+        raise RuntimeError(f"metadata: {describe_error(error)}") from error
+    try:
+        meta = json.loads(body)
+    except ValueError as error:
+        raise RuntimeError(f"metadata: invalid JSON ({error})") from error
+    attributes = meta.get("attributes") if isinstance(meta, dict) else None
     return attributes if isinstance(attributes, list) else []
 
 
