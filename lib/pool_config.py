@@ -1,6 +1,6 @@
 import os
 
-from accounts.pool import AccountPool, USAGE_REFRESH, USAGE_REFRESH_GET, USAGE_REFRESH_POST
+from accounts.pool import AccountPool, USAGE_REFRESH
 from lib.tokenids import REFRESH_TOKENS_PER_COOKIE
 
 
@@ -32,10 +32,6 @@ def account_env_for_refresh_tokens(token_count, limit=REFRESH_TOKENS_PER_COOKIE)
     candidates = []
     for username in pool.pool_usernames():
         if pool.is_exhausted(username, USAGE_REFRESH):
-            continue
-        if pool.is_exhausted(username, USAGE_REFRESH_GET):
-            continue
-        if pool.is_exhausted(username, USAGE_REFRESH_POST):
             continue
         usage = pool.get_refresh_usage(username, limit=limit)
         if int(usage.get("remaining", 0)) <= 0:

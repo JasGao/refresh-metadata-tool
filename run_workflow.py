@@ -32,7 +32,7 @@ from accounts.pool import AccountPool
 from lib.fetch_tokens import fetch_tokens
 from lib.log_util import banner, fail, info, kv, ok, step, substep, summary, warn
 from lib.run_log import exit_code_from_system_exit, push_run_log, setup_run_log
-from lib.paths import CRAWL_REPORT_FILE, migrate_legacy_paths
+from lib.paths import CRAWL_REPORT_FILE
 from lib.report_tokens import refresh_target_counts
 from lib.pool_config import account_env_for_refresh_tokens
 from lib.reset_compare import reset_compare_files
@@ -77,7 +77,7 @@ def print_inputs(token_count):
     ])
 
 
-def ensure_cookies(needed, logged_accounts=None):
+def ensure_cookies(needed):
     pool = AccountPool()
     targets = pool.usernames()[:needed]
     if not targets:
@@ -85,47 +85,26 @@ def ensure_cookies(needed, logged_accounts=None):
 
     kv("Account pool", ", ".join(targets))
 
-    if logged_accounts is not None:
-        login_targets = [
-            name for name in targets
-            if name not in logged_accounts and pool.needs_crawl_login(name)
-        ]
-        if not login_targets:
-            ok(f"Cookies still valid today: {', '.join(targets)}")
-            return logged_accounts
-    else:
-        login_targets = [name for name in targets if pool.needs_crawl_login(name)]
-        if not login_targets:
-            ok(f"Cookies still valid today: {', '.join(targets)}")
-            return set(targets)
+    login_targets = [name for name in targets if pool.needs_crawl_login(name)]
+    if not login_targets:
+        ok(f"Cookies still valid today: {', '.join(targets)}")
+        return
 
     for username in login_targets:
         entry = pool.session(username)
-        entry.pop("cookie", None)
-        entry.pop("userAgent", None)
-        entry.pop("crawlExhaustedUntil", None)
-        entry.pop("refreshGetExhaustedUntil", None)
-        entry.pop("refreshPostExhaustedUntil", None)
-        entry.pop("refreshExhaustedUntil", None)
-        entry.pop("exhaustedUntil", None)
+        for key in ("cookie", "userAgent", "crawlExhaustedUntil", "refreshExhaustedUntil"):
+            entry.pop(key, None)
     pool.save()
     info(f"Re-logging in {len(login_targets)} account(s) via Selenium (steps 1→2→3)")
 
     token_id = login.first_token_id()
     info(f"First tokenId  {token_id}  (from tokens.csv)")
-    try:
-        for index, username in enumerate(login_targets):
-            creds = pool.get_credentials(username)
-            info(f"[{index + 1}/{len(login_targets)}] {username}")
-            login.capture_account(pool, username, creds["password"], token_id, driver=None)
-            if logged_accounts is not None:
-                logged_accounts.add(username)
-            if index + 1 < len(login_targets):
-                time.sleep(login.ACCOUNT_GAP_SECONDS)
-    finally:
-        pass
-
-    return logged_accounts or set(login_targets)
+    for index, username in enumerate(login_targets):
+        creds = pool.get_credentials(username)
+        info(f"[{index + 1}/{len(login_targets)}] {username}")
+        login.capture_account(pool, username, creds["password"], token_id, driver=None)
+        if index + 1 < len(login_targets):
+            time.sleep(login.ACCOUNT_GAP_SECONDS)
 
 
 def parse_args():
@@ -138,7 +117,6 @@ def parse_args():
 
 
 def main():
-    migrate_legacy_paths()
     args = parse_args()
 
     banner("BscScan Metadata Workflow")
@@ -166,11 +144,9 @@ def main():
         banner("Workflow complete")
         return
 
-    logged_accounts = set()
-
     if not args.skip_login:
         step(2, "Ensure starting crawl cookie (account 1)")
-        logged_accounts = ensure_cookies(1) or logged_accounts
+        ensure_cookies(1)
     else:
         step(2, "Login accounts")
         warn("Skipped (--skip-login) — using existing cookies")

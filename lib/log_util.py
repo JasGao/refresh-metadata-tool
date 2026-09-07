@@ -38,10 +38,6 @@ def info(message, indent=2):
     _out(f"{' ' * indent}· {message}")
 
 
-def progress(current, total, detail, indent=2):
-    _out(f"{' ' * indent}[{current}/{total}] {detail}")
-
-
 def summary(title, rows):
     _out(f"\n── {title} {'─' * max(0, 36 - len(title))}")
     for key, value in rows:

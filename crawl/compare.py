@@ -37,14 +37,19 @@ from accounts.pool import AccountPool, DEFAULT_USER_AGENT, USAGE_CRAWL
 from lib.detect import is_cloudflare_html, is_rate_limited_text
 from lib.log_util import banner, fail, info, kv, ok, short_token, summary, warn
 from lib.pool_config import configure_pool_allowed
-from lib.paths import CRAWL_OUTPUT_DIR, PROJECT_ROOT, migrate_legacy_paths
+from lib.paths import CRAWL_OUTPUT_DIR
 from lib.reset_compare import PROGRESS_FILE, REPORT_FILE, reset_compare_files
 from lib.tokenids import TOKEN_IDS_FILE, load_token_ids
 
 CONTRACT = "0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30"
 RPC_URL = os.environ.get("BNB_MAINNET_RPC_URL", "https://bsc-dataseed.binance.org")
-CONCURRENCY = 10
-DELAY_SECONDS = 1.5
+# Parallel tokens per batch. Probed 2026-09-07: 50 concurrent fetches against
+# BscScan, the RPC and renaiss.xyz all completed with no errors or throttling;
+# latency roughly doubles between 20 and 50, so 100 buys little and raises the
+# odds of a Cloudflare challenge. Override with CRAWL_CONCURRENCY=25 if the
+# production Mac's network starts timing out at 50.
+CONCURRENCY = int(os.environ.get("CRAWL_CONCURRENCY", "50"))
+DELAY_SECONDS = float(os.environ.get("CRAWL_BATCH_DELAY", "1.5"))
 HTTP_TIMEOUT = float(os.environ.get("CRAWL_HTTP_TIMEOUT", "30"))
 # Transient network failures (timeouts, resets, SSL EOF) used to go straight
 # into the report as crawl errors, and every one of those then cost a Selenium
@@ -336,7 +341,6 @@ def save_progress(progress):
 
 
 def compare_one(token_id):
-    global cloudflare_challenged
     try:
         bscscan_props = fetch_bscscan(token_id)
         meta_attrs = fetch_token_uri_attrs(token_id)
@@ -348,10 +352,8 @@ def compare_one(token_id):
             "at": now_iso(),
         }
     except Exception as error:
-        message = str(error)
-        if "Cloudflare challenge" in message or "no more accounts to rotate" in message:
-            cloudflare_challenged = True
-        return {"status": "error", "error": message, "at": now_iso()}
+        # rotate_cookie sets cloudflare_challenged before raising; nothing to do here.
+        return {"status": "error", "error": str(error), "at": now_iso()}
 
 
 def parse_args():
@@ -364,7 +366,6 @@ def parse_args():
 
 
 def main():
-    migrate_legacy_paths()
     args = parse_args()
     reset = args.reset or os.environ.get("RESET", "").lower() in ("1", "true")
 

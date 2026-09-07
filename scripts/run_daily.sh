@@ -42,7 +42,7 @@ setup_git_ssh() {
   export GIT_SSH_COMMAND="ssh -i ${key} -o IdentitiesOnly=yes -o UserKnownHostsFile=${HOME}/.ssh/known_hosts"
 }
 
-# Unattended defaults (see README "OpenClaw / unattended cron"). Any value
+# Unattended defaults (see README "Refresh timing knobs"). Any value
 # already set in the environment or scripts/schedule.local.env wins.
 export BSCSCAN_CAPTCHA_WAIT="${BSCSCAN_CAPTCHA_WAIT:-120}"
 export BSCSCAN_LOGIN_RETRIES="${BSCSCAN_LOGIN_RETRIES:-5}"
@@ -62,12 +62,8 @@ mkdir -p "$REPO_DIR/logs" "$BSCSCAN_CHROME_USER_DATA"
 
 cd "$REPO_DIR" || { echo "cannot cd to $REPO_DIR"; exit 1; }
 
-# Stale chromedriver processes from crashed runs can leak file descriptors.
-if command -v pgrep >/dev/null 2>&1; then
-  while read -r pid; do
-    [ -n "$pid" ] && kill "$pid" 2>/dev/null || true
-  done < <(pgrep -x chromedriver 2>/dev/null || true)
-fi
+# Stale chromedriver/Chrome processes are cleaned up by accounts/login.py
+# (create_driver) right before each browser start.
 
 wait_for_network || true
 setup_git_ssh

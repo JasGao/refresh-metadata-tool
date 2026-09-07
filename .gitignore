@@ -4,7 +4,6 @@ accounts/accounts.json
 .env
 **/__pycache__/
 crawl/output/
-refresh-metadata-output/
 logs/*
 !logs/daily-*.log
 !logs/*rows-*.log

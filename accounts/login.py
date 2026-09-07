@@ -1,5 +1,4 @@
 import argparse
-import json
 import os
 import re
 import signal
@@ -19,7 +18,7 @@ sys.path.insert(0, PROJECT_ROOT)
 from accounts.pool import AccountPool, AUTH_COOKIE_MARKERS, DEFAULT_USER_AGENT
 from lib.detect import is_cloudflare_html
 from lib.log_util import info, ok, warn
-from lib.paths import CRAWL_REPORT_FILE, migrate_legacy_paths
+from lib.report_tokens import refresh_target_counts
 from lib.tokenids import count_token_ids, cookies_needed, load_token_ids, refresh_cookies_needed, TOKENS_PER_COOKIE, REFRESH_TOKENS_PER_COOKIE
 
 CONTRACT = os.environ.get("BSCSCAN_CONTRACT", "0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30")
@@ -581,9 +580,8 @@ def is_browser_error_page(driver, page=None):
     return any(
         phrase in page
         for phrase in (
-            "this site can't be reached",
-            "this site can’t be reached",
             "site can't be reached",
+            "site can’t be reached",
             "cannot connect",
             "could not connect",
             "err_connection",
@@ -817,8 +815,8 @@ def nft_page_url(token_id):
     return f"https://bscscan.com/nft/{CONTRACT}/{token_id}"
 
 
-def nft_page_ready(driver):
-    html = driver.page_source
+def nft_page_ready(driver, page=None):
+    html = driver.page_source if page is None else page
     if is_cloudflare_html(html):
         return False
     return 'id="collapseProperties"' in html or "__VIEWSTATE" in html
@@ -929,24 +927,13 @@ def parse_args():
     parser.add_argument(
         "--for-refresh",
         action="store_true",
-        help=f"Log in ceil(outOfSync/{REFRESH_TOKENS_PER_COOKIE}) accounts from compare report",
+        help=f"Log in ceil((outOfSync + crawl errors)/{REFRESH_TOKENS_PER_COOKIE}) accounts from compare report",
     )
     parser.add_argument("--token-id", default=None)
     args = parser.parse_args()
     if args.token_id is None:
         args.token_id = os.environ.get("TOKEN_ID") or first_token_id()
     return args
-
-
-def refresh_tokens_needed(report_path):
-    path = CRAWL_REPORT_FILE
-    if report_path:
-        path = report_path
-    if not os.path.exists(path):
-        return 0
-    with open(path, "r") as file:
-        report = json.load(file)
-    return len([entry for entry in report.get("outOfSync", []) if entry.get("tokenId")])
 
 
 def resolve_login_targets(pool, args):
@@ -962,9 +949,9 @@ def resolve_login_targets(pool, args):
         return pool.usernames()[:needed]
 
     if args.for_refresh:
-        token_count = refresh_tokens_needed(None)
+        token_count = refresh_target_counts()["total"]
         needed = refresh_cookies_needed(token_count)
-        print(f"Refresh needs {needed} cookie(s) for {token_count} out-of-sync token(s) ({REFRESH_TOKENS_PER_COOKIE}/cookie)")
+        print(f"Refresh needs {needed} cookie(s) for {token_count} token(s) ({REFRESH_TOKENS_PER_COOKIE}/cookie)")
         return pool.usernames()[:needed]
 
     if args.count:
@@ -980,7 +967,6 @@ def resolve_login_targets(pool, args):
 
 
 def main():
-    migrate_legacy_paths()
     args = parse_args()
     pool = AccountPool()
     targets = resolve_login_targets(pool, args)

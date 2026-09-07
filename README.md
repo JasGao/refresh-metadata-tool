@@ -116,6 +116,8 @@ Set these in `scripts/schedule.local.env` or the shell.
 
 | Env | Default | Meaning |
 |-----|---------|---------|
+| `CRAWL_CONCURRENCY` | `50` | Tokens fetched in parallel per batch. Was `10` until 2026-09-07; 50 tested clean and crawls about 3x faster. Drop to `25` if `bscscan:`/`metadata:` timeouts spike; do not go to 100 — the metadata host is the bottleneck and BscScan bot detection gets riskier. |
+| `CRAWL_BATCH_DELAY` | `1.5` | Pause between batches, seconds. |
 | `CRAWL_RETRIES` | `3` | Attempts per HTTP call for transient errors (timeouts, resets, SSL EOF, HTTP 429/5xx). Before, one timeout put the token in the report as a crawl error and cost a Selenium refresh. |
 | `CRAWL_RETRY_DELAY` | `2` | Seconds between attempts (grows linearly). |
 | `CRAWL_HTTP_TIMEOUT` | `30` | Per-request timeout for BscScan, RPC, and metadata fetches. |

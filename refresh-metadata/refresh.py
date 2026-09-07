@@ -48,7 +48,7 @@ from accounts.pool import AccountPool, USAGE_REFRESH, cookie_has_auth
 from lib.detect import is_cloudflare_html, is_rate_limited_text
 from lib.log_util import banner, fail, info, kv, ok, short_token, summary, warn
 from lib.pool_config import configure_pool_allowed
-from lib.paths import CRAWL_REPORT_FILE, migrate_legacy_paths
+from lib.paths import CRAWL_REPORT_FILE
 from lib.report_tokens import load_refresh_token_ids, refresh_target_counts
 from lib.tokenids import REFRESH_TOKENS_PER_COOKIE
 
@@ -170,10 +170,6 @@ def is_browser_connection_error(error):
     except ImportError:
         pass
 
-    if isinstance(error, WebDriverException):
-        message = str(error).lower()
-        return any(marker in message for marker in CONNECTION_ERROR_MARKERS)
-
     message = str(error).lower()
     return any(marker in message for marker in CONNECTION_ERROR_MARKERS)
 
@@ -183,8 +179,9 @@ def is_session_lost_error(error):
     return any(marker in message for marker in SESSION_LOST_MARKERS)
 
 
-def is_cloudflare_page(driver):
-    page = driver.page_source
+def is_cloudflare_page(driver, page=None):
+    if page is None:
+        page = driver.page_source
     url = driver.current_url.lower()
     return bool(
         is_cloudflare_html(page)
@@ -616,26 +613,22 @@ def refresh_token(token_id, retries=0, session_retries=0):
         time.sleep(STEP_DELAY_SECONDS)
         login.dismiss_cookie_banner(browser)
 
-        if is_cloudflare_page(browser):
+        # One page_source round trip (~150KB) serves all three checks below.
+        page = browser.page_source
+        if is_cloudflare_page(browser, page=page):
             blocked = _rotate_on_cloudflare(token_id)
             if blocked:
                 return blocked
             retries += 1
             continue
 
-        if is_rate_limited_text(browser.page_source):
+        if is_rate_limited_text(page):
             if not rotate_account(mark_exhausted=USAGE_REFRESH, warm_token_id=token_id):
                 return {"status": "rate_limited", "error": "Daily limit hit — no more accounts in pool"}
             retries += 1
             continue
 
-        if not login.nft_page_ready(browser):
-            if is_cloudflare_page(browser):
-                blocked = _rotate_on_cloudflare(token_id)
-                if blocked:
-                    return blocked
-                retries += 1
-                continue
+        if not login.nft_page_ready(browser, page=page):
             return {
                 "status": "error",
                 "error": (
@@ -691,14 +684,15 @@ def refresh_token(token_id, retries=0, session_retries=0):
                 "error": f"Refresh Metadata button not found — {error}",
             }
 
-        if is_cloudflare_page(browser):
+        page = browser.page_source
+        if is_cloudflare_page(browser, page=page):
             blocked = _rotate_on_cloudflare(token_id, when="after refresh click")
             if blocked:
                 return blocked
             retries += 1
             continue
 
-        if is_rate_limited_text(browser.page_source):
+        if is_rate_limited_text(page):
             if not rotate_account(mark_exhausted=USAGE_REFRESH, warm_token_id=token_id):
                 return {"status": "rate_limited", "error": "Daily limit hit — no more accounts in pool"}
             retries += 1
@@ -708,7 +702,6 @@ def refresh_token(token_id, retries=0, session_retries=0):
 
 
 def main():
-    migrate_legacy_paths()
     args = parse_args()
     tokens = load_tokens(report_path=args.report, csv_path=args.csv)
 
@@ -741,8 +734,7 @@ def main():
 
     init_account()
     try:
-        ensure_active_account_session(token_id=tokens[0])
-        sync_wait()
+        ensure_active_account_session(token_id=tokens[0])  # every path ends in sync_wait()
 
         ok_count = fail_count = 0
         tokens_since_browser_restart = 0

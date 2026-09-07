@@ -19,16 +19,11 @@ DEFAULT_USER_AGENT = (
 AUTH_COOKIE_MARKERS = ("bscscan_userid=", "bscscan_username=")
 
 USAGE_CRAWL = "crawl"
-USAGE_REFRESH = "refresh"  # full flow: account must pass GET + POST checks
-USAGE_REFRESH_GET = "refresh_get"
-USAGE_REFRESH_POST = "refresh_post"
+USAGE_REFRESH = "refresh"
 EXHAUSTED_FIELDS = {
     USAGE_CRAWL: "crawlExhaustedUntil",
     USAGE_REFRESH: "refreshExhaustedUntil",
-    USAGE_REFRESH_GET: "refreshGetExhaustedUntil",
-    USAGE_REFRESH_POST: "refreshPostExhaustedUntil",
 }
-REFRESH_EXHAUSTED_LEGACY = "refreshExhaustedUntil"
 REFRESH_USAGE_FIELD = "refreshUsage"
 
 
@@ -159,27 +154,14 @@ class AccountPool:
         return self.state.setdefault("sessions", {}).setdefault(username, {})
 
     def _exhausted_until(self, username, usage):
-        entry = self.session(username)
-        field = EXHAUSTED_FIELDS.get(usage)
-        if field:
-            until = _parse_iso(entry.get(field))
-            if until is not None:
-                return until
-        if usage in (USAGE_REFRESH_GET, USAGE_REFRESH_POST):
-            until = _parse_iso(entry.get(REFRESH_EXHAUSTED_LEGACY))
-            if until is not None:
-                return until
-        return _parse_iso(entry.get("exhaustedUntil"))
+        return _parse_iso(self.session(username).get(EXHAUSTED_FIELDS[usage]))
 
     def _is_available(self, username, usage):
+        if self.is_exhausted(username, usage):
+            return False
         if usage == USAGE_REFRESH:
-            return (
-                not self.is_exhausted(username, USAGE_REFRESH)
-                and not self.is_exhausted(username, USAGE_REFRESH_GET)
-                and not self.is_exhausted(username, USAGE_REFRESH_POST)
-                and self.get_refresh_usage(username)["remaining"] > 0
-            )
-        return not self.is_exhausted(username, usage)
+            return self.get_refresh_usage(username)["remaining"] > 0
+        return True
 
     def is_exhausted(self, username, usage):
         exhausted_until = self._exhausted_until(username, usage)
@@ -277,12 +259,8 @@ class AccountPool:
         entry["userAgent"] = user_agent or DEFAULT_USER_AGENT
         entry["lastLogin"] = _iso(_now())
         if clear_exhaustion:
-            entry[EXHAUSTED_FIELDS[USAGE_CRAWL]] = None
-            entry[EXHAUSTED_FIELDS[USAGE_REFRESH]] = None
-            entry[EXHAUSTED_FIELDS[USAGE_REFRESH_GET]] = None
-            entry[EXHAUSTED_FIELDS[USAGE_REFRESH_POST]] = None
-            entry.pop(REFRESH_EXHAUSTED_LEGACY, None)
-            entry.pop("exhaustedUntil", None)
+            for field in EXHAUSTED_FIELDS.values():
+                entry[field] = None
         self.save()
 
     def get_cookie(self, username):
