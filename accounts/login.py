@@ -2,6 +2,7 @@ import argparse
 import os
 import re
 import signal
+import socket
 import subprocess
 import sys
 import time
@@ -52,6 +53,13 @@ def first_token_id():
 
 DRIVER_RETRIES = int(os.environ.get("BSCSCAN_DRIVER_RETRIES", "3"))
 DRIVER_RETRY_DELAY = float(os.environ.get("BSCSCAN_DRIVER_RETRY_DELAY", "5"))
+# undetected_chromedriver's default mode deletes its cached chromedriver and
+# re-downloads + re-patches an ~18MB binary on EVERY browser start, using
+# urlopen/urlretrieve with no timeout. On a flaky network that hangs forever
+# right after the "Chrome version_main" log line, with no browser window.
+# Reuse the cached, already-patched binary (user_multi_procs=True) and only
+# download when the cache is empty or no longer matches Chrome.
+DRIVER_DOWNLOAD_TIMEOUT = float(os.environ.get("BSCSCAN_DRIVER_DOWNLOAD_TIMEOUT", "120"))
 CHROME_USER_DATA = os.environ.get(
     "BSCSCAN_CHROME_USER_DATA",
     os.path.expanduser("~/.refresh/chrome-bscscan"),
@@ -238,6 +246,34 @@ def capture_session_cookies(driver):
     return cookie_string(driver)
 
 
+def start_chrome(options, version_main, use_cached_driver):
+    """Start undetected Chrome, bounding any chromedriver download it performs."""
+    kwargs = {"options": options, "user_multi_procs": use_cached_driver}
+    if version_main:
+        kwargs["version_main"] = version_main
+    # The patcher's urlopen/urlretrieve calls have no timeout of their own; the
+    # socket default is the only way to stop them blocking forever.
+    previous_timeout = socket.getdefaulttimeout()
+    socket.setdefaulttimeout(DRIVER_DOWNLOAD_TIMEOUT)
+    try:
+        return uc.Chrome(**kwargs)
+    finally:
+        socket.setdefaulttimeout(previous_timeout)
+
+
+def cached_driver_unusable(error):
+    """True when the cached chromedriver cannot serve this Chrome and must be re-downloaded."""
+    if isinstance(error, ValueError):
+        return True  # empty cache dir: patcher does max() over no files
+    text = str(error).lower()
+    return (
+        "only supports chrome version" in text
+        or "session not created" in text
+        or "no such file or directory" in text
+        or "not a valid" in text
+    )
+
+
 def create_driver(username=None):
     if username:
         set_active_chrome_user(username)
@@ -246,30 +282,38 @@ def create_driver(username=None):
     cleanup_stale_chromedrivers()
     version_main = chrome_version_main()
     last_error = None
+    use_cached_driver = True
 
     if user_data:
         info(f"Chrome profile  {user_data}  ({CHROME_PROFILE})")
     if version_main:
         info(f"Chrome version_main  {version_main}")
 
-    for attempt in range(1, DRIVER_RETRIES + 1):
+    attempt = 1
+    while attempt <= DRIVER_RETRIES:
         options = chrome_options(username)
+        started = time.monotonic()
         try:
-            if version_main:
-                driver = uc.Chrome(options=options, version_main=version_main)
-            else:
-                driver = uc.Chrome(options=options)
+            driver = start_chrome(options, version_main, use_cached_driver)
             apply_command_timeout(driver)
             driver.get("about:blank")
             driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
             driver.set_script_timeout(30)
+            info(f"Chrome started  ({time.monotonic() - started:.1f}s, {'cached' if use_cached_driver else 'downloaded'} chromedriver)")
             return driver
-        except (TimeoutError, OSError, RuntimeError, WebDriverException) as error:
+        except (TimeoutError, OSError, RuntimeError, ValueError, WebDriverException) as error:
             last_error = error
+            if use_cached_driver and cached_driver_unusable(error):
+                # Doesn't consume a retry: this is the expected path after a
+                # Chrome update or on a fresh machine.
+                warn(f"Cached chromedriver unusable ({str(error).strip().splitlines()[0][:90]}) — downloading a fresh one")
+                use_cached_driver = False
+                continue
             if attempt < DRIVER_RETRIES:
                 print(f"Chrome driver init failed (attempt {attempt}/{DRIVER_RETRIES}): {error}")
                 print(f"Retrying in {DRIVER_RETRY_DELAY}s...")
                 time.sleep(DRIVER_RETRY_DELAY)
+            attempt += 1
 
     raise RuntimeError(f"Could not start Chrome after {DRIVER_RETRIES} attempts: {last_error}")
 

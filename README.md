@@ -94,6 +94,7 @@ refresh/
 | Need more accounts | Add usernames to `accounts/accounts.json` |
 | Crawl interrupted | `python3 run_workflow.py --skip-reset --skip-login` |
 | Refresh stalls for minutes | Lower `BSCSCAN_COMMAND_TIMEOUT` / `BSCSCAN_PAGE_LOAD_TIMEOUT` (see below) |
+| Stuck after `Chrome version_main NNN`, no browser window | undetected-chromedriver was re-downloading chromedriver (18 MB, no timeout) on every browser start. Fixed 2026-09-07: the cached binary is reused; a download only happens after a Chrome update and is capped by `BSCSCAN_DRIVER_DOWNLOAD_TIMEOUT`. |
 
 ### Refresh timing knobs
 
@@ -105,12 +106,13 @@ Set these in `scripts/schedule.local.env` or the shell.
 | `BSCSCAN_PAGE_LOAD_TIMEOUT` | `35` | Max seconds for a page load before the load is stopped. |
 | `BSCSCAN_PAGE_LOAD_STRATEGY` | `eager` | `eager` returns at DOMContentLoaded instead of waiting for ads/trackers. Use `normal` for the old behaviour. |
 | `BSCSCAN_NAVIGATE_ATTEMPTS` | `2` | Re-open the NFT page this many times on a page-load timeout before restarting Chrome. |
-| `BSCSCAN_BROWSER_RESTART_EVERY` | `19` | Proactive Chrome restart interval, in tokens. `0` disables. |
+| `BSCSCAN_BROWSER_RESTART_EVERY` | `18` | Proactive Chrome restart interval, in tokens. `0` disables. |
 | `BSCSCAN_STRICT_USERNAME` | unset | `1` makes an unverifiable username fail the session check (forces a full Turnstile login). Off by default — Chrome profiles are per-account. |
 | `BSCSCAN_TURNSTILE_ABSENT_GRACE` | `12` | If no Turnstile widget has rendered after this many seconds, reload instead of polling out `BSCSCAN_CAPTCHA_WAIT`. |
 | `BSCSCAN_CAPTCHA_WAIT` | `120` (in `run_daily.sh`) | Max wait for a Turnstile token *when the widget is actually on the page*. |
 | `BSCSCAN_LOGIN_RETRIES` | `5` (in `run_daily.sh`) | Login attempts before giving up. |
 | `BSCSCAN_LOGIN_STEP_DELAY` | `2.5` | Settle pause after each navigation. |
+| `BSCSCAN_DRIVER_DOWNLOAD_TIMEOUT` | `120` | Max seconds for a chromedriver download when the cached binary no longer matches Chrome. |
 
 ### Crawl network knobs
 

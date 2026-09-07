@@ -61,7 +61,7 @@ REFRESH_BUTTON = "#ContentPlaceHolder1_btnModalRefreshMetadata"
 BROWSER_RESTART_ATTEMPTS = 2
 NAVIGATE_ATTEMPTS = int(os.environ.get("BSCSCAN_NAVIGATE_ATTEMPTS", "2"))
 DRIVER_RESTART_DELAY = float(os.environ.get("BSCSCAN_DRIVER_RESTART_DELAY", "3"))
-BROWSER_RESTART_EVERY = int(os.environ.get("BSCSCAN_BROWSER_RESTART_EVERY", "19"))
+BROWSER_RESTART_EVERY = int(os.environ.get("BSCSCAN_BROWSER_RESTART_EVERY", "18"))
 CONNECTION_ERROR_MARKERS = (
     "connection refused",
     "connection reset",
