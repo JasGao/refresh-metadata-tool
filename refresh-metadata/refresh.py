@@ -59,6 +59,7 @@ STEP_DELAY_SECONDS = login.STEP_DELAY_SECONDS
 
 REFRESH_BUTTON = "#ContentPlaceHolder1_btnModalRefreshMetadata"
 BROWSER_RESTART_ATTEMPTS = 2
+NAVIGATE_ATTEMPTS = int(os.environ.get("BSCSCAN_NAVIGATE_ATTEMPTS", "2"))
 DRIVER_RESTART_DELAY = float(os.environ.get("BSCSCAN_DRIVER_RESTART_DELAY", "3"))
 BROWSER_RESTART_EVERY = int(os.environ.get("BSCSCAN_BROWSER_RESTART_EVERY", "19"))
 CONNECTION_ERROR_MARKERS = (
@@ -347,19 +348,25 @@ def try_saved_cookie_login(browser, username, token_id=None):
     return False
 
 
-def navigate_browser(browser, url):
-    try:
-        browser.get(url)
-    except TimeoutException as error:
-        if not is_page_load_timeout(error):
-            raise
-        warn("Page load timed out — stopping load and continuing")
+def navigate_browser(browser, url, attempts=NAVIGATE_ATTEMPTS):
+    for attempt in range(1, attempts + 1):
         try:
-            browser.execute_script("window.stop();")
-        except Exception:
-            pass
-    if login.is_browser_error_page(browser):
-        raise RuntimeError("Browser connection error loading page")
+            browser.get(url)
+        except TimeoutException as error:
+            if not is_page_load_timeout(error):
+                raise
+            warn(f"Page load timed out ({attempt}/{attempts}) — stopping load")
+            try:
+                browser.execute_script("window.stop();")
+            except Exception:
+                pass
+            # Retrying the same URL is much cheaper than the Chrome restart + login
+            # that a propagated browser error triggers.
+            if attempt < attempts and not login.nft_page_ready(browser):
+                continue
+        if login.is_browser_error_page(browser):
+            raise RuntimeError("Browser connection error loading page")
+        return
 
 
 def refresh_token_with_browser_recovery(token_id):
@@ -745,10 +752,12 @@ def main():
             current = index + 1
             label = short_token(token_id)
             info(f"Refreshing {label}  ({current}/{total})  (account: {active_account['username']})")
+            token_started = time.monotonic()
             result = refresh_token_with_browser_recovery(token_id)
+            elapsed = time.monotonic() - token_started
 
             if result["status"] == "ok":
-                ok(f"{label}  refresh clicked")
+                ok(f"{label}  refresh clicked  ({elapsed:.1f}s)")
                 ok_count += 1
                 note_token_processed()
                 tokens_since_browser_restart += 1
@@ -763,10 +772,10 @@ def main():
                     wait = recover_browser_session(tokens[index + 1])
                     tokens_since_browser_restart = 0
             elif result["status"] == "rate_limited":
-                fail(f"{label}  {result.get('error', 'rate limit')}")
+                fail(f"{label}  ({elapsed:.1f}s)  {result.get('error', 'rate limit')}")
                 fail_count += 1
             else:
-                fail(f"{label}  {result.get('error', result['status'])}")
+                fail(f"{label}  ({elapsed:.1f}s)  {result.get('error', result['status'])}")
                 fail_count += 1
 
             if index + 1 < len(tokens):

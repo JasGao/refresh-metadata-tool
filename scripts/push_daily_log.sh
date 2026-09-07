@@ -109,7 +109,9 @@ sync_with_remote() {
     echo "git fetch failed — skipping push"
     return 1
   fi
-  if ! git -C "$REPO_DIR" rebase "origin/$branch"; then
+  # --autostash: tokens.csv is tracked and rewritten by step 1 of every run, so
+  # the tree is always dirty and a plain rebase refuses to start.
+  if ! git -C "$REPO_DIR" rebase --autostash "origin/$branch"; then
     echo "git rebase onto origin/$branch failed — aborting, log committed locally only"
     git -C "$REPO_DIR" rebase --abort >/dev/null 2>&1 || true
     return 1

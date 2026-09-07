@@ -93,6 +93,28 @@ refresh/
 | Sheet fetch fails | Set `TOKENS_SHEET_URL` in `.env`; sheet must be “Anyone with the link” (viewer OK) |
 | Need more accounts | Add usernames to `accounts/accounts.json` |
 | Crawl interrupted | `python3 run_workflow.py --skip-reset --skip-login` |
+| Refresh stalls for minutes | Lower `BSCSCAN_COMMAND_TIMEOUT` / `BSCSCAN_PAGE_LOAD_TIMEOUT` (see below) |
+
+### Refresh timing knobs
+
+Set these in `scripts/schedule.local.env` or the shell.
+
+| Env | Default | Meaning |
+|-----|---------|---------|
+| `BSCSCAN_COMMAND_TIMEOUT` | `90` | Max seconds any single chromedriver command may block. Selenium's own default is unlimited, so a wedged Chrome used to hang the run silently. |
+| `BSCSCAN_PAGE_LOAD_TIMEOUT` | `35` | Max seconds for a page load before the load is stopped. |
+| `BSCSCAN_PAGE_LOAD_STRATEGY` | `eager` | `eager` returns at DOMContentLoaded instead of waiting for ads/trackers. Use `normal` for the old behaviour. |
+| `BSCSCAN_NAVIGATE_ATTEMPTS` | `2` | Re-open the NFT page this many times on a page-load timeout before restarting Chrome. |
+| `BSCSCAN_BROWSER_RESTART_EVERY` | `19` | Proactive Chrome restart interval, in tokens. `0` disables. |
+| `BSCSCAN_STRICT_USERNAME` | unset | `1` makes an unverifiable username fail the session check (forces a full Turnstile login). Off by default — Chrome profiles are per-account. |
+| `BSCSCAN_TURNSTILE_ABSENT_GRACE` | `12` | If no Turnstile widget has rendered after this many seconds, reload instead of polling out `BSCSCAN_CAPTCHA_WAIT`. |
+| `BSCSCAN_CAPTCHA_WAIT` | `120` (in `run_daily.sh`) | Max wait for a Turnstile token *when the widget is actually on the page*. |
+| `BSCSCAN_LOGIN_RETRIES` | `5` (in `run_daily.sh`) | Login attempts before giving up. |
+| `BSCSCAN_LOGIN_STEP_DELAY` | `2.5` | Settle pause after each navigation. |
+
+Login now logs its own duration (`✓ Login successful  refresh1  (18.3s)`) and the Turnstile solve time.
+
+Each refresh line now logs its elapsed time (`✓ …1234567890  refresh clicked  (11.4s)`), so a stall is visible in `logs/`.
 
 Results: `crawl/output/report.json` → `outOfSync` / `errors`  
 Logs: `logs/daily-*.log`

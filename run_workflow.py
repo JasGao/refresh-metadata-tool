@@ -199,6 +199,9 @@ if __name__ == "__main__":
         code = exit_code_from_system_exit(exc)
         if code != 0:
             raise
+    except KeyboardInterrupt:
+        code = 130  # otherwise an interrupted run is pushed as "-success"
+        raise
     except Exception:
         code = 1
         raise

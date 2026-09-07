@@ -16,7 +16,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, PROJECT_ROOT)
 
-from accounts.pool import AccountPool, DEFAULT_USER_AGENT
+from accounts.pool import AccountPool, AUTH_COOKIE_MARKERS, DEFAULT_USER_AGENT
 from lib.detect import is_cloudflare_html
 from lib.log_util import info, ok, warn
 from lib.paths import CRAWL_REPORT_FILE, migrate_legacy_paths
@@ -31,7 +31,17 @@ CAPTCHA_WAIT_SECONDS = float(os.environ.get("BSCSCAN_CAPTCHA_WAIT", "60"))
 LOGIN_RETRIES = int(os.environ.get("BSCSCAN_LOGIN_RETRIES", "3"))
 POST_TURNSTILE_DELAY = float(os.environ.get("BSCSCAN_POST_TURNSTILE_DELAY", "3"))
 LOGIN_SUBMIT_WAIT = float(os.environ.get("BSCSCAN_LOGIN_SUBMIT_WAIT", "3"))
-PAGE_LOAD_TIMEOUT = int(os.environ.get("BSCSCAN_PAGE_LOAD_TIMEOUT", "60"))
+PAGE_LOAD_TIMEOUT = int(os.environ.get("BSCSCAN_PAGE_LOAD_TIMEOUT", "35"))
+# Selenium 4 defaults the HTTP wait on chromedriver to None (block forever), so a
+# wedged renderer hangs the run silently. Bound it.
+COMMAND_TIMEOUT = int(os.environ.get("BSCSCAN_COMMAND_TIMEOUT", "90"))
+# "eager" returns at DOMContentLoaded — BscScan pages keep loading ads/trackers long
+# after the refresh button is usable. Set to "normal" to restore the old behaviour.
+PAGE_LOAD_STRATEGY = os.environ.get("BSCSCAN_PAGE_LOAD_STRATEGY", "eager").strip().lower()
+STRICT_USERNAME_CHECK = os.environ.get("BSCSCAN_STRICT_USERNAME", "").strip().lower() in ("1", "true", "yes")
+# If no Turnstile widget has rendered after this many seconds, none is coming —
+# polling out the rest of BSCSCAN_CAPTCHA_WAIT just burns wall clock.
+TURNSTILE_ABSENT_GRACE = float(os.environ.get("BSCSCAN_TURNSTILE_ABSENT_GRACE", "12"))
 MANUAL_LOGIN = os.environ.get("BSCSCAN_MANUAL_LOGIN", "").strip().lower() in ("1", "true", "yes")
 MYACCOUNT_URL = "https://bscscan.com/myaccount"
 
@@ -72,6 +82,8 @@ def chrome_options(username=None):
         os.makedirs(user_data, exist_ok=True)
         options.add_argument(f"--user-data-dir={user_data}")
         options.add_argument(f"--profile-directory={CHROME_PROFILE}")
+    if PAGE_LOAD_STRATEGY in ("normal", "eager", "none"):
+        options.page_load_strategy = PAGE_LOAD_STRATEGY
     return options
 
 
@@ -96,12 +108,17 @@ def detect_chrome_version():
     return None
 
 
+_chrome_version_cache = None
+
+
 def chrome_version_main():
+    global _chrome_version_cache
     version = os.environ.get("BSCSCAN_CHROME_VERSION", "").strip()
     if version:
         return int(version)
-    detected = detect_chrome_version()
-    return detected
+    if _chrome_version_cache is None:
+        _chrome_version_cache = detect_chrome_version() or 0
+    return _chrome_version_cache or None
 
 
 def cleanup_stale_chrome_browsers(user_data_dir=None):
@@ -200,6 +217,20 @@ def terminate_driver(driver):
 def capture_session_cookies(driver):
     """Read cookies from My Account so auth markers are included when present."""
     try:
+        current = cookie_string(driver)
+        if (
+            "bscscan.com" in (driver.current_url or "")
+            and any(marker in current for marker in AUTH_COOKIE_MARKERS)
+        ):
+            # The trip to /myaccount exists to pick up bscscan_userid/username,
+            # which get_cookies() omits on some pages. If they're already here, the
+            # extra page load (and 2.5s settle) buys nothing — and it used to
+            # navigate away from the NFT page the caller had just opened.
+            return current
+    except WebDriverException:
+        pass
+
+    try:
         driver.get(MYACCOUNT_URL)
         time.sleep(STEP_DELAY_SECONDS)
         dismiss_cookie_banner(driver)
@@ -229,6 +260,7 @@ def create_driver(username=None):
                 driver = uc.Chrome(options=options, version_main=version_main)
             else:
                 driver = uc.Chrome(options=options)
+            apply_command_timeout(driver)
             driver.get("about:blank")
             driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
             driver.set_script_timeout(30)
@@ -241,6 +273,26 @@ def create_driver(username=None):
                 time.sleep(DRIVER_RETRY_DELAY)
 
     raise RuntimeError(f"Could not start Chrome after {DRIVER_RETRIES} attempts: {last_error}")
+
+
+def apply_command_timeout(driver, timeout=COMMAND_TIMEOUT):
+    """Cap how long any single chromedriver command may block.
+
+    Selenium's ClientConfig.timeout defaults to None, which urllib3 reads as "no
+    timeout" — a hung renderer then stalls the run indefinitely with no output.
+    """
+    if timeout <= 0 or driver is None:
+        return
+    try:
+        driver.command_executor._client_config.timeout = timeout
+    except Exception:
+        pass
+    try:
+        from selenium.webdriver.remote.remote_connection import RemoteConnection
+
+        RemoteConnection._timeout = timeout
+    except Exception:
+        pass
 
 
 def driver_is_alive(driver):
@@ -277,6 +329,41 @@ def logged_in_username(driver):
     return None
 
 
+def username_matches(driver, username):
+    """Confirm the current session belongs to `username`.
+
+    BscScan frequently omits the bscscan_username cookie, and get_cookies() drops it
+    on some pages (see accounts.pool.cookie_has_auth). Treating "unknown" as a
+    mismatch threw away working sessions and forced a full Turnstile login on every
+    browser restart. Chrome profiles are per-account, so fall back to the page text
+    and then to trusting the profile. Set BSCSCAN_STRICT_USERNAME=1 for the old
+    fail-closed behaviour.
+    """
+    logged_as = logged_in_username(driver)
+    if logged_as:
+        if logged_as.lower() == username.lower():
+            return True
+        warn(f"Logged in as {logged_as}, expected {username}")
+        return False
+
+    try:
+        page = (driver.page_source or "").lower()
+    except Exception:
+        page = ""
+    if is_cloudflare_html(page):
+        warn(f"Cloudflare challenge on account page — cannot confirm session for {username}")
+        return False
+    if re.search(r"(?<![a-z0-9_])" + re.escape(username.lower()) + r"(?![a-z0-9_])", page):
+        return True
+
+    if STRICT_USERNAME_CHECK:
+        warn(f"Could not verify logged-in username (expected {username})")
+        return False
+
+    warn(f"Username not shown on page — accepting signed-in session for {username}")
+    return True
+
+
 def try_recover_chrome_profile(driver, username, token_id=None):
     """Reuse a BscScan session already stored in the Chrome user-data profile."""
     if not driver_is_alive(driver):
@@ -290,25 +377,23 @@ def try_recover_chrome_profile(driver, username, token_id=None):
         if not on_myaccount_page(driver) and not is_logged_in(driver):
             return False
 
-        logged_as = logged_in_username(driver)
-        if not logged_as:
-            return False
-        if logged_as.lower() != username.lower():
-            warn(f"Chrome profile signed in as {logged_as}, need {username}")
+        if not username_matches(driver, username):
             return False
 
         ok(f"Session recovered from Chrome profile  {username}")
         if token_id:
             visit_nft_page(driver, token_id)
         return True
-    except WebDriverException:
+    except (WebDriverException, RuntimeError) as error:
+        if isinstance(error, RuntimeError):
+            warn(f"Chrome profile session unusable for {username} — {error}")
         return False
 
 
 def reset_browser_session(driver):
+    # The first load only exists to give delete_all_cookies a bscscan.com origin;
+    # nothing reads the page, so don't wait for it to settle.
     driver.get(LOGIN_URL)
-    time.sleep(STEP_DELAY_SECONDS)
-    dismiss_cookie_banner(driver)
     driver.delete_all_cookies()
     driver.get(LOGIN_URL)
     time.sleep(STEP_DELAY_SECONDS)
@@ -385,10 +470,25 @@ def ensure_credentials_filled(driver, wait, username, password):
     fill_credentials(driver, wait, username, password)
 
 
+def banner_text_present(driver):
+    """Cheap gate for dismiss_cookie_banner's expensive XPath fallback."""
+    try:
+        return bool(driver.execute_script(
+            "return ((document.body && document.body.innerText) || '').includes('Got it');"
+        ))
+    except Exception:
+        return True  # can't tell — fall through to the scan
+
+
 def dismiss_cookie_banner(driver):
+    # //*[contains(normalize-space(), 'Got it')] makes chromedriver normalize the
+    # text of every node on the page. This runs after nearly every navigation, so
+    # skip it entirely when the banner text isn't on the page at all.
+    if not banner_text_present(driver):
+        return
     for xpath in (
         "//button[contains(normalize-space(), 'Got it')]",
-        "//*[contains(normalize-space(), 'Got it')]",
+        "//*[not(self::script)][contains(normalize-space(text()), 'Got it')]",
     ):
         try:
             button = driver.find_element(By.XPATH, xpath)
@@ -404,10 +504,11 @@ def on_myaccount_page(driver):
     url = driver.current_url.lower()
     if "/login" in url:
         return False
+    if "myaccount" in url:
+        return True  # URL alone settles it — skip the page_source round trip
     page = driver.page_source.lower()
     return (
-        "myaccount" in url
-        or "account overview" in page
+        "account overview" in page
         or "personal info" in page
         or ("sign out" in page and "contentplaceholder1_btnlogin" not in page)
     )
@@ -415,10 +516,12 @@ def on_myaccount_page(driver):
 
 def is_logged_in(driver):
     try:
-        if on_myaccount_page(driver):
-            return True
+        # get_cookies() is far cheaper than serialising page_source, and these loops
+        # run at 1-2Hz for up to 25s.
         cookie_names = {cookie.get("name") for cookie in driver.get_cookies()}
         if "bscscan_userid" in cookie_names or "bscscan_username" in cookie_names:
+            return True
+        if on_myaccount_page(driver):
             return True
     except Exception:
         return False
@@ -435,29 +538,24 @@ def confirm_logged_in(driver):
 def confirm_logged_in_as(driver, username):
     if not confirm_logged_in(driver):
         return False
-    logged_as = logged_in_username(driver)
-    if not logged_as:
-        warn(f"Could not verify logged-in username (expected {username})")
-        return False
-    if logged_as.lower() != username.lower():
-        warn(f"Logged in as {logged_as}, expected {username}")
-        return False
-    return True
+    return username_matches(driver, username)
 
 
 def poll_until_logged_in(driver, username, timeout=30):
     info(f"Waiting for login  {username}  (up to {int(timeout)}s, no action needed if browser already signed in)")
     end = time.time() + timeout
     while time.time() < end:
+        # Success check first: it is now URL/cookie-only in the common case, while
+        # is_browser_error_page always pays for page_source.
+        if on_myaccount_page(driver) or is_logged_in(driver):
+            ok(f"Logged in as {username}")
+            return True
         if is_browser_error_page(driver):
             warn("Browser shows connection error — trying My Account directly")
             if confirm_logged_in(driver):
                 ok(f"Logged in as {username}")
                 return True
             break
-        if on_myaccount_page(driver) or is_logged_in(driver):
-            ok(f"Logged in as {username}")
-            return True
         time.sleep(1)
     if confirm_logged_in(driver):
         ok(f"Logged in as {username}")
@@ -465,15 +563,17 @@ def poll_until_logged_in(driver, username, timeout=30):
     return False
 
 
-def page_has_captcha_error(driver):
-    page = driver.page_source.lower()
+def page_has_captcha_error(driver, page=None):
+    if page is None:
+        page = driver.page_source.lower()
     return "invalid captcha response" in page or "captcha verification failed" in page
 
 
-def is_browser_error_page(driver):
+def is_browser_error_page(driver, page=None):
     try:
         url = (driver.current_url or "").lower()
-        page = driver.page_source.lower()
+        if page is None:
+            page = driver.page_source.lower()
     except Exception:
         return False
     if url.startswith("chrome-error://") or "chromewebdata" in url:
@@ -541,14 +641,43 @@ def slow_type(driver, element, value):
         set_field_value(driver, element, value)
 
 
+def turnstile_state(driver):
+    """Return (token, widget_present) for the Turnstile challenge on this page."""
+    try:
+        state = driver.execute_script(
+            """
+            const field = document.querySelector('[name="cf-turnstile-response"]');
+            const widget = document.querySelector(
+                '.cf-turnstile, #cf-turnstile, [data-sitekey], '
+                + 'iframe[src*="challenges.cloudflare.com"]'
+            );
+            return {token: (field && field.value) || '', present: !!(field || widget)};
+            """
+        ) or {}
+    except WebDriverException:
+        return "", True
+    return state.get("token") or "", bool(state.get("present"))
+
+
 def wait_for_turnstile(driver, timeout=CAPTCHA_WAIT_SECONDS):
     info("Waiting for Turnstile (complete captcha in browser if shown)...")
-    end = time.time() + timeout
+    started = time.time()
+    end = started + timeout
     while time.time() < end:
-        if turnstile_token(driver):
+        token, present = turnstile_state(driver)
+        if token:
             time.sleep(POST_TURNSTILE_DELAY)
-            ok("Turnstile completed")
+            ok(f"Turnstile completed ({time.time() - started:.1f}s)")
             return True
+        # Neither the response field nor the widget is in the DOM: the challenge
+        # never rendered, and polling for the remaining timeout cannot make one
+        # appear. Bail early so the caller can reload instead of stalling.
+        if not present and time.time() - started >= TURNSTILE_ABSENT_GRACE:
+            warn(
+                f"No Turnstile widget rendered after {TURNSTILE_ABSENT_GRACE:.0f}s "
+                f"(page: {driver.current_url}) — reloading instead of waiting {int(timeout)}s"
+            )
+            return False
         time.sleep(0.5)
     warn(f"Turnstile not detected within {int(timeout)}s")
     return False
@@ -569,9 +698,13 @@ def wait_for_login_result(driver, username, timeout=25):
         if on_myaccount_page(driver) or is_logged_in(driver):
             ok(f"Logged in as {username}")
             return True
-        if is_browser_error_page(driver):
+        try:
+            page = driver.page_source.lower()  # one read covers both checks below
+        except Exception:
+            page = ""
+        if is_browser_error_page(driver, page=page):
             return False
-        if page_has_captcha_error(driver):
+        if page_has_captcha_error(driver, page=page):
             return False
         time.sleep(0.5)
     return on_myaccount_page(driver) or is_logged_in(driver)
@@ -621,8 +754,8 @@ def wait_for_manual_login(driver, username):
 
 
 def complete_login_after_turnstile(driver, wait, username, password):
+    # wait_for_turnstile already slept POST_TURNSTILE_DELAY after the token landed.
     ensure_credentials_filled(driver, wait, username, password)
-    time.sleep(POST_TURNSTILE_DELAY)
 
     for attempt in range(1, 3):
         if submit_login_and_wait(driver, wait, username, password):
@@ -694,12 +827,13 @@ def nft_page_ready(driver):
 def selenium_login(driver, username, password):
     """Step 1: Log in via Selenium and confirm session before visiting NFT page."""
     info(f"Step 1/3  Selenium login  {username}")
+    started = time.monotonic()
     login(driver, username, password)
     if not confirm_logged_in(driver):
         raise RuntimeError(
             f"Login failed for {username} — complete login in browser, then retry"
         )
-    ok(f"Login successful  {username}")
+    ok(f"Login successful  {username}  ({time.monotonic() - started:.1f}s)")
 
 
 def visit_nft_page(driver, token_id):
