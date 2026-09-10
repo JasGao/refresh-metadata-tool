@@ -1,0 +1,78 @@
+=== refresh run: 2026-09-10 18:30:00.644601 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/Library/Developer/CommandLineTools/usr/bin/python3 (3.9.6)
+args=<full pipeline>
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 15 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      15
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  ✓ Cookies still valid today: refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       15
+  Already done       0
+  Remaining          15
+  Concurrency        50
+  RPC                https://bsc-dataseed.binance.org
+  ✓ …0027377633  in_sync
+  ✓ …9889072735  in_sync
+  ✓ …6811053538  in_sync
+  ✓ …6590226752  in_sync
+  ✓ …3732344611  in_sync
+  ✓ …8744832178  in_sync
+  ✓ …1642600183  in_sync
+  ✓ …7279543503  in_sync
+  ✓ …5152328323  in_sync
+  ✓ …7152204608  in_sync
+  ✓ …8012652281  in_sync
+  ✓ …3164017444  in_sync
+  ✓ …4554924408  in_sync
+  ✓ …6898835628  in_sync
+  ✓ …2216722893  in_sync
+  · Batch done — 15/15 tokens
+
+── Crawl results ───────────────────────
+  in_sync            15
+  out_of_sync        0
+  errors             0
+  Progress file      progress.json
+  Report file        report.json
+  Report contents    0 out_of_sync, 0 errors
+
+── Step 5: Refresh out-of-sync + crawl-error tokens (Selenium) 
+  Out-of-sync        0
+  To refresh         0
+  Accounts needed    0
+  ✓ Nothing to refresh
+
+══════════════════════════════════════════════════
+  Workflow complete
+══════════════════════════════════════════════════
+=== exit 0 at 2026-09-10 18:30:09.041960 ===
