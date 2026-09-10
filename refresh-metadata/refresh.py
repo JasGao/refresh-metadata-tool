@@ -62,6 +62,13 @@ BROWSER_RESTART_ATTEMPTS = 2
 NAVIGATE_ATTEMPTS = int(os.environ.get("BSCSCAN_NAVIGATE_ATTEMPTS", "2"))
 DRIVER_RESTART_DELAY = float(os.environ.get("BSCSCAN_DRIVER_RESTART_DELAY", "3"))
 BROWSER_RESTART_EVERY = int(os.environ.get("BSCSCAN_BROWSER_RESTART_EVERY", "18"))
+# A failed rotation/login used to abort the whole run (2026-08-21, 09-04, 09-07,
+# 09-08 all died that way with most tokens untouched). Now a token failure is
+# recorded and the loop moves on; only a *streak* of failures stops the pass.
+MAX_CONSECUTIVE_FAILURES = int(os.environ.get("BSCSCAN_MAX_CONSECUTIVE_FAILURES", "8"))
+RETRY_FAILED_PASSES = int(os.environ.get("BSCSCAN_RETRY_FAILED_PASSES", "1"))
+RETRY_FAILED_DELAY = float(os.environ.get("BSCSCAN_RETRY_FAILED_DELAY", "30"))
+NETWORK_WAIT_SECONDS = float(os.environ.get("BSCSCAN_NETWORK_WAIT", "600"))
 CONNECTION_ERROR_MARKERS = (
     "connection refused",
     "connection reset",
@@ -79,6 +86,12 @@ PAGE_LOAD_TIMEOUT_MARKERS = (
 SESSION_LOST_MARKERS = (
     "refresh metadata button stayed disabled",
     "account not recognized as logged in",
+)
+LOGIN_FAILURE_MARKERS = (
+    "login failed",
+    "turnstile not ready",
+    "nft page did not load",
+    "could not log in",
 )
 
 pool = AccountPool()
@@ -183,12 +196,38 @@ def is_cloudflare_page(driver, page=None):
     if page is None:
         page = driver.page_source
     url = driver.current_url.lower()
-    return bool(
-        is_cloudflare_html(page)
-        or "challenges.cloudflare.com" in url
-        or "verify you are human" in page.lower()
-        or ("troubleshoot" in page.lower() and "cloudflare" in page.lower())
-    )
+    # Positive evidence wins: a page carrying the NFT properties block or the
+    # ASP.NET form is the real page, whatever Cloudflare scripts it also loads.
+    # Cloudflare's bot-management script keeps fetching from
+    # /cdn-cgi/challenge-platform/... on healthy pages, so any marker-based test
+    # on the rendered DOM misfires (2026-09-10: every token rotated accounts
+    # twice and Refresh was never clicked).
+    if 'id="collapseProperties"' in page or "__VIEWSTATE" in page:
+        return False
+    return bool(is_cloudflare_html(page) or "challenges.cloudflare.com" in url)
+
+
+def network_up(timeout=5):
+    try:
+        socket.create_connection(("bscscan.com", 443), timeout=timeout).close()
+        return True
+    except OSError:
+        return False
+
+
+def wait_for_network(max_wait=NETWORK_WAIT_SECONDS):
+    """Block until bscscan.com is reachable again (Wi-Fi drops mid-run happen)."""
+    if network_up():
+        return True
+    warn(f"Network unreachable — waiting up to {int(max_wait)}s before continuing")
+    end = time.monotonic() + max_wait
+    while time.monotonic() < end:
+        time.sleep(10)
+        if network_up():
+            ok("Network is back")
+            return True
+    fail(f"Network still unreachable after {int(max_wait)}s")
+    return False
 
 
 def log_pool_usage():
@@ -460,11 +499,12 @@ def switch_active_account_session(token_id=None):
     return restore_browser_session(browser, username, token_id=token_id)
 
 
-def rotate_account(mark_exhausted=None, warm_token_id=None):
+def rotate_account(mark_exhausted=None, warm_token_id=None, reason=""):
     global wait
     global active_account
     if mark_exhausted and active_account:
         pool.mark_exhausted(active_account["username"], mark_exhausted)
+        reason = reason or "rate limit"
 
     next_account = pool.rotate(
         USAGE_REFRESH,
@@ -475,7 +515,7 @@ def rotate_account(mark_exhausted=None, warm_token_id=None):
         return None
 
     active_account = next_account
-    warn(f"Rotated to {next_account['username']}")
+    warn(f"Rotated to {next_account['username']}" + (f" ({reason})" if reason else ""))
     wait = switch_active_account_session(token_id=warm_token_id)
     return next_account
 
@@ -487,7 +527,7 @@ def note_token_processed():
     kv("Quota", f"{usage['remaining']}/{usage['limit']} remaining for {active_account['username']}")
     if usage["remaining"] <= 0:
         info("Refresh quota used up — rotating account")
-        rotate_account()
+        rotate_account(reason="quota used up")
 
 
 def ensure_active_quota():
@@ -498,7 +538,7 @@ def ensure_active_quota():
     if usage["remaining"] > 0:
         return
     info(f"Refresh quota already used up for {active_account['username']} — rotating account")
-    if not rotate_account():
+    if not rotate_account(reason="quota used up"):
         raise SystemExit("No available accounts in pool. (all refresh quotas exhausted)")
 
 
@@ -515,7 +555,8 @@ def _cloudflare_failure(when=""):
 
 
 def _rotate_on_cloudflare(warm_token_id, when=""):
-    if rotate_account(warm_token_id=warm_token_id):
+    reason = f"Cloudflare challenge {when}".strip()
+    if rotate_account(warm_token_id=warm_token_id, reason=reason):
         return None
     return _cloudflare_failure(when)
 
@@ -589,6 +630,21 @@ def click_refresh_metadata(driver):
             "Refresh Metadata click did not trigger a postback (no-op) — refresh not submitted"
         )
     time.sleep(STEP_DELAY_SECONDS)
+    banner = postback_banner_text(driver)
+    if banner:
+        info(f"BscScan says: {banner}", indent=4)
+
+
+def postback_banner_text(driver):
+    """Text of the alert BscScan shows after the refresh postback (for the log)."""
+    try:
+        for element in driver.find_elements(By.CSS_SELECTOR, ".alert, [role='alert'], .toast-body"):
+            text = " ".join((element.text or "").split())
+            if text and element.is_displayed():
+                return text[:160]
+    except Exception:
+        pass
+    return ""
 
 
 def refresh_token(token_id, retries=0, session_retries=0):
@@ -654,6 +710,8 @@ def refresh_token(token_id, retries=0, session_retries=0):
         try:
             click_refresh_metadata(browser)
         except TimeoutException as error:
+            if is_browser_connection_error(error):
+                raise  # renderer hang: let the caller restart Chrome and retry
             return {
                 "status": "error",
                 "error": f"Refresh Metadata button not found — {error}",
@@ -701,6 +759,109 @@ def refresh_token(token_id, retries=0, session_retries=0):
         return {"status": "ok"}
 
 
+def first_line(text):
+    return str(text).strip().splitlines()[0] if str(text).strip() else ""
+
+
+def is_login_failure(error):
+    message = str(error).lower()
+    return any(marker in message for marker in LOGIN_FAILURE_MARKERS)
+
+
+def process_token(token_id):
+    """Refresh one token and never raise: any error becomes a failed result."""
+    try:
+        return refresh_token_with_browser_recovery(token_id)
+    except KeyboardInterrupt:
+        raise
+    except Exception as error:
+        # Rotation, login and navigation errors used to escape here and kill the
+        # run. Drop the browser so the next token starts from a clean recovery.
+        warn(f"Unexpected error on {short_token(token_id)} — {type(error).__name__}: {first_line(error)}")
+        quit_driver()
+        if is_login_failure(error):
+            # Don't hammer the account that just failed Turnstile; move on and
+            # let the quota logic come back to it later.
+            try:
+                rotate_account(reason="login failed", warm_token_id=token_id)
+            except KeyboardInterrupt:
+                raise
+            except Exception as rotate_error:
+                warn(f"Rotation after login failure also failed — {type(rotate_error).__name__}: {first_line(rotate_error)}")
+                quit_driver()
+        return {"status": "error", "error": f"{type(error).__name__}: {first_line(error)}"}
+
+
+def proactive_restart(next_token_id):
+    try:
+        recover_browser_session(next_token_id)
+    except KeyboardInterrupt:
+        raise
+    except Exception as error:
+        warn(f"Proactive restart failed — {type(error).__name__}: {first_line(error)}; will recover on the next token")
+        quit_driver()
+
+
+def run_pass(tokens, pass_label=""):
+    """Refresh every token once. Returns (ok_count, failed[(token, error)], skipped[tokens])."""
+    ok_count = 0
+    failed = []
+    consecutive_failures = 0
+    tokens_since_browser_restart = 0
+    total = len(tokens)
+
+    for index, token_id in enumerate(tokens):
+        try:
+            ensure_active_quota()
+        except SystemExit as exc:
+            fail(str(exc))
+            return ok_count, failed, tokens[index:]
+
+        current = index + 1
+        label = short_token(token_id)
+        info(f"Refreshing {label}  ({current}/{total}){pass_label}  (account: {active_account['username']})")
+        token_started = time.monotonic()
+        result = process_token(token_id)
+        elapsed = time.monotonic() - token_started
+
+        if result["status"] == "ok":
+            ok(f"{label}  refresh clicked  ({elapsed:.1f}s)")
+            ok_count += 1
+            consecutive_failures = 0
+            note_token_processed()
+            tokens_since_browser_restart += 1
+            if (
+                BROWSER_RESTART_EVERY > 0
+                and tokens_since_browser_restart >= BROWSER_RESTART_EVERY
+                and index + 1 < len(tokens)
+            ):
+                info(f"Proactive browser restart after {tokens_since_browser_restart} tokens")
+                proactive_restart(tokens[index + 1])
+                tokens_since_browser_restart = 0
+        else:
+            error = result.get("error", result["status"])
+            fail(f"{label}  ({elapsed:.1f}s)  {error}")
+            failed.append((token_id, error))
+            consecutive_failures += 1
+            if result["status"] == "rate_limited" and "no more accounts" in error:
+                fail("Every account is out of refresh quota — stopping this pass")
+                return ok_count, failed, tokens[index + 1:]
+            if consecutive_failures >= 2 and not network_up():
+                if not wait_for_network():
+                    return ok_count, failed, tokens[index + 1:]
+            if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                fail(
+                    f"{consecutive_failures} consecutive failures — stopping this pass "
+                    f"({len(tokens) - current} tokens not attempted)"
+                )
+                return ok_count, failed, tokens[index + 1:]
+
+        if index + 1 < len(tokens):
+            time.sleep(DELAY_SECONDS)
+
+    return ok_count, failed, []
+
+
 def main():
     args = parse_args()
     tokens = load_tokens(report_path=args.report, csv_path=args.csv)
@@ -725,61 +886,56 @@ def main():
         rows.append(("Out-of-sync", counts["out_of_sync"]))
         if counts["errors"]:
             rows.append(("Crawl errors", counts["errors"]))
+        if counts.get("skipped"):
+            rows.append(("Not refreshable", f"{counts['skipped']} (tokenURI revert)"))
     rows.extend([
         ("Tokens", len(tokens)),
         ("Limit per account", f"{TOKENS_PER_ACCOUNT} tokens"),
         ("Delay", f"{DELAY_SECONDS}s between tokens"),
+        ("Retry passes", RETRY_FAILED_PASSES),
     ])
     summary("Run config", rows)
 
     init_account()
+    aborted = False
     try:
-        ensure_active_account_session(token_id=tokens[0])  # every path ends in sync_wait()
+        try:
+            ensure_active_account_session(token_id=tokens[0])  # every path ends in sync_wait()
+        except Exception as error:
+            # Recoverable per token: process_token re-creates the session lazily.
+            warn(f"Initial session setup failed — {type(error).__name__}: {first_line(error)}; retrying per token")
+            quit_driver()
 
-        ok_count = fail_count = 0
-        tokens_since_browser_restart = 0
-        total = len(tokens)
-        for index, token_id in enumerate(tokens):
-            ensure_active_quota()
-            current = index + 1
-            label = short_token(token_id)
-            info(f"Refreshing {label}  ({current}/{total})  (account: {active_account['username']})")
-            token_started = time.monotonic()
-            result = refresh_token_with_browser_recovery(token_id)
-            elapsed = time.monotonic() - token_started
+        ok_count, failed, not_attempted = run_pass(tokens)
+        aborted = bool(not_attempted)
 
-            if result["status"] == "ok":
-                ok(f"{label}  refresh clicked  ({elapsed:.1f}s)")
-                ok_count += 1
-                note_token_processed()
-                tokens_since_browser_restart += 1
-                if (
-                    BROWSER_RESTART_EVERY > 0
-                    and tokens_since_browser_restart >= BROWSER_RESTART_EVERY
-                    and index + 1 < len(tokens)
-                ):
-                    info(
-                        f"Proactive browser restart after {tokens_since_browser_restart} tokens"
-                    )
-                    wait = recover_browser_session(tokens[index + 1])
-                    tokens_since_browser_restart = 0
-            elif result["status"] == "rate_limited":
-                fail(f"{label}  ({elapsed:.1f}s)  {result.get('error', 'rate limit')}")
-                fail_count += 1
-            else:
-                fail(f"{label}  ({elapsed:.1f}s)  {result.get('error', result['status'])}")
-                fail_count += 1
-
-            if index + 1 < len(tokens):
-                time.sleep(DELAY_SECONDS)
+        for pass_number in range(1, RETRY_FAILED_PASSES + 1):
+            if not failed or aborted:
+                break
+            info(f"Retry pass {pass_number}/{RETRY_FAILED_PASSES}: {len(failed)} failed token(s) after {RETRY_FAILED_DELAY:.0f}s")
+            time.sleep(RETRY_FAILED_DELAY)
+            quit_driver()  # fresh Chrome for the retry
+            retry_ok, failed, not_attempted = run_pass(
+                [token_id for token_id, _ in failed], pass_label=f"  [retry {pass_number}]"
+            )
+            ok_count += retry_ok
+            aborted = bool(not_attempted)
 
         summary("Refresh results", [
             ("Succeeded", ok_count),
-            ("Failed", fail_count),
+            ("Failed", len(failed)),
+            ("Not attempted", len(not_attempted)),
             ("Total", len(tokens)),
         ])
+        if failed:
+            info("Failed tokens:")
+            for token_id, error in failed:
+                fail(f"{short_token(token_id)}  {error}", indent=4)
     finally:
         quit_driver()
+
+    if aborted:
+        raise SystemExit("Refresh stopped early — see 'Not attempted' above")
 
 
 if __name__ == "__main__":

@@ -93,6 +93,9 @@ refresh/
 | Sheet fetch fails | Set `TOKENS_SHEET_URL` in `.env`; sheet must be “Anyone with the link” (viewer OK) |
 | Need more accounts | Add usernames to `accounts/accounts.json` |
 | Crawl interrupted | `python3 run_workflow.py --skip-reset --skip-login` |
+| `Another workflow run is already in progress` | A previous run (scheduled or manual) is still going. Two runs share the Chrome profiles and kill each other's browser, so the second one now exits with code 2 instead. Wait, or kill the pid shown. |
+| Sheet fetch fails but the run continues | Since 2026-09-10 the sheet is retried 3x and, if still unreachable, the run uses the `tokens.csv` from the previous run (logged as a warning). |
+| Refresh log ends with `Refresh stopped early` | The pass hit `BSCSCAN_MAX_CONSECUTIVE_FAILURES` failures in a row (or the network never came back). Fix the cause, then `refresh-metadata/refresh.py --from-token …suffix` for the "Not attempted" tokens. |
 | Refresh stalls for minutes | Lower `BSCSCAN_COMMAND_TIMEOUT` / `BSCSCAN_PAGE_LOAD_TIMEOUT` (see below) |
 | Stuck after `Chrome version_main NNN`, no browser window | undetected-chromedriver was re-downloading chromedriver (18 MB, no timeout) on every browser start. Fixed 2026-09-07: the cached binary is reused; a download only happens after a Chrome update and is capped by `BSCSCAN_DRIVER_DOWNLOAD_TIMEOUT`. |
 
@@ -107,12 +110,17 @@ Set these in `scripts/schedule.local.env` or the shell.
 | `BSCSCAN_PAGE_LOAD_STRATEGY` | `eager` | `eager` returns at DOMContentLoaded instead of waiting for ads/trackers. Use `normal` for the old behaviour. |
 | `BSCSCAN_NAVIGATE_ATTEMPTS` | `2` | Re-open the NFT page this many times on a page-load timeout before restarting Chrome. |
 | `BSCSCAN_BROWSER_RESTART_EVERY` | `18` | Proactive Chrome restart interval, in tokens. `0` disables. |
+| `BSCSCAN_REMEMBER_ME` | `1` | Tick "Remember & Auto Login" when logging in. BscScan then sets 45-day `bscscan_autologin`/`bscscan_pwd`/`bscscan_userid` cookies, so a Chrome restart, a next-day run, or a cookie restore on another machine logs in **without Turnstile**. Verified 2026-09-10. `0` restores the old session-only login. |
 | `BSCSCAN_STRICT_USERNAME` | unset | `1` makes an unverifiable username fail the session check (forces a full Turnstile login). Off by default — Chrome profiles are per-account. |
 | `BSCSCAN_TURNSTILE_ABSENT_GRACE` | `12` | If no Turnstile widget has rendered after this many seconds, reload instead of polling out `BSCSCAN_CAPTCHA_WAIT`. |
 | `BSCSCAN_CAPTCHA_WAIT` | `120` (in `run_daily.sh`) | Max wait for a Turnstile token *when the widget is actually on the page*. |
 | `BSCSCAN_LOGIN_RETRIES` | `5` (in `run_daily.sh`) | Login attempts before giving up. |
 | `BSCSCAN_LOGIN_STEP_DELAY` | `2.5` | Settle pause after each navigation. |
 | `BSCSCAN_DRIVER_DOWNLOAD_TIMEOUT` | `120` | Max seconds for a chromedriver download when the cached binary no longer matches Chrome. |
+| `BSCSCAN_MAX_CONSECUTIVE_FAILURES` | `8` | A single failed token no longer aborts the run (2026-09-10). Only this many failures *in a row* stop the pass; the rest are listed as "Not attempted" and the run exits 1. |
+| `BSCSCAN_RETRY_FAILED_PASSES` | `1` | After the main pass, retry the failed tokens this many times with a fresh Chrome. `0` disables. |
+| `BSCSCAN_RETRY_FAILED_DELAY` | `30` | Pause before a retry pass, seconds. |
+| `BSCSCAN_NETWORK_WAIT` | `600` | After two failures in a row, if bscscan.com is unreachable, wait up to this long for the network to return instead of failing every remaining token. |
 
 ### Crawl network knobs
 
@@ -123,8 +131,16 @@ Set these in `scripts/schedule.local.env` or the shell.
 | `CRAWL_RETRIES` | `3` | Attempts per HTTP call for transient errors (timeouts, resets, SSL EOF, HTTP 429/5xx). Before, one timeout put the token in the report as a crawl error and cost a Selenium refresh. |
 | `CRAWL_RETRY_DELAY` | `2` | Seconds between attempts (grows linearly). |
 | `CRAWL_HTTP_TIMEOUT` | `30` | Per-request timeout for BscScan, RPC, and metadata fetches. |
+| `CRAWL_THROTTLE_PAUSE` | `20` | After a BscScan HTTP 429 all workers pause this long, then the crawl continues on the next account instead of reporting the token as an error. |
+| `TOKENS_SHEET_ATTEMPTS` | `3` | Google Sheet fetch attempts before falling back to the local `tokens.csv`. |
 
-Crawl errors in `report.json` and the logs are prefixed with the stage that failed: `bscscan:`, `rpc:`, or `metadata:`.
+Crawl errors in `report.json` and the logs are prefixed with the stage that failed: `bscscan:`, `rpc:`, or `metadata:`. A `rpc: tokenURI revert` error means the token no longer exists on-chain; it stays in the report but is **not** sent to the refresh step (shown as "Not refreshable").
+
+Account rotation is logged with its reason (`Rotated to refresh3 (Cloudflare challenge)`, `(rate limit)`, `(quota used up)`, `(login failed)`). In the crawl, one Cloudflare/429 event now causes exactly one rotation, not one per in-flight worker.
+
+Session reuse always opens `/login` first (`accounts/login.py: autologin_via_login_page`). With remember-me cookies BscScan logs in there and redirects to My Account; opening My Account first instead makes the server *delete* the remembered cookies, which is why "Checking Chrome profile session" never succeeded before 2026-09-10. Expect `Session recovered from Chrome profile` / `Reused Chrome profile session — no Turnstile login needed` in the logs; a Turnstile login should now only happen the first time an account is used on a machine (or after ~45 days).
+
+Cloudflare detection (`lib/detect.py`) only matches real challenge/block pages. Until 2026-09-10 it also matched Cloudflare's bot-management beacon that BscScan injects into ordinary pages, which made healthy NFT pages look like challenges — the cause of most surprise rotations, discarded sessions, and the 2026-09-07/08 crashes.
 
 Login now logs its own duration (`✓ Login successful  refresh1  (18.3s)`) and the Turnstile solve time.
 

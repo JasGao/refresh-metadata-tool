@@ -61,12 +61,23 @@ TRANSIENT_HTTP_CODES = (429, 500, 502, 503, 504)
 # BscScan 503 means "rotate account", not "retry" — leave it to fetch_bscscan.
 BSCSCAN_TRANSIENT_HTTP_CODES = (429, 500, 502, 504)
 
+# After a BscScan 429 every worker pauses this long before its next request,
+# instead of 50 threads retrying into the same throttle.
+THROTTLE_PAUSE_SECONDS = float(os.environ.get("CRAWL_THROTTLE_PAUSE", "20"))
+
 pool = AccountPool()
 active_account = None
 cookie = ""
 user_agent = DEFAULT_USER_AGENT
+# Bumped on every rotation. A worker that failed with an older generation must
+# NOT rotate again: another worker already did, and it should simply retry with
+# the new cookie. Without this, one Cloudflare event on a 50-token batch rotated
+# through five accounts back to back (2026-09-07 batch 900) — and each account
+# without a cookie means a Turnstile login inside the lock.
+cookie_generation = 0
 cloudflare_challenged = False
 cookie_lock = threading.RLock()
+throttle_until = 0.0
 
 
 def now_iso():
@@ -162,9 +173,25 @@ def init_account():
     kv("Active account", active_account["username"])
 
 
-def rotate_cookie(reason, mark_exhausted=False):
-    global active_account, cookie, user_agent, cloudflare_challenged
+def respect_throttle():
+    delay = throttle_until - time.monotonic()
+    if delay > 0:
+        time.sleep(delay)
+
+
+def note_throttled(seconds=THROTTLE_PAUSE_SECONDS):
+    global throttle_until
     with cookie_lock:
+        if throttle_until < time.monotonic():
+            warn(f"BscScan throttling (HTTP 429) — pausing all workers {seconds:.0f}s", indent=4)
+        throttle_until = max(throttle_until, time.monotonic() + seconds)
+
+
+def rotate_cookie(reason, mark_exhausted=False, seen_generation=None):
+    global active_account, cookie, user_agent, cloudflare_challenged, cookie_generation
+    with cookie_lock:
+        if seen_generation is not None and seen_generation != cookie_generation:
+            return  # someone else already rotated since this request went out; retry with the new cookie
         if mark_exhausted and active_account:
             pool.mark_exhausted(active_account["username"], USAGE_CRAWL)
         attempted = {active_account["username"]} if active_account else set()
@@ -195,6 +222,7 @@ def rotate_cookie(reason, mark_exhausted=False):
             active_account = next_account
             cookie = next_account["cookie"]
             user_agent = next_account.get("userAgent") or DEFAULT_USER_AGENT
+            cookie_generation += 1
             warn(f"Rotated to {next_account['username']} ({reason})")
             return
 
@@ -225,8 +253,10 @@ def fetch_bscscan(token_id):
     # Retry on Cloudflare/rate-limits/503 until rotation exhausts the pool
     # (recursion replaced with a loop to avoid stack growth).
     while True:
+        respect_throttle()
         with cookie_lock:
             headers = {"user-agent": user_agent, "cookie": cookie}
+            generation = cookie_generation
         url = f"https://bscscan.com/nft/{CONTRACT}/{token_id}"
         try:
             html = with_retries(
@@ -237,7 +267,14 @@ def fetch_bscscan(token_id):
             )
         except urllib.error.HTTPError as error:
             if error.code == 503:
-                rotate_cookie("HTTP 503")
+                rotate_cookie("HTTP 503", seen_generation=generation)
+                continue
+            if error.code == 429:
+                # Still throttled after the per-request retries: back everyone
+                # off, then continue on the next account instead of reporting
+                # the token as a crawl error (which costs a Selenium refresh).
+                note_throttled()
+                rotate_cookie("HTTP 429", seen_generation=generation)
                 continue
             raise RuntimeError(f"bscscan: HTTP {error.code}") from error
         except (OSError, http.client.HTTPException) as error:
@@ -246,12 +283,16 @@ def fetch_bscscan(token_id):
 
         if 'id="collapseProperties"' not in html:
             if is_cloudflare_html(html):
-                rotate_cookie("Cloudflare challenge")
+                rotate_cookie("Cloudflare challenge", seen_generation=generation)
                 continue
             if is_rate_limited_text(html):
-                rotate_cookie("rate limit", mark_exhausted=True)
+                rotate_cookie("rate limit", mark_exhausted=True, seen_generation=generation)
                 continue
-            raise RuntimeError("bscscan: page missing properties (throttled?)")
+            # Keep the title so the log tells a throttle page from a token that
+            # simply has no properties on BscScan yet.
+            title = re.search(r"<title>(.*?)</title>", html, re.S | re.I)
+            title_text = re.sub(r"\s+", " ", title.group(1)).strip()[:80] if title else "no title"
+            raise RuntimeError(f"bscscan: page missing properties (title: {title_text})")
         return parse_bscscan_props(html)
 
 
@@ -296,9 +337,22 @@ def fetch_token_uri_attrs(token_id):
     return attributes if isinstance(attributes, list) else []
 
 
+def _is_blank(value):
+    return value is None or str(value).strip() == ""
+
+
+def _trait_map(items):
+    result = {}
+    for item in items:
+        if not isinstance(item, dict) or item.get("trait_type") is None:
+            continue
+        result[norm(item["trait_type"])] = item.get("value")
+    return result
+
+
 def diff(bscscan_props, meta_attrs):
-    b_map = {norm(item["trait_type"]): item["value"] for item in bscscan_props}
-    m_map = {norm(item["trait_type"]): item["value"] for item in meta_attrs}
+    b_map = _trait_map(bscscan_props)
+    m_map = _trait_map(meta_attrs)
     keys = set(b_map) | set(m_map)
     diffs = []
 
@@ -318,6 +372,8 @@ def diff(bscscan_props, meta_attrs):
                     {"trait": key, "kind": "value_diff", "bscscan": b_val, "metadata": m_val}
                 )
         elif in_m:
+            if _is_blank(m_val):
+                continue  # BscScan never renders an empty trait; refreshing can't change that
             diffs.append({"trait": key, "kind": "missing_on_bscscan", "metadata": m_val})
         else:
             diffs.append({"trait": key, "kind": "missing_in_metadata", "bscscan": b_val})

@@ -16,6 +16,7 @@ Optional overrides:
 
 import os
 import re
+import time
 import urllib.parse
 
 import requests
@@ -25,6 +26,27 @@ from lib.paths import TOKEN_IDS_FILE
 
 HEADER = "tokenId"
 REQUEST_TIMEOUT = 30
+# One connect timeout to docs.google.com used to abort the whole run
+# (2026-09-05). Retry transient failures before giving up.
+FETCH_ATTEMPTS = int(os.environ.get("TOKENS_SHEET_ATTEMPTS", "3"))
+FETCH_RETRY_DELAY = float(os.environ.get("TOKENS_SHEET_RETRY_DELAY", "5"))
+TRANSIENT_STATUS = (429, 500, 502, 503, 504)
+
+
+def _get_with_retries(url):
+    last_error = None
+    for attempt in range(1, FETCH_ATTEMPTS + 1):
+        try:
+            response = requests.get(url, timeout=REQUEST_TIMEOUT)
+            if response.status_code not in TRANSIENT_STATUS:
+                return response
+            last_error = RuntimeError(f"HTTP {response.status_code}")
+        except requests.RequestException as error:
+            last_error = error
+        if attempt < FETCH_ATTEMPTS:
+            print(f"  ⚠ Sheet fetch attempt {attempt}/{FETCH_ATTEMPTS} failed: {last_error} — retrying in {FETCH_RETRY_DELAY:.0f}s", flush=True)
+            time.sleep(FETCH_RETRY_DELAY * attempt)
+    raise RuntimeError(f"Google Sheet fetch failed after {FETCH_ATTEMPTS} attempts: {last_error}")
 
 
 def parse_sheet_ref(url):
@@ -84,7 +106,7 @@ def fetch_tokens(dest=None):
     sheet_id, gid = _resolve_ref()
     url = export_csv_url(sheet_id, gid)
 
-    response = requests.get(url, timeout=REQUEST_TIMEOUT)
+    response = _get_with_retries(url)
     if response.status_code != 200:
         raise RuntimeError(
             f"Google Sheet fetch failed (HTTP {response.status_code}). "

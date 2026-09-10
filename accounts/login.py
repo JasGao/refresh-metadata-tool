@@ -43,6 +43,12 @@ STRICT_USERNAME_CHECK = os.environ.get("BSCSCAN_STRICT_USERNAME", "").strip().lo
 # polling out the rest of BSCSCAN_CAPTCHA_WAIT just burns wall clock.
 TURNSTILE_ABSENT_GRACE = float(os.environ.get("BSCSCAN_TURNSTILE_ABSENT_GRACE", "12"))
 MANUAL_LOGIN = os.environ.get("BSCSCAN_MANUAL_LOGIN", "").strip().lower() in ("1", "true", "yes")
+# Tick "Remember & Auto Login" on the login form. Without it BscScan keeps the
+# login in a session cookie that dies with Chrome, so every browser restart
+# (every 18 tokens) and every daily Step 2 needed a fresh Turnstile login —
+# "Checking Chrome profile session" never once succeeded in the logs.
+REMEMBER_ME = os.environ.get("BSCSCAN_REMEMBER_ME", "1").strip().lower() not in ("0", "false", "no")
+REMEMBER_ME_CHECKBOX = "#ContentPlaceHolder1_chkRemember"
 MYACCOUNT_URL = "https://bscscan.com/myaccount"
 
 
@@ -52,6 +58,7 @@ def first_token_id():
 
 
 DRIVER_RETRIES = int(os.environ.get("BSCSCAN_DRIVER_RETRIES", "3"))
+GRACEFUL_CLOSE_SECONDS = float(os.environ.get("BSCSCAN_GRACEFUL_CLOSE", "2.5"))
 DRIVER_RETRY_DELAY = float(os.environ.get("BSCSCAN_DRIVER_RETRY_DELAY", "5"))
 # undetected_chromedriver's default mode deletes its cached chromedriver and
 # re-downloads + re-patches an ~18MB binary on EVERY browser start, using
@@ -205,6 +212,14 @@ def terminate_driver(driver):
                 service_pid = service.process.pid
         except Exception:
             pass
+        # Close the window first and give Chrome a moment to exit on its own.
+        # A hard kill right after login loses the remember-me cookies Chrome
+        # has not flushed to disk yet, so the next restart needs Turnstile again.
+        try:
+            driver.close()
+            time.sleep(GRACEFUL_CLOSE_SECONDS)
+        except Exception:
+            pass
         try:
             driver.quit()
         except Exception:
@@ -266,9 +281,11 @@ def cached_driver_unusable(error):
     if isinstance(error, ValueError):
         return True  # empty cache dir: patcher does max() over no files
     text = str(error).lower()
+    # "session not created" alone is too broad: it is also what chromedriver says
+    # when Chrome was killed or its port is busy (2026-09-09 run re-downloaded
+    # the driver for that). The version mismatch case names the version.
     return (
         "only supports chrome version" in text
-        or "session not created" in text
         or "no such file or directory" in text
         or "not a valid" in text
     )
@@ -414,10 +431,8 @@ def try_recover_chrome_profile(driver, username, token_id=None):
 
     info(f"Checking Chrome profile session for {username}")
     try:
-        driver.get(MYACCOUNT_URL)
-        time.sleep(STEP_DELAY_SECONDS)
-        dismiss_cookie_banner(driver)
-        if not on_myaccount_page(driver) and not is_logged_in(driver):
+        if not autologin_via_login_page(driver):
+            info(f"Chrome profile has no live session for {username} (landed on {driver.current_url})")
             return False
 
         if not username_matches(driver, username):
@@ -501,7 +516,34 @@ def fill_credentials(driver, wait, username, password):
             f"Could not fill login form (username_ok={username_ok}, password_ok={password_ok}). "
             f"URL: {driver.current_url}"
         )
-    ok(f"Filled username/password for {username}")
+    remembered = tick_remember_me(driver)
+    ok(f"Filled username/password for {username}" + ("  (remember me)" if remembered else ""))
+
+
+def tick_remember_me(driver):
+    """Check the 'Remember & Auto Login' box so the session persists in the Chrome profile."""
+    if not REMEMBER_ME:
+        return False
+    try:
+        box = driver.find_element(By.CSS_SELECTOR, REMEMBER_ME_CHECKBOX)
+    except Exception:
+        warn("Remember-me checkbox not found on login page — session will not persist across restarts")
+        return False
+    try:
+        if not box.is_selected():
+            driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", box)
+            driver.execute_script("arguments[0].click();", box)
+            time.sleep(0.2)
+        if not box.is_selected():
+            driver.execute_script(
+                "arguments[0].checked = true;"
+                "arguments[0].dispatchEvent(new Event('change', {bubbles: true}));",
+                box,
+            )
+        return bool(box.is_selected())
+    except Exception as error:
+        warn(f"Could not tick remember-me — {error}")
+        return False
 
 
 def ensure_credentials_filled(driver, wait, username, password):
@@ -571,7 +613,20 @@ def is_logged_in(driver):
     return False
 
 
+def autologin_via_login_page(driver):
+    """Open /login first: with remember-me cookies BscScan logs in there and
+    redirects to My Account. Opening a protected page first does the opposite —
+    the server clears bscscan_pwd/bscscan_userid and the remembered login is
+    gone for good (verified 2026-09-10)."""
+    driver.get(LOGIN_URL)
+    time.sleep(STEP_DELAY_SECONDS)
+    dismiss_cookie_banner(driver)
+    return on_myaccount_page(driver) or is_logged_in(driver)
+
+
 def confirm_logged_in(driver):
+    if autologin_via_login_page(driver):
+        return True
     driver.get(MYACCOUNT_URL)
     time.sleep(STEP_DELAY_SECONDS)
     dismiss_cookie_banner(driver)
@@ -861,9 +916,13 @@ def nft_page_url(token_id):
 
 def nft_page_ready(driver, page=None):
     html = driver.page_source if page is None else page
+    # Positive evidence first: a rendered properties block or the ASP.NET form
+    # means the real NFT page is up, whatever Cloudflare scripts it also carries.
+    if 'id="collapseProperties"' in html:
+        return True
     if is_cloudflare_html(html):
         return False
-    return 'id="collapseProperties"' in html or "__VIEWSTATE" in html
+    return "__VIEWSTATE" in html
 
 
 def selenium_login(driver, username, password):
@@ -934,9 +993,12 @@ def capture_account(pool, username, password, token_id, driver=None):
                     quit_driver(driver)
                     driver = create_driver(username=username)
 
-                reset_browser_session(driver)
-                selenium_login(driver, username, password)
-                visit_nft_page(driver, token_id)
+                if try_recover_chrome_profile(driver, username, token_id=token_id):
+                    ok(f"Reused Chrome profile session — no Turnstile login needed  {username}")
+                else:
+                    reset_browser_session(driver)
+                    selenium_login(driver, username, password)
+                    visit_nft_page(driver, token_id)
                 cookies, user_agent = capture_session(driver, username)
                 pool.save_session(username, cookies, user_agent)
                 ok(f"Saved to account state  {username}")

@@ -18,6 +18,7 @@ Usage:
 """
 
 import argparse
+import fcntl
 import os
 import subprocess
 import sys
@@ -32,13 +33,42 @@ from accounts.pool import AccountPool
 from lib.fetch_tokens import fetch_tokens
 from lib.log_util import banner, fail, info, kv, ok, step, substep, summary, warn
 from lib.run_log import exit_code_from_system_exit, push_run_log, setup_run_log
-from lib.paths import CRAWL_REPORT_FILE
+from lib.paths import CRAWL_REPORT_FILE, TOKEN_IDS_FILE
 from lib.report_tokens import refresh_target_counts
 from lib.pool_config import account_env_for_refresh_tokens
 from lib.reset_compare import reset_compare_files
 from lib.tokenids import REFRESH_TOKENS_PER_COOKIE, count_token_ids, refresh_cookies_needed
 
 REPORT_FILE = CRAWL_REPORT_FILE
+LOCK_FILE = os.path.join(SCRIPT_DIR, "crawl", "output", ".workflow.lock")
+_lock_handle = None
+
+
+def acquire_run_lock():
+    """Refuse to start while another run is in progress.
+
+    Two overlapping runs share the Chrome profiles, and the second run's
+    stale-Chrome cleanup kills the first run's browser (2026-09-09: manual run
+    overlapped the scheduled one and died with InvalidSessionIdException).
+    """
+    global _lock_handle
+    os.makedirs(os.path.dirname(LOCK_FILE), exist_ok=True)
+    handle = open(LOCK_FILE, "a+")
+    try:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        handle.seek(0)
+        owner = handle.read().strip() or "unknown pid"
+        handle.close()
+        raise SystemExit(
+            f"Another workflow run is already in progress (pid {owner}, lock {LOCK_FILE}). "
+            "Wait for it to finish (or kill it) before starting a new run."
+        )
+    handle.seek(0)
+    handle.truncate()
+    handle.write(f"{os.getpid()}\n")
+    handle.flush()
+    _lock_handle = handle
 
 
 def run_phase(name, cmd, env=None):
@@ -134,7 +164,12 @@ def main():
                 ok(f"Pulled {fetched} token ids from sheet {sheet_id} (gid={gid})")
         except Exception as exc:  # network / sharing / format failures
             fail(f"Sheet fetch failed: {exc}")
-            raise SystemExit("Aborting — could not refresh tokens.csv (use --skip-fetch to run on the local file)")
+            # The sheet rarely changes between runs; a network blip should not
+            # cost a whole day. Fall back to the last pulled copy if there is one.
+            local_count = count_token_ids() if os.path.exists(TOKEN_IDS_FILE) else 0
+            if local_count == 0:
+                raise SystemExit("Aborting — could not refresh tokens.csv and no local copy to fall back on")
+            warn(f"Using the local tokens.csv from the previous run ({local_count} token ids)")
 
     token_count = count_token_ids()
     print_inputs(token_count)
@@ -174,6 +209,8 @@ def main():
     kv("Out-of-sync", refresh_counts["out_of_sync"])
     if refresh_counts["errors"]:
         kv("Crawl errors", refresh_counts["errors"])
+    if refresh_counts.get("skipped"):
+        kv("Not refreshable", f"{refresh_counts['skipped']} (tokenURI revert — token gone on-chain)")
     kv("To refresh", refresh_counts["total"])
     kv("Accounts needed", refresh_cookies)
 
@@ -192,6 +229,11 @@ def main():
 
 
 if __name__ == "__main__":
+    try:
+        acquire_run_lock()
+    except SystemExit as exc:
+        print(exc.code, file=sys.stderr)
+        sys.exit(2)
     setup_run_log()
     code = 0
     # Report the failure *before* push_run_log restores the streams — anything
