@@ -1,0 +1,22 @@
+=== refresh run: 2026-09-12 18:30:00.635504 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/Library/Developer/CommandLineTools/usr/bin/python3 (3.9.6)
+args=<full pipeline>
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Sheet is empty (header only) — wrote tokens.csv from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      0
+  ✓ No token ids in tokens.csv — skipping crawl and refresh
+
+══════════════════════════════════════════════════
+  Workflow complete
+══════════════════════════════════════════════════
+=== exit 0 at 2026-09-12 18:30:02.035092 ===
