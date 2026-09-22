@@ -1,0 +1,1245 @@
+=== refresh run: 2026-09-22 18:01:36.823742 ===
+repo=/Users/jasmine/refresh
+python=/Applications/Xcode.app/Contents/Developer/usr/bin/python3 (3.9.6)
+args=--skip-fetch --crawl-only
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+  ⚠ Skipped (--skip-fetch) — using existing tokens.csv
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      1153
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  · Re-logging in 1 account(s) via Selenium (steps 1→2→3)
+  · First tokenId  53471257924106106625816972300577265847217274024369243708292541863493969624309  (from tokens.csv)
+  · [1/1] refresh1
+  · Chrome profile  /Users/jasmine/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (1.1s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  ✓ Session recovered from Chrome profile  refresh1
+  · Step 2/3  Open first token NFT page  …3969624309
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/53471257924106106625816972300577265847217274024369243708292541863493969624309
+  ✓ NFT page loaded  …3969624309
+  ✓ Reused Chrome profile session — no Turnstile login needed  refresh1
+  · Step 3/3  Capture cookie + userAgent  refresh1
+  ✓ Captured  12 cookies  cf_clearance=True  session=True
+  ✓ Saved to account state  refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+/Users/jasmine/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       1153
+  Already done       0
+  Remaining          1153
+  Concurrency        50
+  RPC                https://bsc-dataseed.binance.org
+  ✗ …3969624309  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2420085994  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4553073400  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2873664123  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8340196078  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4770062240  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4817185015  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8227143418  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2460322916  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7324448097  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3905064523  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0315639843  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6511622442  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9311058945  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5495259967  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4673131443  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9141986628  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9944160361  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7886723802  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3040818122  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6010456446  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1589767348  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2749605659  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4005967190  bscscan: page missing properties (title: Renaiss #10008965527029937357847834958829204018911969486055398817200943732899400)
+  ✗ …1094075797  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0005827645  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2221276457  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0335388250  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5567373370  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0272688006  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4230847190  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2756296826  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5047957257  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8927667319  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9967660114  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8475565540  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7652711505  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7623069439  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8171676453  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3867262352  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1788861357  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8620224557  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7433446915  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1195318162  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1526121975  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5610593799  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2806444394  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8950556525  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9904712705  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3691181298  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 50/1153 tokens
+  ✗ …5907151511  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2994407532  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8219080743  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5933243736  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0230203126  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8382795171  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9612848673  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9981445305  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8186351545  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2460999774  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1821394105  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5184757259  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5982569775  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0431001548  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8862217742  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0409526929  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6251564830  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6224024867  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6544047397  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5424442347  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8158143068  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8507172631  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4046585126  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5950125339  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4099711323  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4583845061  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9964162787  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9992954604  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0674721293  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3959206710  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5501089227  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7657466607  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9224234424  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6988237239  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8684719854  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7638804459  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3420061219  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5869680665  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1257744883  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4634958540  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7238539426  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6853133042  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7828817879  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3779402092  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9129625108  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8821833298  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1405001264  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3032190862  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3534761703  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0088355920  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 100/1153 tokens
+  ✗ …3764340908  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2708908602  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1400211890  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1737965022  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5685629619  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4073689237  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6532225928  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1798836902  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3932801625  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6068047768  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5811108224  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2130168830  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1372579879  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2879409958  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3789113855  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1557155845  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7751703401  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5852018658  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3429263759  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6955546479  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0951150605  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9697892861  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0941688375  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5857157108  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2674569572  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2672661975  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6966870525  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5330220765  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3900584478  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4265000561  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9261729111  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3343702406  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3342314253  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8848411762  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5784617136  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7044217285  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5690962407  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9740526249  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5261955161  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8059603434  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4865619786  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8632691717  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7711820055  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9554742534  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7917624574  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4542264458  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5043001700  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3380317722  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2432205854  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8720425797  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 150/1153 tokens
+  ✗ …4655433410  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8674208446  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1866983744  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8538602327  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8870339883  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1748594372  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9260769595  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5460381818  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2501499554  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7499756731  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4691748330  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5915546083  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4650158854  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5322543215  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8576376309  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7647182959  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7447635391  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0137606672  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7919373345  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9961525522  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8779287387  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2788649119  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5925372465  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8183170598  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5629422308  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4133429683  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9479584320  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7911720023  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8847411094  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9439051663  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5648452431  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7104544732  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6715906934  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8587207329  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4534053197  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2185870604  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0830852499  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7334376555  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9533727887  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1552066466  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9633138867  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3664806533  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4032889179  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1094864721  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9867502762  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9216388479  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3417127274  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5799190027  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3307576633  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4655249478  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 200/1153 tokens
+  ✗ …8561530490  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9778289593  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6424420594  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2317601286  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5536848421  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7268201408  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7694708425  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8010538163  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0401512592  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0242329891  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4099133038  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9046785320  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8433690079  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9632739620  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8741942374  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5518184409  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8943250105  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0819822993  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1513726596  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9518333034  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4897654050  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3309469964  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7020599693  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8942500410  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1742945941  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6611089523  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0108395007  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9176174656  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8127283839  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9569582744  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9355577569  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3105956605  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2518740905  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7812677456  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8148089862  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5967806521  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5938506519  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1112251668  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1920793780  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0656597965  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0522402206  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6473415404  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4530264736  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0766961473  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6109266560  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3381293266  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7717467151  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6573402076  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7418703334  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3443059677  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 250/1153 tokens
+  ✗ …4356484244  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2853330476  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7550626258  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3598500834  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5346268198  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4592668177  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8664264372  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9557569744  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6046268791  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0775278044  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0668902036  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3291728988  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7670321343  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5397983918  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9525692154  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1551540890  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6350693830  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0563079201  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4083884419  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8671199111  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3323422591  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4062686995  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6616001820  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7015679575  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5559167485  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6028764152  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8132154230  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1695376269  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5466064234  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8260245876  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5984596112  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8499394099  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2082167515  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1991967946  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1370709801  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1265817790  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6817015395  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4495272779  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4053320175  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2869124977  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0327189549  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8331061290  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8724663949  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4855346713  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6581042595  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4079141872  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2985851172  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3554432124  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9648517178  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1693089951  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 300/1153 tokens
+  ✗ …8974343323  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9257258911  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4652713309  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9310035985  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7600602537  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8729309038  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8993789343  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8990431066  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2205128895  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8467343474  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2838483091  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7982660711  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1476029102  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5880453432  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5590509505  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0877969840  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0336353703  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2465802566  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4405181050  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8998745544  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8581067840  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0202533841  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7569482317  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6932239169  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7266912342  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8974784436  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4040162197  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9873903510  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5160579742  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1373886425  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9496826125  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3913945502  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7340062733  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2550569852  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0725201380  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2502620270  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9920554281  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2708448795  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3765817429  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6626297956  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8000607069  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7982185127  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3261021899  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2715136022  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4630864374  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2861396431  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1755333523  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7146132928  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1425712709  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7202412480  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 350/1153 tokens
+  ✗ …4399972201  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9142796606  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8461920131  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3082702043  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8271040108  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1775214530  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1141511840  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2208813843  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3253995947  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6053690708  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0839676564  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2763748959  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0606288275  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9736950848  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8419318516  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4164427091  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3660412219  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7268369732  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9887345301  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3112220584  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4606932122  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4791197681  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8484074527  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9642699552  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9663936909  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8336463230  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6703055240  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3131595092  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5633291203  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0576310561  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0984316754  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4495584221  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7413294424  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4934793989  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5989517953  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7915537322  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7203794530  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6282465245  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5070212632  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5245253905  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2998034702  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6111261327  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4697856352  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6976229220  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0924909237  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6565210505  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4198089927  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7938259578  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3270259053  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7937560668  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 400/1153 tokens
+  ✗ …9312440462  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8884188586  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7997773926  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8244602262  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3181137298  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0707909122  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7167919302  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2505468883  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3347495401  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9098729251  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1403696663  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3670494516  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5901437648  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9232460706  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1532982701  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2751195535  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7962140961  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7162333596  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2357186311  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1029422744  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5723000212  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8405760844  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1341049785  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2037825081  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0709125907  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1856016687  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4717714289  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8849256533  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2202255274  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8018235009  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6724783441  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3837247495  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9519378861  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5526683804  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1329171916  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9413539475  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2148348218  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6873843317  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1187237523  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0278454242  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3879402379  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1938957785  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0093065153  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8299813526  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7330067250  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7034014832  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8454961540  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2190076295  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4325202233  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5902147616  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 450/1153 tokens
+  ✗ …8006498917  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5108843174  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7134340255  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0278369454  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6410769941  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8109322512  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9973914934  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4876529163  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7046281412  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8839321409  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2968601591  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0093107201  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6452948580  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2651822874  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4637829881  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0659837958  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3522768246  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7372133881  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1706958916  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0960188901  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4160414150  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1773362537  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3595656426  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1170481009  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7812951018  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7019331845  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2511615603  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7235390837  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6563090432  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3344863317  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7452873444  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1126200238  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7772883937  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7148622770  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0312512478  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7785135742  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3447132941  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5560752130  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4691359218  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5052652659  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1608669927  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8122937320  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1157594594  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7396818741  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2582728175  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9361512085  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7325619917  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6880836077  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0180538098  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5382273319  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 500/1153 tokens
+  ✗ …8679018778  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9640628192  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6236373517  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2095133627  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9642398874  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9525111952  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4238836621  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6211419706  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3376626220  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7443155762  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3226019580  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4819667528  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5292782076  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6910244292  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6364651253  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2273000388  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1505706268  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9660215590  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4026216919  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9958514815  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2050037703  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9430440200  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7705493666  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2739992135  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3466825849  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5426026466  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2744721304  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9499401744  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1300067475  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9835703715  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9201183570  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4787292254  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9889688420  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4463829663  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3778618263  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5364714270  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2929028273  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7755998309  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0237092456  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6263087477  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8148224894  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5535870960  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3991546759  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3849878283  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3337042104  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4566022163  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8765216910  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4171486583  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7237091385  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8072933181  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 550/1153 tokens
+  ✗ …4833592971  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1156643830  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7108220400  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3325570548  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1859236398  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3286531259  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1342864179  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7381048583  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3231280934  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6718091926  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9785296444  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3668893424  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9117616818  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2769834422  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2811826216  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3304195192  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3468571725  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3708468492  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8978072068  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6557828551  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1805491654  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6203682422  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6094932337  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8416163882  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2708401279  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0623606709  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0326914147  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9208009044  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5244156671  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2268107767  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2275344239  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7085261055  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3009824090  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5725630244  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2593725116  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3958945807  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2659999251  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9831237045  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1295328685  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8838037520  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0467279743  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5098358953  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9427553728  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0691380527  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2203909106  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3372974197  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4793447489  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6818132234  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2374411230  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5319830055  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 600/1153 tokens
+  ✗ …4056690405  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0590621882  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9862156655  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9992067156  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8354745792  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6052703414  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5965737238  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3607704741  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1778531086  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6375682350  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8680788615  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9770547143  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2381778904  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5912677453  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5371250731  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1636938395  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5769526318  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0391318513  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8093417515  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6114318215  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4560709004  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0673774002  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0103422946  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0944330504  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0802577920  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1419765273  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2865721618  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6630679732  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9558615340  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9484989296  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5452392247  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1618399587  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5058900149  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7981788574  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5405084948  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0390115633  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6405286286  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9786077890  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8017351872  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5429822559  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3093422308  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9939180822  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3803374292  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5661541721  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5165113561  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8430758154  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8474817784  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0098354521  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4262826061  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1313385189  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 650/1153 tokens
+  ✗ …3540644598  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9509452650  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7355290405  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8584629558  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9683372616  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7737889210  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7270924252  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7533640660  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1027457260  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3056630726  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5337691922  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5013449026  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9350706115  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3352550337  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1722910023  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1552469611  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1512138915  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6459372370  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0767446524  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8688451891  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6467148270  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5616457674  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9065925689  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8753337718  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8387180981  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8245790110  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6568416384  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5925081413  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1300906610  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5097469970  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2404491113  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7335914611  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9875591939  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6986489793  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1631848860  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0791475823  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6903857234  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6346046685  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6732282208  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2340536845  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4658637993  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3733522978  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4425810215  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5967178164  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1315781585  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5515064269  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4859696886  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8873462323  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0063794452  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8287520859  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 700/1153 tokens
+  ✗ …7094646968  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9308716955  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0251292511  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7239224808  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1812153658  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1195558123  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4365204124  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2280366626  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9696176553  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2509678623  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2904438787  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6015446177  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8222025859  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1944425853  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1092282141  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7363455169  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7269237171  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3697050849  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8720633892  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8565096624  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0714753078  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1792994759  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6726399841  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9123795815  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3897576165  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5446685739  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5261148512  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6454198478  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2338391290  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6830190534  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5357591792  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4603763029  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1417697512  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9530429826  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4520301680  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8432868872  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6130334045  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7534234271  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6096080093  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1073637275  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7023839283  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0760430360  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1390185394  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4811945220  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8550392077  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0618581878  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7630798724  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5755434795  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2656514022  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8021776790  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 750/1153 tokens
+  ✗ …2237217853  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6525057224  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8765087427  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2497470313  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6595075138  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6702387749  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0001639710  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4308737764  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5195997129  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5141315053  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1643546636  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6008050706  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6520067325  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4603695822  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6241996577  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5106300386  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9051740308  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9009365203  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4651092099  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2675038898  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9536356234  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1564055910  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6078442574  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3185040816  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6290302131  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0451583296  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4753229101  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6928455263  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0200826833  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8880807509  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6256177642  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2732430536  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7011432916  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3822758648  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7136918821  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7734113381  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9284765183  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1686720969  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4664914583  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4554180131  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8164096562  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2235881295  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3498203956  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8351786948  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8649815260  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6539458835  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9782694151  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4202437329  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8468196281  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4737627110  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 800/1153 tokens
+  ✗ …2566443735  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5816114515  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6740786151  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7937637580  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0193188645  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2783608132  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5305541104  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8343580325  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5877420220  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5588245899  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0241099818  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9866443932  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3485973363  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7532497597  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1949909438  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1518993075  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3088940831  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3250262555  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1914765058  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8899001599  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0433259321  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3213819225  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6746042030  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0011136010  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4860063347  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6288497486  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8087030906  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7348909208  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0489476160  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8864863482  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0806125813  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8386727284  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9874715594  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7911924418  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9125869350  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9654734149  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2843187157  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8873038698  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5993419956  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3457696043  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9248304314  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1633993483  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9437212308  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5139736405  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8131727989  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3533589055  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5591180135  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2000751599  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5641615372  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9401207500  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 850/1153 tokens
+  ✗ …6495180074  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6009520522  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6153682840  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5635606516  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3639476180  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8557341872  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3151793025  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3678073439  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4555889021  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0233766910  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4655131325  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3367200522  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6146040141  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3139136069  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3373106652  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7106542433  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7618165697  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7320112411  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3299532959  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6207134929  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5348080041  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0724264499  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6091057931  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3639394504  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0150378522  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4583184752  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1465608870  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9187019253  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6248463487  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1335099438  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4858745991  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7069780596  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9074110401  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6683005877  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4685471820  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7543714637  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9159451682  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9303002731  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3588337623  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7565223925  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8277114372  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6548319908  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7078010126  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8272230736  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0931624233  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1037800396  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4918740002  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3280168328  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3743715428  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5078383385  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 900/1153 tokens
+  ✗ …6582212862  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5784985257  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3715127202  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9643798579  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6228737483  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8001375205  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2118033147  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1230119978  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2259632700  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4803954413  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2516231294  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4348479401  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0681862948  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2079919634  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8867901327  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4151153729  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0054383642  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7300553071  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5807221839  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7297750902  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0062013597  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4291949660  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0314624410  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5005674484  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9044404136  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9059051398  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4608929542  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6149712297  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2970659216  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4137599722  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …5604198550  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4371997840  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9176532299  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6686197443  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5424100670  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3905950762  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4268109641  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1742266924  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9843014882  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9259204761  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0856189472  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6973208223  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9048179649  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8990790905  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2758307320  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6288217119  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1050869290  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6134816903  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1341475202  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2551952008  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 950/1153 tokens
+  ✗ …6102286553  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5758317942  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0870720547  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2714267949  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6381866783  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7085461895  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5008829425  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1528627182  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2223494771  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5331950613  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2661415445  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9495651561  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7972041552  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5511959734  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3943468696  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5747809082  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5743808748  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2162708632  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7528568776  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1596472422  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3691905351  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4545345644  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4911370088  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0712145402  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4535602136  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1167888995  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3808177597  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0829428768  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0291302934  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3876412917  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9737703213  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5948606905  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5236801873  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0170746415  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1866611400  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0665101762  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6185390935  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7882894305  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7917317121  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3566001798  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8126272928  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4552369707  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1034939753  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1527745702  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7895410571  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0409194722  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0287064705  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5844378803  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8936680346  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9685654941  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 1000/1153 tokens
+  ✗ …5443324583  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8680290887  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2060363910  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6851119858  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7756985270  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2774725644  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3337903942  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3218324045  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7407186339  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9919857025  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6686125098  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2594557626  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5271756982  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4337301027  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4986897412  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1745638071  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2623716034  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8128986636  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0905473176  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4663206881  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2384336484  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4654911551  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1096367491  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5847975058  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4079851020  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9721078836  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0045099334  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4590376915  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3021007735  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9521061833  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9335168528  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7754517805  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0300032755  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0620951256  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5467993839  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1556603038  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7170519628  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3901637825  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8244431444  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4072241316  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1506437479  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1432983345  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3392808303  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5399398557  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6630138205  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7506018130  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8504138960  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6032545438  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5163981083  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4505030559  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 1050/1153 tokens
+  ✗ …8780791127  bscscan: HTTP 403
+  ✗ …5963427620  bscscan: HTTP 403
+  ✗ …8212377423  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0786805350  bscscan: HTTP 403
+  ✗ …6756522165  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7793479115  bscscan: HTTP 403
+  ✗ …1389918030  bscscan: HTTP 403
+  ✗ …3549446539  bscscan: HTTP 403
+  ✗ …5827829739  bscscan: HTTP 403
+  ✗ …6351340149  bscscan: HTTP 403
+  ✗ …2420829065  bscscan: HTTP 403
+  ✗ …8756909255  bscscan: HTTP 403
+  ✗ …6194248603  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2988957999  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2532126187  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8479636473  bscscan: HTTP 403
+  ✗ …7362020650  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …9998681085  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0624815875  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1549462905  bscscan: HTTP 403
+  ✗ …5366262552  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7958988714  bscscan: HTTP 403
+  ✗ …5804723732  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …0513211251  bscscan: HTTP 403
+  ✗ …1094083417  bscscan: HTTP 403
+  ✗ …3237031509  bscscan: HTTP 403
+  ✗ …2387807615  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8858717261  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …3790493576  bscscan: HTTP 403
+  ✗ …5714360489  bscscan: HTTP 403
+  ✗ …5311266938  bscscan: HTTP 403
+  ✗ …5250648003  bscscan: HTTP 403
+  ✗ …4238741707  bscscan: HTTP 403
+  ✗ …0654361358  bscscan: HTTP 403
+  ✗ …1469358355  bscscan: HTTP 403
+  ✗ …4121013689  bscscan: HTTP 403
+  ✗ …6250084301  bscscan: HTTP 403
+  ✗ …7542111769  bscscan: HTTP 403
+  ✗ …7022957399  bscscan: HTTP 403
+  ✗ …2877160384  bscscan: HTTP 403
+  ✗ …9402120156  bscscan: HTTP 403
+  ✗ …9346969382  bscscan: HTTP 403
+  ✗ …9690533504  bscscan: HTTP 403
+  ✗ …5639655897  bscscan: HTTP 403
+  ✗ …1886931204  bscscan: HTTP 403
+  ✗ …9000199482  bscscan: HTTP 403
+  ✗ …5913713018  bscscan: HTTP 403
+  ✗ …1162240856  bscscan: HTTP 403
+  ✗ …7459155627  bscscan: HTTP 403
+  ✗ …8777859606  bscscan: HTTP 403
+  · Batch done — 1100/1153 tokens
+  ✗ …2999837721  bscscan: HTTP 403
+  ✗ …3898284927  bscscan: HTTP 403
+  ✗ …0044167638  bscscan: HTTP 403
+  ✗ …0954114879  bscscan: HTTP 403
+  ✗ …9696659390  bscscan: HTTP 403
+  ✗ …8693759379  bscscan: HTTP 403
+  ✗ …7011478867  bscscan: HTTP 403
+  ✗ …7984342449  bscscan: HTTP 403
+  ✗ …6375226144  bscscan: HTTP 403
+  ✗ …6143934148  bscscan: HTTP 403
+  ✗ …7972228388  bscscan: HTTP 403
+  ✗ …6899328414  bscscan: HTTP 403
+  ✗ …5710537362  bscscan: HTTP 403
+  ✗ …7828116333  bscscan: HTTP 403
+  ✗ …5188940675  bscscan: HTTP 403
+  ✗ …3025055272  bscscan: HTTP 403
+  ✗ …7944139962  bscscan: HTTP 403
+  ✗ …4127256863  bscscan: HTTP 403
+  ✗ …6400467405  bscscan: HTTP 403
+  ✗ …3708464749  bscscan: HTTP 403
+  ✗ …7803039960  bscscan: HTTP 403
+  ✗ …8024591404  bscscan: HTTP 403
+  ✗ …3141092415  bscscan: HTTP 403
+  ✗ …8813898462  bscscan: HTTP 403
+  ✗ …3378782423  bscscan: HTTP 403
+  ✗ …7843849887  bscscan: HTTP 403
+  ✗ …4573912288  bscscan: HTTP 403
+  ✗ …8432249931  bscscan: HTTP 403
+  ✗ …5107584865  bscscan: HTTP 403
+  ✗ …6679985243  bscscan: HTTP 403
+  ✗ …8530438925  bscscan: HTTP 403
+  ✗ …9452622091  bscscan: HTTP 403
+  ✗ …1478847844  bscscan: HTTP 403
+  ✗ …4489346115  bscscan: HTTP 403
+  ✗ …9183925460  bscscan: HTTP 403
+  ✗ …9210381105  bscscan: HTTP 403
+  ✗ …8165054813  bscscan: HTTP 403
+  ✗ …1132216528  bscscan: HTTP 403
+  ✗ …7688555249  bscscan: HTTP 403
+  ✗ …4229197270  bscscan: HTTP 403
+  ✗ …0622887544  bscscan: HTTP 403
+  ✗ …6204360194  bscscan: HTTP 403
+  ✗ …4477722883  bscscan: HTTP 403
+  ✗ …6903557803  bscscan: HTTP 403
+  ✗ …4314855635  bscscan: HTTP 403
+  ✗ …3223509791  bscscan: HTTP 403
+  ✗ …3813716607  bscscan: HTTP 403
+  ✗ …6305369086  bscscan: HTTP 403
+  ✗ …6085192723  bscscan: HTTP 403
+  ✗ …3353378885  bscscan: HTTP 403
+  · Batch done — 1150/1153 tokens
+  ✗ …4468741434  bscscan: HTTP 403
+  ✗ …9923395729  bscscan: HTTP 403
+  ✗ …1904779838  bscscan: HTTP 403
+  · Batch done — 1153/1153 tokens
+
+── Crawl results ───────────────────────
+  in_sync            0
+  out_of_sync        0
+  errors             1153
+  Progress file      progress.json
+  Report file        report.json
+  Report contents    0 out_of_sync, 1153 errors
+
+══════════════════════════════════════════════════
+  Done — refresh skipped (--crawl-only)
+══════════════════════════════════════════════════
+=== exit 0 at 2026-09-22 18:05:40.660400 ===
