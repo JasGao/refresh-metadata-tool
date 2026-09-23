@@ -1,0 +1,219 @@
+=== refresh run: 2026-09-22 21:43:04.427139 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/Library/Developer/CommandLineTools/usr/bin/python3 (3.9.6)
+args=<full pipeline>
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 10 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      10
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  ✓ Cookies still valid today: refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       10
+  Already done       0
+  Remaining          10
+  Concurrency        50
+  RPC                https://bsc-dataseed.binance.org
+    ⚠ …8012652281  rpc retry 1/2: TLS/SSL connection has been closed (EOF) (_ssl.c:1129)
+  ✗ …8744832178  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …1642600183  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7279543503  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …5152328323  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …7152204608  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …8012652281  rpc: [Errno 8] nodename nor servname provided, or not known
+  ✗ …3164017444  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …4554924408  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …6898835628  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✗ …2216722893  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  · Batch done — 10/10 tokens
+
+── Crawl results ───────────────────────
+  in_sync            0
+  out_of_sync        0
+  errors             10
+  Progress file      progress.json
+  Report file        report.json
+  Report contents    0 out_of_sync, 10 errors
+
+── Step 5: Refresh out-of-sync + crawl-error tokens (Selenium) 
+  Out-of-sync        0
+  Crawl errors       1
+  Not refreshable    9 (tokenURI revert — token gone on-chain)
+  To refresh         1
+  Accounts needed    1
+  Account pool       refresh1,refresh2,refresh3,refresh4,refresh5,refresh6,refresh7,refresh8,refresh9,refresh10,refresh11,refresh12,refresh13,refresh14,refresh15,refresh16,refresh17,refresh18,refresh19,refresh20
+
+  ▸ refresh-metadata/refresh.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Refresh — Selenium
+══════════════════════════════════════════════════
+
+── Run config ──────────────────────────
+  Source             report.json
+  Out-of-sync        0
+  Crawl errors       1
+  Not refreshable    9 (tokenURI revert)
+  Tokens             1
+  Limit per account  100 tokens
+  Delay              5.0s between tokens
+  Retry passes       1
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Refresh quota (today) ───────────────
+  refresh1           93/100 left (used 7, since 2026-09-22T03:38:09Z)
+  refresh2           100/100 left (used 0, since not started)
+  refresh3           100/100 left (used 0, since not started)
+  refresh4           100/100 left (used 0, since not started)
+  refresh5           100/100 left (used 0, since not started)
+  refresh6           100/100 left (used 0, since not started)
+  refresh7           100/100 left (used 0, since not started)
+  refresh8           100/100 left (used 0, since not started)
+  refresh9           100/100 left (used 0, since not started)
+  refresh10          100/100 left (used 0, since not started)
+  refresh11          100/100 left (used 0, since not started)
+  refresh12          100/100 left (used 0, since not started)
+  refresh13          100/100 left (used 0, since not started)
+  refresh14          100/100 left (used 0, since not started)
+  refresh15          100/100 left (used 0, since not started)
+  refresh16          100/100 left (used 0, since not started)
+  refresh17          100/100 left (used 0, since not started)
+  refresh18          100/100 left (used 0, since not started)
+  refresh19          100/100 left (used 0, since not started)
+  refresh20          100/100 left (used 0, since not started)
+  · Reusing today's session  refresh1  (93/100 left, started 2026-09-22T03:38:09Z)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (4.5s, cached chromedriver)
+  · Trying saved cookies for refresh1 before Selenium login
+  ✓ Logged in via saved cookies  refresh1
+  · Step 2/3  Open first token NFT page  …8012652281
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48972281717646070785507026413111865012049844585963966028260713410988012652281
+  ✓ NFT page loaded  …8012652281
+  ✓ Session ready  refresh1  (93/100 left, started 2026-09-22T03:38:09Z)
+  · Refreshing …8012652281  (1/1)  (account: refresh1)
+  ⚠ Session lost — restoring login for refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (1.1s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  · Chrome profile has no live session for refresh1 (landed on https://bscscan.com/login)
+  · Trying saved cookies for refresh1 before Selenium login
+  ✓ Logged in via saved cookies  refresh1
+  · Step 2/3  Open first token NFT page  …8012652281
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48972281717646070785507026413111865012049844585963966028260713410988012652281
+  ✓ NFT page loaded  …8012652281
+  ✓ Session ready  refresh1  (93/100 left, started 2026-09-22T03:38:09Z)
+  ⚠ Session lost — restoring login for refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (1.1s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  · Chrome profile has no live session for refresh1 (landed on https://bscscan.com/login)
+  · Trying saved cookies for refresh1 before Selenium login
+  ✓ Logged in via saved cookies  refresh1
+  · Step 2/3  Open first token NFT page  …8012652281
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48972281717646070785507026413111865012049844585963966028260713410988012652281
+  ✓ NFT page loaded  …8012652281
+  ✓ Session ready  refresh1  (93/100 left, started 2026-09-22T03:38:09Z)
+  ✗ …8012652281  (114.0s)  Session lost for refresh1 — re-login: python3 accounts/login.py --account refresh1
+  · Retry pass 1/1: 1 failed token(s) after 30s
+  · Refreshing …8012652281  (1/1)  [retry 1]  (account: refresh1)
+  ⚠ Chrome driver not responding — restarting
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (8.8s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  · Chrome profile has no live session for refresh1 (landed on https://bscscan.com/login)
+  · Trying saved cookies for refresh1 before Selenium login
+  ✓ Logged in via saved cookies  refresh1
+  · Step 2/3  Open first token NFT page  …8012652281
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48972281717646070785507026413111865012049844585963966028260713410988012652281
+  ✓ NFT page loaded  …8012652281
+  ✓ Session ready  refresh1  (93/100 left, started 2026-09-22T03:38:09Z)
+  ⚠ Session lost — restoring login for refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (1.5s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  · Chrome profile has no live session for refresh1 (landed on https://bscscan.com/login)
+  · Trying saved cookies for refresh1 before Selenium login
+  ⚠ Browser error (TimeoutException) — restarting Chrome (1/2)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (1.1s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  · Chrome profile has no live session for refresh1 (landed on https://bscscan.com/login)
+  · Trying saved cookies for refresh1 before Selenium login
+  ✓ Logged in via saved cookies  refresh1
+  · Step 2/3  Open first token NFT page  …8012652281
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48972281717646070785507026413111865012049844585963966028260713410988012652281
+  ✓ NFT page loaded  …8012652281
+  ✓ Session ready  refresh1  (93/100 left, started 2026-09-22T03:38:09Z)
+  ⚠ Session lost — restoring login for refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (1.1s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  · Chrome profile has no live session for refresh1 (landed on https://bscscan.com/login)
+  · Trying saved cookies for refresh1 before Selenium login
+  ✓ Logged in via saved cookies  refresh1
+  · Step 2/3  Open first token NFT page  …8012652281
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48972281717646070785507026413111865012049844585963966028260713410988012652281
+  ✓ NFT page loaded  …8012652281
+  ✓ Session ready  refresh1  (93/100 left, started 2026-09-22T03:38:09Z)
+  ⚠ Session lost — restoring login for refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  153
+  · Chrome started  (1.1s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  · Chrome profile has no live session for refresh1 (landed on https://bscscan.com/login)
+  · Trying saved cookies for refresh1 before Selenium login
+  ✓ Logged in via saved cookies  refresh1
+  · Step 2/3  Open first token NFT page  …8012652281
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/48972281717646070785507026413111865012049844585963966028260713410988012652281
+  ⚠ Unexpected error on …8012652281 — WebDriverException: Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+  ✗ …8012652281  (229.2s)  WebDriverException: Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+
+── Refresh results ─────────────────────
+  Succeeded          0
+  Failed             1
+  Not attempted      0
+  Total              1
+  · Failed tokens:
+    ✗ …8012652281  WebDriverException: Message: unknown error: net::ERR_INTERNET_DISCONNECTED
+
+══════════════════════════════════════════════════
+  Workflow complete
+══════════════════════════════════════════════════
+=== exit 0 at 2026-09-24 03:00:38.156770 ===
