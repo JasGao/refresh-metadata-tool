@@ -1,0 +1,585 @@
+=== refresh run: 2026-10-25 18:30:00.640341 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/Library/Developer/CommandLineTools/usr/bin/python3 (3.9.6)
+args=<full pipeline>
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 225 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      225
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  · Re-logging in 1 account(s) via Selenium (steps 1→2→3)
+  · First tokenId  63916979733380156795598267794815819613999026142417759280243924613522636714049  (from tokens.csv)
+  · [1/1] refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  155
+  · Chrome started  (1.3s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  ✓ Session recovered from Chrome profile  refresh1
+  · Step 2/3  Open first token NFT page  …2636714049
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/63916979733380156795598267794815819613999026142417759280243924613522636714049
+  ✓ NFT page loaded  …2636714049
+  ✓ Reused Chrome profile session — no Turnstile login needed  refresh1
+  · Step 3/3  Capture cookie + userAgent  refresh1
+  ✓ Captured  12 cookies  cf_clearance=True  session=True
+  ✓ Saved to account state  refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       225
+  Already done       0
+  Remaining          225
+  Concurrency        50
+  RPC                https://bsc-dataseed.binance.org
+    ⚠ …5030346914  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9690253007  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …7064194017  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …5204865426  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9591365282  bscscan retry 1/2: The read operation timed out
+    ⚠ …5451433572  bscscan retry 1/2: The read operation timed out
+  ✓ …2636714049  in_sync
+  ✓ …8430530597  in_sync
+  ✓ …7374136328  in_sync
+  ✓ …5030346914  in_sync
+  ✓ …3566151596  in_sync
+  ✓ …6783959317  in_sync
+  ✓ …5699236874  in_sync
+  ✓ …9896181561  in_sync
+  ✓ …3854659043  in_sync
+  ✓ …7040144831  in_sync
+  ✓ …5593713648  in_sync
+  ⚠ …4580351653  out_of_sync (5 diffs)
+  ✓ …6960222678  in_sync
+  ✓ …4331620254  in_sync
+  ✓ …3308563962  in_sync
+  ✓ …5204865426  in_sync
+  ✓ …5280247628  in_sync
+  ⚠ …0809189663  out_of_sync (5 diffs)
+  ✓ …7176034722  in_sync
+  ✓ …9627756668  in_sync
+  ✓ …4055702730  in_sync
+  ✓ …5962190676  in_sync
+  ✓ …9591365282  in_sync
+  ✓ …5451433572  in_sync
+  ✓ …0619026577  in_sync
+  ✓ …7756989724  in_sync
+  ⚠ …2156162150  out_of_sync (5 diffs)
+  ✓ …9335770040  in_sync
+  ✓ …0208054763  in_sync
+  ✓ …6323371168  in_sync
+  ✓ …0384173407  in_sync
+  ✓ …7477343594  in_sync
+  ✓ …0396324222  in_sync
+  ✓ …6572979189  in_sync
+  ⚠ …0812321901  out_of_sync (5 diffs)
+  ✓ …1385327307  in_sync
+  ⚠ …7064194017  out_of_sync (5 diffs)
+  ✓ …9690253007  in_sync
+  ✓ …0944145011  in_sync
+  ✓ …8649689964  in_sync
+  ✓ …6218536156  in_sync
+  ✓ …0231227075  in_sync
+  ✓ …1333640140  in_sync
+  ✓ …9230288882  in_sync
+  ✓ …4770287325  in_sync
+  ⚠ …4630375666  out_of_sync (5 diffs)
+  ⚠ …4863552798  out_of_sync (5 diffs)
+  ⚠ …7775359652  out_of_sync (5 diffs)
+  ✓ …1154990783  in_sync
+  ✓ …1317724872  in_sync
+  · Batch done — 50/225 tokens
+    ⚠ …3510775557  bscscan retry 1/2: Remote end closed connection without response
+    ⚠ …1222042934  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …8455915371  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …5846590203  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …7705055116  bscscan retry 1/2: The read operation timed out
+    ⚠ …1222042934  metadata retry 2/2: [Errno 60] Operation timed out
+    ⚠ …5846590203  metadata retry 2/2: [Errno 60] Operation timed out
+  ✓ …1787992699  in_sync
+  ✓ …2511448098  in_sync
+  ⚠ …9778910189  out_of_sync (5 diffs)
+  ✓ …5388168048  in_sync
+  ✓ …3510775557  in_sync
+  ✓ …5846590203  in_sync
+  ✓ …9171943764  in_sync
+  ✓ …5955103163  in_sync
+  ✓ …9517052080  in_sync
+  ✓ …3806616960  in_sync
+  ✓ …8879079059  in_sync
+  ✓ …7705055116  in_sync
+  ⚠ …5601732161  out_of_sync (5 diffs)
+  ✓ …0924902463  in_sync
+  ✓ …6121453941  in_sync
+  ✓ …3489411433  in_sync
+  ✓ …4223908797  in_sync
+  ✓ …8680613100  in_sync
+  ⚠ …3012713831  out_of_sync (5 diffs)
+  ✓ …0091751008  in_sync
+  ✓ …4986505034  in_sync
+  ✓ …8152848416  in_sync
+  ⚠ …3881923415  out_of_sync (5 diffs)
+  ✓ …7955539106  in_sync
+  ✓ …5381895311  in_sync
+  ⚠ …9871309409  out_of_sync (5 diffs)
+  ✓ …6212669701  in_sync
+  ⚠ …3194794185  out_of_sync (5 diffs)
+  ⚠ …6522668446  out_of_sync (5 diffs)
+  ⚠ …8166858512  out_of_sync (5 diffs)
+  ✓ …4438724858  in_sync
+  ⚠ …8455915371  out_of_sync (5 diffs)
+  ⚠ …1721370705  out_of_sync (5 diffs)
+  ✓ …9063663532  in_sync
+  ✓ …6325431686  in_sync
+  ✓ …0737246039  in_sync
+  ✓ …8510608961  in_sync
+  ⚠ …2185526888  out_of_sync (5 diffs)
+  ⚠ …2841619210  out_of_sync (5 diffs)
+  ⚠ …1867602980  out_of_sync (5 diffs)
+  ⚠ …5647340559  out_of_sync (5 diffs)
+  ✓ …8176790109  in_sync
+  ⚠ …6412241227  out_of_sync (5 diffs)
+  ✓ …4955513109  in_sync
+  ⚠ …9067473146  out_of_sync (5 diffs)
+  ✓ …9760321726  in_sync
+  ⚠ …5836543673  out_of_sync (5 diffs)
+  ⚠ …6776515734  out_of_sync (5 diffs)
+  ✓ …2219543454  in_sync
+  ✓ …1222042934  in_sync
+  · Batch done — 100/225 tokens
+    ⚠ …4338558765  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …3367444427  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0711500079  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …8384212411  bscscan retry 1/2: The read operation timed out
+    ⚠ …6352304272  bscscan retry 1/2: The read operation timed out
+  ✓ …2867190030  in_sync
+  ⚠ …7247260713  out_of_sync (5 diffs)
+  ✓ …5196363268  in_sync
+  ✓ …8793561442  in_sync
+  ✓ …0711500079  in_sync
+  ⚠ …6706572085  out_of_sync (5 diffs)
+  ✓ …7353541096  in_sync
+  ✓ …8467002691  in_sync
+  ✓ …3420144714  in_sync
+  ⚠ …8384212411  out_of_sync (5 diffs)
+  ✓ …8453628427  in_sync
+  ✓ …9874141844  in_sync
+  ✓ …9660884585  in_sync
+  ✓ …0826643209  in_sync
+  ✓ …1626018991  in_sync
+  ✓ …9011446477  in_sync
+  ✓ …8926353570  in_sync
+  ✓ …4609634109  in_sync
+  ✓ …9903237064  in_sync
+  ✓ …6786997400  in_sync
+  ✓ …4284954513  in_sync
+  ✓ …2583218532  in_sync
+  ✓ …2623223093  in_sync
+  ✓ …7414481121  in_sync
+  ✓ …6304838326  in_sync
+  ✓ …2416351188  in_sync
+  ✓ …1760070735  in_sync
+  ✓ …6292572117  in_sync
+  ✓ …4338558765  in_sync
+  ✓ …0037266319  in_sync
+  ✓ …8829042445  in_sync
+  ✓ …0729907600  in_sync
+  ✓ …8760567414  in_sync
+  ✓ …9504113050  in_sync
+  ✓ …5334649473  in_sync
+  ✓ …6371970251  in_sync
+  ✓ …0556596066  in_sync
+  ✓ …6244706014  in_sync
+  ⚠ …7662777064  out_of_sync (5 diffs)
+  ✓ …5255131393  in_sync
+  ✓ …3133181759  in_sync
+  ✓ …0287443803  in_sync
+  ✓ …5717826448  in_sync
+  ✓ …6352304272  in_sync
+  ✓ …4169009577  in_sync
+  ⚠ …2894847610  out_of_sync (5 diffs)
+  ✓ …2408734880  in_sync
+  ⚠ …0978840937  out_of_sync (5 diffs)
+  ✓ …3591773727  in_sync
+  ✓ …3367444427  in_sync
+  · Batch done — 150/225 tokens
+    ⚠ …6230674494  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9533964506  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …3740297521  bscscan retry 1/2: The read operation timed out
+  ✓ …4362798430  in_sync
+  ⚠ …9533964506  out_of_sync (5 diffs)
+  ✓ …9523579954  in_sync
+  ✓ …7262083633  in_sync
+  ✓ …9574950814  in_sync
+  ✓ …8614463293  in_sync
+  ✓ …0768859437  in_sync
+  ✓ …6009223415  in_sync
+  ✓ …2957889708  in_sync
+  ⚠ …0652073244  out_of_sync (5 diffs)
+  ✓ …1602250296  in_sync
+  ✓ …2393341372  in_sync
+  ✓ …0154541515  in_sync
+  ✓ …4474339731  in_sync
+  ✓ …8186336653  in_sync
+  ✓ …5781385633  in_sync
+  ⚠ …8663925916  out_of_sync (5 diffs)
+  ⚠ …7927371061  out_of_sync (5 diffs)
+  ✓ …2180581880  in_sync
+  ⚠ …3219119739  out_of_sync (5 diffs)
+  ✓ …5935203992  in_sync
+  ⚠ …7405180361  out_of_sync (5 diffs)
+  ⚠ …5342061008  out_of_sync (5 diffs)
+  ✓ …7685215829  in_sync
+  ✓ …7751303993  in_sync
+  ⚠ …7231998666  out_of_sync (5 diffs)
+  ✓ …8366491076  in_sync
+  ⚠ …5555099392  out_of_sync (5 diffs)
+  ✓ …7861217619  in_sync
+  ✓ …1291258907  in_sync
+  ⚠ …6496362334  out_of_sync (5 diffs)
+  ✓ …2516033415  in_sync
+  ✓ …3076513723  in_sync
+  ✓ …3740297521  in_sync
+  ✓ …3723870427  in_sync
+  ✓ …3524362572  in_sync
+  ✓ …9361779421  in_sync
+  ✓ …7733080301  in_sync
+  ✓ …5643914815  in_sync
+  ✓ …9331189492  in_sync
+  ⚠ …3658078437  out_of_sync (5 diffs)
+  ✓ …0253430074  in_sync
+  ✓ …4708046820  in_sync
+  ✓ …4843891934  in_sync
+  ✓ …2633423081  in_sync
+  ⚠ …3220710035  out_of_sync (5 diffs)
+  ✓ …5346710955  in_sync
+  ✓ …8718739109  in_sync
+  ⚠ …8317774128  out_of_sync (5 diffs)
+  ✓ …6230674494  in_sync
+  · Batch done — 200/225 tokens
+    ⚠ …8696837109  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9689283179  rpc retry 1/2: The read operation timed out
+    ⚠ …5329758006  bscscan retry 1/2: The read operation timed out
+  ✓ …2014960967  in_sync
+  ✓ …5574537056  in_sync
+  ✓ …4958117696  in_sync
+  ✓ …6560015751  in_sync
+  ✓ …6162974051  in_sync
+  ✓ …8696837109  in_sync
+  ✓ …4593186241  in_sync
+  ✓ …2138059377  in_sync
+  ✓ …4732917762  in_sync
+  ✓ …2044116291  in_sync
+  ✓ …5553410860  in_sync
+  ✓ …5291810549  in_sync
+  ✓ …9689283179  in_sync
+  ✓ …5808283960  in_sync
+  ✓ …8037876874  in_sync
+  ✓ …4848650698  in_sync
+  ✓ …5329758006  in_sync
+  ✓ …5917647591  in_sync
+  ✓ …3949791451  in_sync
+  ✓ …2554900730  in_sync
+  ✓ …6772294037  in_sync
+  ✓ …2689402524  in_sync
+  ✓ …3516590005  in_sync
+  ✓ …7032280364  in_sync
+  ✓ …4174923211  in_sync
+  · Batch done — 225/225 tokens
+
+── Crawl results ───────────────────────
+  in_sync            180
+  out_of_sync        45
+  errors             0
+  Progress file      progress.json
+  Report file        report.json
+  Report contents    45 out_of_sync, 0 errors
+
+── Step 5: Refresh out-of-sync + crawl-error tokens (Selenium) 
+  Out-of-sync        45
+  To refresh         45
+  Accounts needed    1
+  Account pool       refresh1,refresh2,refresh3,refresh4,refresh5,refresh6,refresh7,refresh8,refresh9,refresh10,refresh11,refresh12,refresh13,refresh14,refresh15,refresh16,refresh17,refresh18,refresh19,refresh20
+
+  ▸ refresh-metadata/refresh.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Refresh — Selenium
+══════════════════════════════════════════════════
+
+── Run config ──────────────────────────
+  Source             report.json
+  Out-of-sync        45
+  Tokens             45
+  Limit per account  100 tokens
+  Delay              5.0s between tokens
+  Retry passes       1
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Refresh quota (today) ───────────────
+  refresh1           100/100 left (used 0, since not started)
+  refresh2           100/100 left (used 0, since not started)
+  refresh3           100/100 left (used 0, since not started)
+  refresh4           100/100 left (used 0, since not started)
+  refresh5           100/100 left (used 0, since not started)
+  refresh6           100/100 left (used 0, since not started)
+  refresh7           100/100 left (used 0, since not started)
+  refresh8           100/100 left (used 0, since not started)
+  refresh9           100/100 left (used 0, since not started)
+  refresh10          100/100 left (used 0, since not started)
+  refresh11          100/100 left (used 0, since not started)
+  refresh12          100/100 left (used 0, since not started)
+  refresh13          100/100 left (used 0, since not started)
+  refresh14          100/100 left (used 0, since not started)
+  refresh15          100/100 left (used 0, since not started)
+  refresh16          100/100 left (used 0, since not started)
+  refresh17          100/100 left (used 0, since not started)
+  refresh18          100/100 left (used 0, since not started)
+  refresh19          100/100 left (used 0, since not started)
+  refresh20          100/100 left (used 0, since not started)
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  155
+  · Chrome started  (1.2s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  ✓ Session recovered from Chrome profile  refresh1
+  · Step 2/3  Open first token NFT page  …4580351653
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/55856175301109576715436279423977840095164411443558768369829447378844580351653
+  ✓ NFT page loaded  …4580351653
+  ✓ Session ready  refresh1  (100/100 left, started 2026-10-25T10:33:37Z)
+  · Refreshing …4580351653  (1/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …4580351653  refresh clicked  (7.8s)
+  Quota              99/100 remaining for refresh1
+  · Refreshing …0809189663  (2/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …0809189663  refresh clicked  (8.0s)
+  Quota              98/100 remaining for refresh1
+  · Refreshing …2156162150  (3/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …2156162150  refresh clicked  (8.8s)
+  Quota              97/100 remaining for refresh1
+  · Refreshing …0812321901  (4/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …0812321901  refresh clicked  (8.3s)
+  Quota              96/100 remaining for refresh1
+  · Refreshing …7064194017  (5/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …7064194017  refresh clicked  (7.7s)
+  Quota              95/100 remaining for refresh1
+  · Refreshing …4630375666  (6/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …4630375666  refresh clicked  (7.8s)
+  Quota              94/100 remaining for refresh1
+  · Refreshing …4863552798  (7/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …4863552798  refresh clicked  (7.9s)
+  Quota              93/100 remaining for refresh1
+  · Refreshing …7775359652  (8/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …7775359652  refresh clicked  (8.3s)
+  Quota              92/100 remaining for refresh1
+  · Refreshing …9778910189  (9/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …9778910189  refresh clicked  (8.3s)
+  Quota              91/100 remaining for refresh1
+  · Refreshing …5601732161  (10/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …5601732161  refresh clicked  (7.7s)
+  Quota              90/100 remaining for refresh1
+  · Refreshing …3012713831  (11/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …3012713831  refresh clicked  (8.1s)
+  Quota              89/100 remaining for refresh1
+  · Refreshing …3881923415  (12/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …3881923415  refresh clicked  (7.8s)
+  Quota              88/100 remaining for refresh1
+  · Refreshing …9871309409  (13/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …9871309409  refresh clicked  (8.0s)
+  Quota              87/100 remaining for refresh1
+  · Refreshing …3194794185  (14/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …3194794185  refresh clicked  (7.8s)
+  Quota              86/100 remaining for refresh1
+  · Refreshing …6522668446  (15/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …6522668446  refresh clicked  (7.8s)
+  Quota              85/100 remaining for refresh1
+  · Refreshing …8166858512  (16/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …8166858512  refresh clicked  (7.9s)
+  Quota              84/100 remaining for refresh1
+  · Refreshing …8455915371  (17/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …8455915371  refresh clicked  (8.0s)
+  Quota              83/100 remaining for refresh1
+  · Refreshing …1721370705  (18/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …1721370705  refresh clicked  (7.7s)
+  Quota              82/100 remaining for refresh1
+  · Proactive browser restart after 18 tokens
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  155
+  · Chrome started  (1.2s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  ✓ Session recovered from Chrome profile  refresh1
+  · Step 2/3  Open first token NFT page  …2185526888
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/53749987735381540048313706196476746690715168943391874390213008010912185526888
+  ✓ NFT page loaded  …2185526888
+  ✓ Session ready  refresh1  (82/100 left, started 2026-10-25T10:33:37Z)
+  · Refreshing …2185526888  (19/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …2185526888  refresh clicked  (8.0s)
+  Quota              81/100 remaining for refresh1
+  · Refreshing …2841619210  (20/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …2841619210  refresh clicked  (8.1s)
+  Quota              80/100 remaining for refresh1
+  · Refreshing …1867602980  (21/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …1867602980  refresh clicked  (7.8s)
+  Quota              79/100 remaining for refresh1
+  · Refreshing …5647340559  (22/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …5647340559  refresh clicked  (7.9s)
+  Quota              78/100 remaining for refresh1
+  · Refreshing …6412241227  (23/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …6412241227  refresh clicked  (8.0s)
+  Quota              77/100 remaining for refresh1
+  · Refreshing …9067473146  (24/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …9067473146  refresh clicked  (7.8s)
+  Quota              76/100 remaining for refresh1
+  · Refreshing …5836543673  (25/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …5836543673  refresh clicked  (7.8s)
+  Quota              75/100 remaining for refresh1
+  · Refreshing …6776515734  (26/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …6776515734  refresh clicked  (8.1s)
+  Quota              74/100 remaining for refresh1
+  · Refreshing …7247260713  (27/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …7247260713  refresh clicked  (8.2s)
+  Quota              73/100 remaining for refresh1
+  · Refreshing …6706572085  (28/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …6706572085  refresh clicked  (8.0s)
+  Quota              72/100 remaining for refresh1
+  · Refreshing …8384212411  (29/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …8384212411  refresh clicked  (7.8s)
+  Quota              71/100 remaining for refresh1
+  · Refreshing …7662777064  (30/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …7662777064  refresh clicked  (7.9s)
+  Quota              70/100 remaining for refresh1
+  · Refreshing …2894847610  (31/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …2894847610  refresh clicked  (8.3s)
+  Quota              69/100 remaining for refresh1
+  · Refreshing …0978840937  (32/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …0978840937  refresh clicked  (7.9s)
+  Quota              68/100 remaining for refresh1
+  · Refreshing …9533964506  (33/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …9533964506  refresh clicked  (7.9s)
+  Quota              67/100 remaining for refresh1
+  · Refreshing …0652073244  (34/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …0652073244  refresh clicked  (8.1s)
+  Quota              66/100 remaining for refresh1
+  · Refreshing …8663925916  (35/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …8663925916  refresh clicked  (7.9s)
+  Quota              65/100 remaining for refresh1
+  · Refreshing …7927371061  (36/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …7927371061  refresh clicked  (8.3s)
+  Quota              64/100 remaining for refresh1
+  · Proactive browser restart after 18 tokens
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  155
+  · Chrome started  (1.2s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  ✓ Session recovered from Chrome profile  refresh1
+  · Step 2/3  Open first token NFT page  …3219119739
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/97071933648148130841206535719801427889184747840758642306348545758793219119739
+  ✓ NFT page loaded  …3219119739
+  ✓ Session ready  refresh1  (64/100 left, started 2026-10-25T10:33:37Z)
+  · Refreshing …3219119739  (37/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …3219119739  refresh clicked  (7.9s)
+  Quota              63/100 remaining for refresh1
+  · Refreshing …7405180361  (38/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …7405180361  refresh clicked  (8.2s)
+  Quota              62/100 remaining for refresh1
+  · Refreshing …5342061008  (39/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …5342061008  refresh clicked  (7.9s)
+  Quota              61/100 remaining for refresh1
+  · Refreshing …7231998666  (40/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …7231998666  refresh clicked  (7.9s)
+  Quota              60/100 remaining for refresh1
+  · Refreshing …5555099392  (41/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …5555099392  refresh clicked  (8.1s)
+  Quota              59/100 remaining for refresh1
+  · Refreshing …6496362334  (42/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …6496362334  refresh clicked  (7.9s)
+  Quota              58/100 remaining for refresh1
+  · Refreshing …3658078437  (43/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …3658078437  refresh clicked  (8.0s)
+  Quota              57/100 remaining for refresh1
+  · Refreshing …3220710035  (44/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …3220710035  refresh clicked  (7.8s)
+  Quota              56/100 remaining for refresh1
+  · Refreshing …8317774128  (45/45)  (account: refresh1)
+    · BscScan says: We've queued this item for an update, please check back later.
+  ✓ …8317774128  refresh clicked  (7.9s)
+  Quota              55/100 remaining for refresh1
+
+── Refresh results ─────────────────────
+  Succeeded          45
+  Failed             0
+  Not attempted      0
+  Total              45
+
+══════════════════════════════════════════════════
+  Workflow complete
+══════════════════════════════════════════════════
+=== exit 0 at 2026-10-25 18:43:47.943685 ===
