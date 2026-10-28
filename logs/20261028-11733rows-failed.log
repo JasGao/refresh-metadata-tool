@@ -1,0 +1,809 @@
+=== refresh run: 2026-10-28 12:18:24.075320 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/Library/Developer/CommandLineTools/usr/bin/python3 (3.9.6)
+args=<full pipeline>
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ✓ Pulled 11733 token ids from sheet 1OgtsuOP2eKQays_mWAzVK2eRoQKP1QYVRsquGOafH7w (gid=0)
+
+── Run inputs ──────────────────────────
+  Tokens in CSV      11733
+
+── Step 2: Ensure starting crawl cookie (account 1) 
+  Account pool       refresh1
+  · Re-logging in 1 account(s) via Selenium (steps 1→2→3)
+  · First tokenId  100000795755207871678506413242375629730592905602740764550827817945717630825918  (from tokens.csv)
+  · [1/1] refresh1
+  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
+  · Chrome version_main  156
+  · Chrome started  (1.5s, cached chromedriver)
+  · Checking Chrome profile session for refresh1
+  ✓ Session recovered from Chrome profile  refresh1
+  · Step 2/3  Open first token NFT page  …7630825918
+  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/100000795755207871678506413242375629730592905602740764550827817945717630825918
+  ✓ NFT page loaded  …7630825918
+  ✓ Reused Chrome profile session — no Turnstile login needed  refresh1
+  · Step 3/3  Capture cookie + userAgent  refresh1
+  ✓ Captured  13 cookies  cf_clearance=True  session=True
+  ✓ Saved to account state  refresh1
+
+── Step 3: Reset compare output files ──────────────
+  ✓ Progress reset: progress.json
+  ✓ Report reset:   report.json
+
+── Step 4: Crawl — compare BscScan vs on-chain metadata 
+
+  ▸ crawl/compare.py
+/Users/admin/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+══════════════════════════════════════════════════
+  Crawl — BscScan vs on-chain metadata
+══════════════════════════════════════════════════
+  Account pool       refresh1, refresh2, refresh3, refresh4, refresh5, refresh6, refresh7, refresh8, refresh9, refresh10, refresh11, refresh12, refresh13, refresh14, refresh15, refresh16, refresh17, refresh18, refresh19, refresh20
+  Active account     refresh1
+
+── Run config ──────────────────────────
+  Total tokens       11733
+  Already done       0
+  Remaining          11733
+  Concurrency        50
+  RPC                https://bsc-dataseed.binance.org
+    ⚠ …6013524465  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0000099787  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …7032369967  bscscan retry 1/2: The read operation timed out
+  ⚠ …7630825918  out_of_sync (6 diffs)
+  ⚠ …9751319473  out_of_sync (6 diffs)
+  ⚠ …7941469638  out_of_sync (7 diffs)
+  ⚠ …7970974095  out_of_sync (6 diffs)
+  ⚠ …9697034981  out_of_sync (7 diffs)
+  ⚠ …8541928981  out_of_sync (6 diffs)
+  ⚠ …0000099787  out_of_sync (6 diffs)
+  ⚠ …2712532538  out_of_sync (6 diffs)
+  ⚠ …7400821672  out_of_sync (6 diffs)
+  ⚠ …3804435959  out_of_sync (6 diffs)
+  ⚠ …9265716282  out_of_sync (6 diffs)
+  ⚠ …9052898006  out_of_sync (6 diffs)
+  ⚠ …7180130279  out_of_sync (7 diffs)
+  ⚠ …1359890733  out_of_sync (7 diffs)
+  ⚠ …7375463824  out_of_sync (7 diffs)
+  ⚠ …0835609587  out_of_sync (7 diffs)
+  ⚠ …4648329139  out_of_sync (7 diffs)
+  ⚠ …0184996421  out_of_sync (7 diffs)
+  ⚠ …1763021654  out_of_sync (7 diffs)
+  ⚠ …1448421360  out_of_sync (7 diffs)
+  ⚠ …0859528184  out_of_sync (6 diffs)
+  ✓ …4082451440  in_sync
+  ⚠ …1181441361  out_of_sync (6 diffs)
+  ⚠ …2786239672  out_of_sync (6 diffs)
+  ⚠ …5088658618  out_of_sync (6 diffs)
+  ⚠ …1757748609  out_of_sync (6 diffs)
+  ⚠ …0265959091  out_of_sync (6 diffs)
+  ⚠ …8225051622  out_of_sync (6 diffs)
+  ⚠ …8960909699  out_of_sync (6 diffs)
+  ⚠ …3096463363  out_of_sync (6 diffs)
+  ⚠ …6013524465  out_of_sync (6 diffs)
+  ⚠ …3432344885  out_of_sync (6 diffs)
+  ⚠ …3720416149  out_of_sync (7 diffs)
+  ⚠ …7032369967  out_of_sync (6 diffs)
+  ⚠ …8280594323  out_of_sync (6 diffs)
+  ⚠ …2344914749  out_of_sync (7 diffs)
+  ⚠ …5676021998  out_of_sync (7 diffs)
+  ⚠ …7790994828  out_of_sync (6 diffs)
+  ⚠ …7654986348  out_of_sync (7 diffs)
+  ⚠ …2584048560  out_of_sync (7 diffs)
+  ⚠ …7185679937  out_of_sync (6 diffs)
+  ⚠ …3751789083  out_of_sync (7 diffs)
+  ⚠ …2059281994  out_of_sync (7 diffs)
+  ⚠ …5801527820  out_of_sync (7 diffs)
+  ⚠ …9731288751  out_of_sync (6 diffs)
+  ⚠ …5309559216  out_of_sync (6 diffs)
+  ⚠ …6800174640  out_of_sync (6 diffs)
+  ⚠ …8359996298  out_of_sync (6 diffs)
+  ⚠ …7352545517  out_of_sync (6 diffs)
+  ⚠ …5077788490  out_of_sync (6 diffs)
+  · Batch done — 50/11733 tokens
+    ⚠ …0257308317  bscscan retry 1/2: Remote end closed connection without response
+    ⚠ …2177120084  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0831957662  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …8312783887  bscscan retry 1/2: The read operation timed out
+    ⚠ …0257308317  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …2177120084  metadata retry 2/2: [Errno 60] Operation timed out
+  ⚠ …9847872813  out_of_sync (6 diffs)
+  ⚠ …8382333241  out_of_sync (6 diffs)
+  ⚠ …0826643209  out_of_sync (6 diffs)
+  ⚠ …3126517676  out_of_sync (8 diffs)
+  ⚠ …5563744834  out_of_sync (7 diffs)
+  ⚠ …2839336331  out_of_sync (6 diffs)
+  ⚠ …0117693569  out_of_sync (6 diffs)
+  ⚠ …1339741434  out_of_sync (6 diffs)
+  ⚠ …3320764106  out_of_sync (7 diffs)
+  ⚠ …7125198917  out_of_sync (6 diffs)
+  ⚠ …2567352267  out_of_sync (6 diffs)
+  ⚠ …9797448194  out_of_sync (6 diffs)
+  ⚠ …2873227947  out_of_sync (7 diffs)
+  ⚠ …2311322199  out_of_sync (7 diffs)
+  ⚠ …2929134193  out_of_sync (6 diffs)
+  ⚠ …0635490753  out_of_sync (6 diffs)
+  ⚠ …8892442508  out_of_sync (6 diffs)
+  ⚠ …1554468122  out_of_sync (6 diffs)
+  ⚠ …7825063555  out_of_sync (6 diffs)
+  ⚠ …9685439284  out_of_sync (6 diffs)
+  ⚠ …7148205948  out_of_sync (7 diffs)
+  ⚠ …0951773446  out_of_sync (6 diffs)
+  ⚠ …1246805137  out_of_sync (6 diffs)
+  ⚠ …1356071687  out_of_sync (5 diffs)
+  ⚠ …1592811154  out_of_sync (7 diffs)
+  ⚠ …0258488985  out_of_sync (6 diffs)
+  ⚠ …5245963442  out_of_sync (7 diffs)
+  ⚠ …9888233143  out_of_sync (6 diffs)
+  ⚠ …2177120084  out_of_sync (6 diffs)
+  ⚠ …8449159253  out_of_sync (6 diffs)
+  ⚠ …8422382886  out_of_sync (7 diffs)
+  ⚠ …0257308317  out_of_sync (7 diffs)
+  ⚠ …6354699654  out_of_sync (7 diffs)
+  ⚠ …2564705435  out_of_sync (7 diffs)
+  ⚠ …4417570158  out_of_sync (6 diffs)
+  ⚠ …0578750522  out_of_sync (6 diffs)
+  ⚠ …2526991336  out_of_sync (6 diffs)
+  ⚠ …5564764567  out_of_sync (6 diffs)
+  ⚠ …8312783887  out_of_sync (6 diffs)
+  ⚠ …7747747211  out_of_sync (6 diffs)
+  ⚠ …7037030087  out_of_sync (7 diffs)
+  ⚠ …6516247505  out_of_sync (7 diffs)
+  ⚠ …0287948431  out_of_sync (6 diffs)
+  ⚠ …2721924264  out_of_sync (6 diffs)
+  ⚠ …0592576402  out_of_sync (8 diffs)
+  ⚠ …8822018438  out_of_sync (6 diffs)
+  ⚠ …3365258767  out_of_sync (6 diffs)
+  ⚠ …8720049592  out_of_sync (6 diffs)
+  ⚠ …0831957662  out_of_sync (7 diffs)
+  ⚠ …2005791435  out_of_sync (7 diffs)
+  · Batch done — 100/11733 tokens
+    ⚠ …9907291232  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …8285099216  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0931090116  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …3727562858  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …3727562858  metadata retry 2/2: HTTP 503
+    ⚠ …8625201608  bscscan retry 1/2: The read operation timed out
+    ⚠ …8625201608  bscscan retry 2/2: The read operation timed out
+  ⚠ …3200559673  out_of_sync (6 diffs)
+  ⚠ …5634797529  out_of_sync (6 diffs)
+  ⚠ …8659551542  out_of_sync (6 diffs)
+  ⚠ …3424330264  out_of_sync (7 diffs)
+  ⚠ …8625201608  out_of_sync (7 diffs)
+  ⚠ …9907291232  out_of_sync (5 diffs)
+  ⚠ …6155441621  out_of_sync (8 diffs)
+  ⚠ …1524863814  out_of_sync (7 diffs)
+  ⚠ …8495974220  out_of_sync (7 diffs)
+  ⚠ …3236388922  out_of_sync (7 diffs)
+  ⚠ …8894641189  out_of_sync (6 diffs)
+  ⚠ …1443198548  out_of_sync (7 diffs)
+  ⚠ …1079920798  out_of_sync (7 diffs)
+  ⚠ …0235958793  out_of_sync (6 diffs)
+  ⚠ …7052657333  out_of_sync (6 diffs)
+  ⚠ …9948356362  out_of_sync (6 diffs)
+  ⚠ …5493579346  out_of_sync (6 diffs)
+  ⚠ …9294958710  out_of_sync (7 diffs)
+  ⚠ …8553415462  out_of_sync (6 diffs)
+  ⚠ …7128170657  out_of_sync (8 diffs)
+  ⚠ …3084982400  out_of_sync (6 diffs)
+  ⚠ …2780348557  out_of_sync (8 diffs)
+  ⚠ …3617010483  out_of_sync (8 diffs)
+  ⚠ …9618924628  out_of_sync (6 diffs)
+  ⚠ …7263308002  out_of_sync (7 diffs)
+  ✗ …3727562858  metadata: HTTP 503
+  ⚠ …8285099216  out_of_sync (7 diffs)
+  ⚠ …1933920013  out_of_sync (6 diffs)
+  ⚠ …8782351041  out_of_sync (6 diffs)
+  ⚠ …1322197158  out_of_sync (6 diffs)
+  ⚠ …9356312741  out_of_sync (6 diffs)
+  ⚠ …8599382092  out_of_sync (5 diffs)
+  ⚠ …8545360825  out_of_sync (6 diffs)
+  ⚠ …2303835888  out_of_sync (5 diffs)
+  ⚠ …0265705443  out_of_sync (7 diffs)
+  ⚠ …3662907764  out_of_sync (7 diffs)
+  ⚠ …2673175369  out_of_sync (7 diffs)
+  ⚠ …5281440983  out_of_sync (6 diffs)
+  ⚠ …4251851806  out_of_sync (7 diffs)
+  ⚠ …4104159899  out_of_sync (6 diffs)
+  ⚠ …2244359747  out_of_sync (7 diffs)
+  ⚠ …5016864232  out_of_sync (7 diffs)
+  ⚠ …0931090116  out_of_sync (6 diffs)
+  ⚠ …9908587255  out_of_sync (7 diffs)
+  ⚠ …5793502794  out_of_sync (7 diffs)
+  ⚠ …3687713965  out_of_sync (7 diffs)
+  ⚠ …1947903714  out_of_sync (7 diffs)
+  ⚠ …9572597174  out_of_sync (6 diffs)
+  ⚠ …8614480569  out_of_sync (7 diffs)
+  ⚠ …6958160014  out_of_sync (6 diffs)
+  · Batch done — 150/11733 tokens
+    ⚠ …1146404975  bscscan retry 1/2: Remote end closed connection without response
+    ⚠ …6212978454  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9516460791  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …1963287378  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …1146404975  rpc retry 1/2: [Errno 60] Operation timed out
+  ⚠ …7374025152  out_of_sync (7 diffs)
+  ⚠ …3601434361  out_of_sync (6 diffs)
+  ⚠ …4481072577  out_of_sync (7 diffs)
+  ⚠ …4331620254  out_of_sync (6 diffs)
+  ⚠ …8953663063  out_of_sync (6 diffs)
+  ⚠ …1978697609  out_of_sync (7 diffs)
+  ⚠ …8720191772  out_of_sync (6 diffs)
+  ⚠ …9651767460  out_of_sync (6 diffs)
+  ⚠ …5113260429  out_of_sync (8 diffs)
+  ⚠ …6079742222  out_of_sync (7 diffs)
+  ⚠ …6581990990  out_of_sync (6 diffs)
+  ⚠ …2523851747  out_of_sync (7 diffs)
+  ⚠ …8430344965  out_of_sync (6 diffs)
+  ⚠ …3818326820  out_of_sync (7 diffs)
+  ⚠ …5803540859  out_of_sync (7 diffs)
+  ⚠ …2653630705  out_of_sync (5 diffs)
+  ⚠ …7031668462  out_of_sync (6 diffs)
+  ⚠ …3710797670  out_of_sync (6 diffs)
+  ⚠ …4741696950  out_of_sync (6 diffs)
+  ⚠ …1531110170  out_of_sync (7 diffs)
+  ⚠ …1904945790  out_of_sync (6 diffs)
+  ⚠ …7364490213  out_of_sync (7 diffs)
+  ⚠ …7895092153  out_of_sync (6 diffs)
+  ⚠ …0930830905  out_of_sync (7 diffs)
+  ⚠ …7705285852  out_of_sync (6 diffs)
+  ⚠ …7740322108  out_of_sync (7 diffs)
+  ⚠ …7860246886  out_of_sync (6 diffs)
+  ⚠ …3679778241  out_of_sync (7 diffs)
+  ⚠ …4302217755  out_of_sync (6 diffs)
+  ⚠ …4274185526  out_of_sync (6 diffs)
+  ⚠ …4080742549  out_of_sync (6 diffs)
+  ⚠ …4628181669  out_of_sync (7 diffs)
+  ⚠ …0099284034  out_of_sync (6 diffs)
+  ⚠ …0719064170  out_of_sync (6 diffs)
+  ⚠ …1146404975  out_of_sync (6 diffs)
+  ⚠ …1963287378  out_of_sync (6 diffs)
+  ⚠ …6212978454  out_of_sync (6 diffs)
+  ⚠ …7594408656  out_of_sync (7 diffs)
+  ⚠ …8082754333  out_of_sync (7 diffs)
+  ⚠ …6217844105  out_of_sync (6 diffs)
+  ⚠ …2120397878  out_of_sync (7 diffs)
+  ⚠ …2960478297  out_of_sync (7 diffs)
+  ⚠ …5480062872  out_of_sync (6 diffs)
+  ⚠ …3900114890  out_of_sync (6 diffs)
+  ⚠ …8355967590  out_of_sync (6 diffs)
+  ⚠ …8530054509  out_of_sync (6 diffs)
+  ⚠ …1050338991  out_of_sync (6 diffs)
+  ⚠ …8538631962  out_of_sync (6 diffs)
+  ⚠ …9516460791  out_of_sync (6 diffs)
+  ⚠ …2955232986  out_of_sync (7 diffs)
+  · Batch done — 200/11733 tokens
+    ⚠ …8668255396  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …6771363508  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …2366969660  bscscan retry 1/2: The read operation timed out
+    ⚠ …3754221412  metadata retry 1/2: [Errno 60] Operation timed out
+  ⚠ …7003781558  out_of_sync (6 diffs)
+  ⚠ …5486642029  out_of_sync (7 diffs)
+  ⚠ …8668255396  out_of_sync (6 diffs)
+  ⚠ …8961564395  out_of_sync (7 diffs)
+  ⚠ …7541820689  out_of_sync (7 diffs)
+  ⚠ …8951869544  out_of_sync (7 diffs)
+  ⚠ …1044259392  out_of_sync (6 diffs)
+  ⚠ …7032105621  out_of_sync (5 diffs)
+  ⚠ …8126665739  out_of_sync (7 diffs)
+  ⚠ …6253648795  out_of_sync (6 diffs)
+  ⚠ …6581731904  out_of_sync (7 diffs)
+  ⚠ …7461568067  out_of_sync (6 diffs)
+  ⚠ …5750140942  out_of_sync (7 diffs)
+  ⚠ …7860919575  out_of_sync (7 diffs)
+  ⚠ …9661660337  out_of_sync (7 diffs)
+  ⚠ …3529643034  out_of_sync (6 diffs)
+  ⚠ …6122637629  out_of_sync (6 diffs)
+  ⚠ …1614078936  out_of_sync (6 diffs)
+  ⚠ …6771363508  out_of_sync (6 diffs)
+  ⚠ …9318670005  out_of_sync (6 diffs)
+  ⚠ …7361043106  out_of_sync (6 diffs)
+  ⚠ …4095819036  out_of_sync (6 diffs)
+  ⚠ …7527831623  out_of_sync (7 diffs)
+  ⚠ …3754221412  out_of_sync (7 diffs)
+  ⚠ …6231158874  out_of_sync (6 diffs)
+  ⚠ …2164769136  out_of_sync (7 diffs)
+  ⚠ …2366969660  out_of_sync (6 diffs)
+  ⚠ …0305844564  out_of_sync (6 diffs)
+  ⚠ …3632883186  out_of_sync (7 diffs)
+  ⚠ …9788898900  out_of_sync (7 diffs)
+  ⚠ …3343068930  out_of_sync (7 diffs)
+  ⚠ …0989334467  out_of_sync (8 diffs)
+  ⚠ …4017944596  out_of_sync (7 diffs)
+  ⚠ …7416152946  out_of_sync (8 diffs)
+  ⚠ …2873170500  out_of_sync (7 diffs)
+  ⚠ …0639596685  out_of_sync (7 diffs)
+  ⚠ …1942379122  out_of_sync (7 diffs)
+  ⚠ …4617588463  out_of_sync (6 diffs)
+  ⚠ …0159754043  out_of_sync (5 diffs)
+  ⚠ …4828679588  out_of_sync (6 diffs)
+  ⚠ …9560264176  out_of_sync (6 diffs)
+  ⚠ …1135301977  out_of_sync (7 diffs)
+  ⚠ …1853115572  out_of_sync (7 diffs)
+  ⚠ …3938268157  out_of_sync (6 diffs)
+  ⚠ …9799789413  out_of_sync (8 diffs)
+  ⚠ …3910430222  out_of_sync (7 diffs)
+  ⚠ …4206219304  out_of_sync (7 diffs)
+  ⚠ …1875369352  out_of_sync (7 diffs)
+  ⚠ …6384459382  out_of_sync (7 diffs)
+  ⚠ …6874325940  out_of_sync (7 diffs)
+  · Batch done — 250/11733 tokens
+    ⚠ …4352770289  metadata retry 1/2: HTTP 503
+    ⚠ …2767881700  metadata retry 1/2: HTTP 503
+    ⚠ …1591627466  metadata retry 1/2: HTTP 503
+    ⚠ …7406674247  metadata retry 1/2: HTTP 503
+    ⚠ …7515097305  metadata retry 1/2: HTTP 503
+    ⚠ …7200909632  metadata retry 1/2: HTTP 503
+    ⚠ …9850673425  metadata retry 1/2: HTTP 503
+    ⚠ …1409366413  metadata retry 1/2: HTTP 503
+    ⚠ …9570300145  metadata retry 1/2: HTTP 503
+    ⚠ …6900255704  metadata retry 1/2: HTTP 503
+    ⚠ …3517031487  metadata retry 1/2: HTTP 503
+    ⚠ …8656193190  metadata retry 1/2: HTTP 503
+    ⚠ …6111287549  metadata retry 1/2: HTTP 503
+    ⚠ …2794486640  metadata retry 1/2: HTTP 503
+    ⚠ …1909311897  metadata retry 1/2: HTTP 503
+    ⚠ …4270677111  metadata retry 1/2: HTTP 503
+    ⚠ …4904321063  metadata retry 1/2: HTTP 503
+    ⚠ …7632330682  metadata retry 1/2: HTTP 503
+    ⚠ …3388251462  metadata retry 1/2: HTTP 503
+    ⚠ …5412476805  metadata retry 1/2: HTTP 503
+    ⚠ …4352770289  metadata retry 2/2: HTTP 503
+    ⚠ …2767881700  metadata retry 2/2: HTTP 503
+    ⚠ …1591627466  metadata retry 2/2: HTTP 503
+    ⚠ …3536595451  metadata retry 1/2: HTTP 503
+    ⚠ …7406674247  metadata retry 2/2: HTTP 503
+    ⚠ …7515097305  metadata retry 2/2: HTTP 503
+    ⚠ …7200909632  metadata retry 2/2: HTTP 503
+    ⚠ …9850673425  metadata retry 2/2: HTTP 503
+    ⚠ …1409366413  metadata retry 2/2: HTTP 503
+    ⚠ …6900255704  metadata retry 2/2: HTTP 503
+    ⚠ …9570300145  metadata retry 2/2: HTTP 503
+    ⚠ …3517031487  metadata retry 2/2: HTTP 503
+    ⚠ …8656193190  metadata retry 2/2: HTTP 503
+    ⚠ …6111287549  metadata retry 2/2: HTTP 503
+    ⚠ …2794486640  metadata retry 2/2: HTTP 503
+    ⚠ …4904321063  metadata retry 2/2: HTTP 503
+    ⚠ …4270677111  metadata retry 2/2: HTTP 503
+    ⚠ …3388251462  metadata retry 2/2: HTTP 503
+    ⚠ …5412476805  metadata retry 2/2: HTTP 503
+    ⚠ …7632330682  metadata retry 2/2: HTTP 503
+    ⚠ …3536595451  metadata retry 2/2: HTTP 503
+    ⚠ …1909311897  metadata retry 2/2: HTTP 503
+    ⚠ …6030370646  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9292791550  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …7641633383  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0266738808  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0266738808  metadata retry 2/2: [Errno 60] Operation timed out
+    ⚠ …7595606075  bscscan retry 1/2: The read operation timed out
+  ⚠ …6030370646  out_of_sync (6 diffs)
+  ⚠ …4107307611  out_of_sync (6 diffs)
+  ⚠ …0221020588  out_of_sync (8 diffs)
+  ✗ …8656193190  metadata: HTTP 503
+  ⚠ …6200614279  out_of_sync (6 diffs)
+  ⚠ …7092779911  out_of_sync (6 diffs)
+  ⚠ …3563980543  out_of_sync (7 diffs)
+  ⚠ …4403195595  out_of_sync (7 diffs)
+  ⚠ …1909311897  out_of_sync (6 diffs)
+  ⚠ …2654858193  out_of_sync (7 diffs)
+  ⚠ …9493178589  out_of_sync (6 diffs)
+  ⚠ …2143214433  out_of_sync (8 diffs)
+  ✗ …3388251462  metadata: HTTP 503
+  ✗ …9570300145  metadata: HTTP 503
+  ⚠ …2882446921  out_of_sync (6 diffs)
+  ⚠ …7147372584  out_of_sync (7 diffs)
+  ⚠ …7595606075  out_of_sync (6 diffs)
+  ⚠ …1568759636  out_of_sync (6 diffs)
+  ⚠ …7641633383  out_of_sync (7 diffs)
+  ⚠ …9313205643  out_of_sync (6 diffs)
+  ✗ …7200909632  metadata: HTTP 503
+  ✗ …4904321063  metadata: HTTP 503
+  ✗ …6900255704  metadata: HTTP 503
+  ⚠ …3339823040  out_of_sync (6 diffs)
+  ⚠ …9292791550  out_of_sync (6 diffs)
+  ⚠ …2024002648  out_of_sync (6 diffs)
+  ✗ …9850673425  metadata: HTTP 503
+  ⚠ …4888158275  out_of_sync (7 diffs)
+  ⚠ …5673702741  out_of_sync (7 diffs)
+  ✗ …3517031487  metadata: HTTP 503
+  ⚠ …1173188206  out_of_sync (6 diffs)
+  ✗ …2794486640  metadata: HTTP 503
+  ✗ …2767881700  metadata: HTTP 503
+  ✗ …7632330682  metadata: HTTP 503
+  ⚠ …3620055185  out_of_sync (6 diffs)
+  ✗ …7406674247  metadata: HTTP 503
+  ✗ …3536595451  metadata: HTTP 503
+  ✗ …5412476805  metadata: HTTP 503
+  ✗ …1409366413  metadata: HTTP 503
+  ⚠ …9148844031  out_of_sync (7 diffs)
+  ✗ …6111287549  metadata: HTTP 503
+  ✗ …4352770289  metadata: HTTP 503
+  ✗ …4270677111  metadata: HTTP 503
+  ⚠ …0639165470  out_of_sync (6 diffs)
+  ⚠ …0266738808  out_of_sync (7 diffs)
+  ✗ …7515097305  metadata: [Errno 60] Operation timed out
+  ⚠ …4718741069  out_of_sync (6 diffs)
+  ⚠ …4252263640  out_of_sync (6 diffs)
+  ⚠ …0153418217  out_of_sync (7 diffs)
+  ✗ …1591627466  metadata: HTTP 503
+  · Batch done — 300/11733 tokens
+    ⚠ …6387755858  metadata retry 1/2: HTTP 503
+    ⚠ …9393565460  metadata retry 1/2: HTTP 503
+    ⚠ …8962291798  metadata retry 1/2: HTTP 503
+    ⚠ …0835041288  metadata retry 1/2: HTTP 503
+    ⚠ …0432531649  metadata retry 1/2: HTTP 503
+    ⚠ …2985866594  metadata retry 1/2: HTTP 503
+    ⚠ …3237009744  metadata retry 1/2: HTTP 503
+    ⚠ …4964255204  metadata retry 1/2: HTTP 503
+    ⚠ …7457009590  metadata retry 1/2: HTTP 503
+    ⚠ …6150564671  metadata retry 1/2: HTTP 503
+    ⚠ …8979252359  metadata retry 1/2: HTTP 503
+    ⚠ …1826365671  metadata retry 1/2: HTTP 503
+    ⚠ …7588942937  metadata retry 1/2: HTTP 503
+    ⚠ …8365781588  metadata retry 1/2: HTTP 503
+    ⚠ …3383667566  metadata retry 1/2: HTTP 503
+    ⚠ …1874864042  metadata retry 1/2: HTTP 503
+    ⚠ …8385278616  metadata retry 1/2: HTTP 503
+    ⚠ …4636583142  metadata retry 1/2: HTTP 503
+    ⚠ …2228902994  metadata retry 1/2: HTTP 503
+    ⚠ …1513584033  metadata retry 1/2: HTTP 503
+    ⚠ …9340729580  metadata retry 1/2: HTTP 503
+    ⚠ …1469881956  metadata retry 1/2: HTTP 503
+    ⚠ …5956749779  metadata retry 1/2: HTTP 503
+    ⚠ …0869075807  metadata retry 1/2: HTTP 503
+    ⚠ …5011483635  metadata retry 1/2: HTTP 503
+    ⚠ …9050649685  metadata retry 1/2: HTTP 503
+    ⚠ …7705055116  metadata retry 1/2: HTTP 503
+    ⚠ …2871064217  metadata retry 1/2: HTTP 503
+    ⚠ …6853204753  metadata retry 1/2: HTTP 503
+    ⚠ …6292682543  metadata retry 1/2: HTTP 503
+    ⚠ …4260917649  metadata retry 1/2: HTTP 503
+    ⚠ …6387755858  metadata retry 2/2: HTTP 503
+    ⚠ …9393565460  metadata retry 2/2: HTTP 503
+    ⚠ …2985866594  metadata retry 2/2: HTTP 503    ⚠ …0432531649  metadata retry 2/2: HTTP 503
+
+    ⚠ …0835041288  metadata retry 2/2: HTTP 503
+    ⚠ …8962291798  metadata retry 2/2: HTTP 503
+    ⚠ …3237009744  metadata retry 2/2: HTTP 503
+    ⚠ …2261942838  metadata retry 1/2: HTTP 503
+    ⚠ …0080221740  metadata retry 1/2: HTTP 503
+    ⚠ …5153350339  metadata retry 1/2: HTTP 503
+    ⚠ …6503746291  metadata retry 1/2: HTTP 503
+    ⚠ …6150564671  metadata retry 2/2: HTTP 503
+    ⚠ …8979252359  metadata retry 2/2: HTTP 503
+    ⚠ …7457009590  metadata retry 2/2: HTTP 503
+    ⚠ …1826365671  metadata retry 2/2: HTTP 503
+    ⚠ …9417768535  metadata retry 1/2: HTTP 503
+    ⚠ …7588942937  metadata retry 2/2: HTTP 503
+    ⚠ …0808549859  metadata retry 1/2: HTTP 503
+    ⚠ …8365781588  metadata retry 2/2: HTTP 503
+    ⚠ …3383667566  metadata retry 2/2: HTTP 503
+    ⚠ …1874864042  metadata retry 2/2: HTTP 503
+    ⚠ …8385278616  metadata retry 2/2: HTTP 503
+    ⚠ …3495370865  metadata retry 1/2: HTTP 503
+    ⚠ …6384196305  metadata retry 1/2: HTTP 503
+    ⚠ …1513584033  metadata retry 2/2: HTTP 503
+    ⚠ …4636583142  metadata retry 2/2: HTTP 503
+    ⚠ …4392225954  metadata retry 1/2: HTTP 503
+    ⚠ …9340729580  metadata retry 2/2: HTTP 503
+    ⚠ …3920276445  metadata retry 1/2: HTTP 503
+    ⚠ …1469881956  metadata retry 2/2: HTTP 503
+    ⚠ …8237594301  metadata retry 1/2: HTTP 503
+    ⚠ …5956749779  metadata retry 2/2: HTTP 503
+    ⚠ …0869075807  metadata retry 2/2: HTTP 503
+    ⚠ …5011483635  metadata retry 2/2: HTTP 503
+    ⚠ …9050649685  metadata retry 2/2: HTTP 503
+    ⚠ …7705055116  metadata retry 2/2: HTTP 503
+    ⚠ …2871064217  metadata retry 2/2: HTTP 503
+    ⚠ …5371054069  metadata retry 1/2: HTTP 503
+    ⚠ …0146585978  metadata retry 1/2: HTTP 503
+    ⚠ …8494300372  metadata retry 1/2: HTTP 503
+    ⚠ …4260917649  metadata retry 2/2: HTTP 503
+    ⚠ …2228902994  metadata retry 2/2: HTTP 503
+    ⚠ …2261942838  metadata retry 2/2: HTTP 503
+    ⚠ …0080221740  metadata retry 2/2: HTTP 503
+    ⚠ …5153350339  metadata retry 2/2: HTTP 503
+    ⚠ …8375669233  metadata retry 1/2: HTTP 503
+    ⚠ …0808549859  metadata retry 2/2: HTTP 503
+    ⚠ …9417768535  metadata retry 2/2: HTTP 503
+    ⚠ …6384196305  metadata retry 2/2: HTTP 503
+    ⚠ …3495370865  metadata retry 2/2: HTTP 503
+    ⚠ …4392225954  metadata retry 2/2: HTTP 503
+    ⚠ …6503746291  metadata retry 2/2: HTTP 503
+    ⚠ …3920276445  metadata retry 2/2: HTTP 503
+    ⚠ …8237594301  metadata retry 2/2: HTTP 503
+    ⚠ …5371054069  metadata retry 2/2: HTTP 503
+    ⚠ …0146585978  metadata retry 2/2: HTTP 503
+    ⚠ …8494300372  metadata retry 2/2: HTTP 503
+    ⚠ …8375669233  metadata retry 2/2: HTTP 503
+    ⚠ …5966623986  bscscan retry 1/2: Remote end closed connection without response
+    ⚠ …5966623986  metadata retry 1/2: HTTP 503
+    ⚠ …2342792264  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0471562054  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …4964255204  metadata retry 2/2: [Errno 60] Operation timed out
+    ⚠ …2342792264  metadata retry 2/2: HTTP 503
+    ⚠ …6853204753  metadata retry 2/2: [Errno 60] Operation timed out
+    ⚠ …6431523341  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …0471562054  metadata retry 2/2: HTTP 503
+    ⚠ …6292682543  metadata retry 2/2: [Errno 60] Operation timed out
+    ⚠ …5966623986  metadata retry 2/2: [Errno 60] Operation timed out
+  ✗ …3383667566  metadata: [Errno 60] Operation timed out
+  ✗ …7457009590  metadata: HTTP 503
+  ⚠ …9340729580  out_of_sync (6 diffs)
+  ⚠ …5966623986  out_of_sync (7 diffs)
+  ✗ …8962291798  metadata: HTTP 503
+  ⚠ …2261942838  out_of_sync (7 diffs)
+  ⚠ …0471562054  out_of_sync (6 diffs)
+  ✗ …4636583142  metadata: HTTP 503
+  ✗ …9393565460  metadata: HTTP 503
+  ✗ …6150564671  metadata: HTTP 503
+  ⚠ …6384196305  out_of_sync (6 diffs)
+  ⚠ …2871064217  out_of_sync (7 diffs)
+  ✗ …8979252359  metadata: HTTP 503
+  ✗ …6387755858  metadata: HTTP 503
+  ✗ …1874864042  metadata: HTTP 503
+  ✗ …1469881956  metadata: HTTP 503
+  ⚠ …6853204753  out_of_sync (7 diffs)
+  ⚠ …9417768535  out_of_sync (6 diffs)
+  ✗ …3495370865  metadata: [Errno 60] Operation timed out
+  ⚠ …4392225954  out_of_sync (7 diffs)
+  ⚠ …0080221740  out_of_sync (6 diffs)
+  ⚠ …5371054069  out_of_sync (7 diffs)
+  ⚠ …6292682543  out_of_sync (7 diffs)
+  ⚠ …5956749779  out_of_sync (7 diffs)
+  ⚠ …8494300372  out_of_sync (6 diffs)
+  ⚠ …8375669233  out_of_sync (6 diffs)
+  ⚠ …5153350339  out_of_sync (6 diffs)
+  ⚠ …0869075807  out_of_sync (7 diffs)
+  ✗ …1826365671  metadata: HTTP 503
+  ✗ …7588942937  metadata: HTTP 503
+  ✗ …7705055116  metadata: HTTP 503
+  ✗ …0432531649  metadata: HTTP 503
+  ✗ …0835041288  metadata: HTTP 503
+  ✗ …8385278616  metadata: HTTP 503
+  ⚠ …9050649685  out_of_sync (6 diffs)
+  ⚠ …6503746291  out_of_sync (6 diffs)
+  ⚠ …6431523341  out_of_sync (6 diffs)
+  ⚠ …4260917649  out_of_sync (6 diffs)
+  ⚠ …0808549859  out_of_sync (6 diffs)
+  ⚠ …8237594301  out_of_sync (6 diffs)
+  ⚠ …0146585978  out_of_sync (6 diffs)
+  ⚠ …2342792264  out_of_sync (6 diffs)
+  ⚠ …4964255204  out_of_sync (6 diffs)
+  ⚠ …2228902994  out_of_sync (7 diffs)
+  ✗ …2985866594  metadata: HTTP 503
+  ✗ …1513584033  metadata: [Errno 60] Operation timed out
+  ⚠ …3920276445  out_of_sync (6 diffs)
+  ✗ …8365781588  metadata: HTTP 503
+  ✗ …3237009744  metadata: HTTP 503
+  ✗ …5011483635  metadata: HTTP 503
+  · Batch done — 350/11733 tokens
+    ⚠ …3685156372  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …6149235835  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9325945686  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …3431409458  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …7104450444  bscscan retry 1/2: The read operation timed out
+  ⚠ …7851661854  out_of_sync (7 diffs)
+  ⚠ …1947952816  out_of_sync (6 diffs)
+  ⚠ …3685156372  out_of_sync (6 diffs)
+  ⚠ …3324963767  out_of_sync (6 diffs)
+  ⚠ …0804808934  out_of_sync (6 diffs)
+  ⚠ …0219501254  out_of_sync (6 diffs)
+  ⚠ …2925328003  out_of_sync (6 diffs)
+  ⚠ …3697264410  out_of_sync (6 diffs)
+  ⚠ …0160481742  out_of_sync (7 diffs)
+  ⚠ …2468659265  out_of_sync (6 diffs)
+  ⚠ …0537179774  out_of_sync (6 diffs)
+  ⚠ …3447616763  out_of_sync (7 diffs)
+  ⚠ …3152900768  out_of_sync (7 diffs)
+  ⚠ …7266541029  out_of_sync (6 diffs)
+  ⚠ …5350406898  out_of_sync (8 diffs)
+  ⚠ …7251969803  out_of_sync (6 diffs)
+  ⚠ …3614645818  out_of_sync (6 diffs)
+  ⚠ …4771344949  out_of_sync (7 diffs)
+  ⚠ …7066139200  out_of_sync (6 diffs)
+  ⚠ …6689345929  out_of_sync (6 diffs)
+  ⚠ …6701470608  out_of_sync (8 diffs)
+  ⚠ …4350118999  out_of_sync (6 diffs)
+  ⚠ …9130967400  out_of_sync (6 diffs)
+  ⚠ …1127520179  out_of_sync (7 diffs)
+  ⚠ …3532953114  out_of_sync (6 diffs)
+  ⚠ …4448002032  out_of_sync (7 diffs)
+  ⚠ …9325945686  out_of_sync (7 diffs)
+  ⚠ …0901443921  out_of_sync (6 diffs)
+  ⚠ …7378822303  out_of_sync (7 diffs)
+  ⚠ …2442015974  out_of_sync (6 diffs)
+  ⚠ …4740396106  out_of_sync (6 diffs)
+  ⚠ …7863230773  out_of_sync (6 diffs)
+  ⚠ …9126009516  out_of_sync (8 diffs)
+  ⚠ …3298636341  out_of_sync (6 diffs)
+  ⚠ …1687537901  out_of_sync (7 diffs)
+  ⚠ …6149235835  out_of_sync (6 diffs)
+  ⚠ …3431409458  out_of_sync (6 diffs)
+  ⚠ …0294771651  out_of_sync (7 diffs)
+  ⚠ …8082298236  out_of_sync (7 diffs)
+  ⚠ …5885193714  out_of_sync (6 diffs)
+  ⚠ …4193564397  out_of_sync (6 diffs)
+  ⚠ …7104450444  out_of_sync (6 diffs)
+  ⚠ …2989033024  out_of_sync (6 diffs)
+  ⚠ …7981192950  out_of_sync (6 diffs)
+  ⚠ …3510775557  out_of_sync (6 diffs)
+  ⚠ …9025252901  out_of_sync (8 diffs)
+  ⚠ …6155761751  out_of_sync (7 diffs)
+  ⚠ …2535100282  out_of_sync (7 diffs)
+  ⚠ …4430859747  out_of_sync (7 diffs)
+  ⚠ …5088863812  out_of_sync (6 diffs)
+  · Batch done — 400/11733 tokens
+    ⚠ …0810994536  bscscan retry 1/2: Remote end closed connection without response
+    ⚠ …6308449798  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …9680298168  rpc retry 1/2: [Errno 60] Operation timed out
+    ⚠ …6149045289  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …8602292980  rpc retry 1/2: [Errno 60] Operation timed out
+  ⚠ …5384279061  out_of_sync (6 diffs)
+  ⚠ …5306352767  out_of_sync (7 diffs)
+  ⚠ …9285806225  out_of_sync (6 diffs)
+  ⚠ …5458809720  out_of_sync (7 diffs)
+  ⚠ …9173076749  out_of_sync (7 diffs)
+  ⚠ …9871633252  out_of_sync (6 diffs)
+  ⚠ …6308449798  out_of_sync (7 diffs)
+  ⚠ …3606241005  out_of_sync (7 diffs)
+  ⚠ …0544421884  out_of_sync (6 diffs)
+  ⚠ …5497849505  out_of_sync (8 diffs)
+  ⚠ …4942474265  out_of_sync (6 diffs)
+  ⚠ …5726621312  out_of_sync (8 diffs)
+  ⚠ …0711107174  out_of_sync (7 diffs)
+  ⚠ …0600201076  out_of_sync (7 diffs)
+  ⚠ …9331170749  out_of_sync (6 diffs)
+  ✓ …8302007707  in_sync
+  ⚠ …6184270075  out_of_sync (7 diffs)
+  ⚠ …2520937429  out_of_sync (6 diffs)
+  ⚠ …1628889329  out_of_sync (6 diffs)
+  ⚠ …1253733668  out_of_sync (6 diffs)
+  ⚠ …1125523251  out_of_sync (7 diffs)
+  ⚠ …9322344008  out_of_sync (6 diffs)
+  ⚠ …4006546706  out_of_sync (7 diffs)
+  ⚠ …5620183660  out_of_sync (7 diffs)
+  ⚠ …9680298168  out_of_sync (7 diffs)
+  ⚠ …6149045289  out_of_sync (6 diffs)
+  ⚠ …6668229388  out_of_sync (7 diffs)
+  ⚠ …1378546659  out_of_sync (7 diffs)
+  ⚠ …5933992198  out_of_sync (7 diffs)
+  ⚠ …2123768931  out_of_sync (7 diffs)
+  ⚠ …9397161628  out_of_sync (6 diffs)
+  ⚠ …6186544496  out_of_sync (8 diffs)
+  ⚠ …6161964978  out_of_sync (8 diffs)
+  ⚠ …8507492034  out_of_sync (6 diffs)
+  ⚠ …1839842000  out_of_sync (6 diffs)
+  ⚠ …0050412118  out_of_sync (6 diffs)
+  ⚠ …8602292980  out_of_sync (6 diffs)
+  ⚠ …0810994536  out_of_sync (6 diffs)
+  ⚠ …3900984765  out_of_sync (6 diffs)
+  ⚠ …3545810112  out_of_sync (6 diffs)
+  ⚠ …2329242229  out_of_sync (6 diffs)
+  ⚠ …5350674202  out_of_sync (6 diffs)
+  ⚠ …5456623274  out_of_sync (6 diffs)
+  ⚠ …1322690699  out_of_sync (6 diffs)
+  ⚠ …5436629160  out_of_sync (6 diffs)
+  ⚠ …8060945916  out_of_sync (6 diffs)
+  ⚠ …5373893169  out_of_sync (7 diffs)
+  ⚠ …8645614190  out_of_sync (7 diffs)
+  ⚠ …2009173282  out_of_sync (7 diffs)
+  ⚠ …1627895553  out_of_sync (6 diffs)
+  · Batch done — 450/11733 tokens
+    ⚠ …0127885954  bscscan retry 1/2: Remote end closed connection without response
+    ⚠ …1510548596  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …2336252451  metadata retry 1/2: [Errno 60] Operation timed out
+    ⚠ …7284302595  metadata retry 1/2: [Errno 60] Operation timed out
+  ⚠ …9620279159  out_of_sync (7 diffs)
+  ⚠ …3295291136  out_of_sync (7 diffs)
+  ⚠ …1212934136  out_of_sync (6 diffs)
+  ⚠ …6350255507  out_of_sync (7 diffs)
+  ⚠ …0127885954  out_of_sync (7 diffs)
+  ⚠ …8490303831  out_of_sync (8 diffs)
+  ⚠ …2946241610  out_of_sync (6 diffs)
+  ⚠ …5465436921  out_of_sync (8 diffs)
+  ⚠ …5851856263  out_of_sync (6 diffs)
+  ⚠ …2336252451  out_of_sync (6 diffs)
+  ⚠ …1518069152  out_of_sync (7 diffs)
+  ⚠ …0835509602  out_of_sync (7 diffs)
+  ⚠ …4238618832  out_of_sync (6 diffs)
+  ⚠ …7404584002  out_of_sync (6 diffs)
+  ⚠ …7874079657  out_of_sync (6 diffs)
+  ⚠ …6130484209  out_of_sync (6 diffs)
+  ⚠ …5919359750  out_of_sync (6 diffs)
+  ⚠ …0227948002  out_of_sync (7 diffs)
+  ⚠ …8671437491  out_of_sync (6 diffs)
+  ⚠ …5474361026  out_of_sync (6 diffs)
+  ⚠ …8217924950  out_of_sync (8 diffs)
+  ⚠ …7284302595  out_of_sync (7 diffs)
+  ⚠ …7308158293  out_of_sync (6 diffs)
+  ⚠ …4871809659  out_of_sync (7 diffs)
+  ⚠ …2607704475  out_of_sync (8 diffs)
+  ⚠ …5945152455  out_of_sync (7 diffs)
+  ⚠ …8907571136  out_of_sync (6 diffs)
+  ⚠ …2068898595  out_of_sync (6 diffs)
+  ⚠ …7903593411  out_of_sync (7 diffs)
+  ⚠ …2840599877  out_of_sync (6 diffs)
+  ⚠ …1809003172  out_of_sync (6 diffs)
+  ⚠ …0934138495  out_of_sync (6 diffs)
+  ⚠ …7192215330  out_of_sync (7 diffs)
+  ⚠ …6793286901  out_of_sync (5 diffs)
+  ⚠ …8338826922  out_of_sync (6 diffs)
+  ⚠ …0073201749  out_of_sync (8 diffs)
+  ⚠ …3643473364  out_of_sync (7 diffs)
+  ⚠ …6175428737  out_of_sync (6 diffs)
+  ⚠ …9581480428  out_of_sync (7 diffs)
+  ⚠ …8448291883  out_of_sync (6 diffs)
+  ⚠ …1510548596  out_of_sync (6 diffs)
+  ⚠ …9647356738  out_of_sync (6 diffs)
+  ⚠ …9519263040  out_of_sync (7 diffs)
+  ⚠ …9385147739  out_of_sync (7 diffs)
+  ⚠ …6311500701  out_of_sync (7 diffs)
+  ⚠ …7135787619  out_of_sync (6 diffs)
+  ⚠ …5010178840  out_of_sync (6 diffs)
+  ⚠ …1714535680  out_of_sync (6 diffs)
+  ⚠ …6930041538  out_of_sync (7 diffs)
+  ⚠ …4303548662  out_of_sync (7 diffs)
+  · Batch done — 500/11733 tokens
+    ⚠ …3283237765  bscscan retry 1/2: Remote end closed connection without response
+    ⚠ …7026206479  rpc retry 1/2: [Errno 60] Operation timed out
+  ⚠ …9782514118  out_of_sync (7 diffs)
+  ✗ …6291892597  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …4561993962  out_of_sync (6 diffs)
+  ⚠ …1132244177  out_of_sync (6 diffs)
+  ✗ …3812468636  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …8009383316  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …8202750070  out_of_sync (5 diffs)
+  ✗ …5170552486  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0380745240  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …9010353416  out_of_sync (8 diffs)
+  ✗ …2849828738  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …6595398721  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2286592477  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …7026206479  out_of_sync (6 diffs)
+  ⚠ …9096412282  out_of_sync (7 diffs)
+  ⚠ …9694714620  out_of_sync (6 diffs)
+  ⚠ …4537833089  out_of_sync (7 diffs)
+  ✗ …2738346864  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …9517052080  out_of_sync (6 diffs)
+  ⚠ …7329330274  out_of_sync (7 diffs)
+  ✗ …8414627334  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …8812410473  out_of_sync (6 diffs)
+  ✗ …9884482871  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …3411596044  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …7440710782  out_of_sync (7 diffs)
+  ✗ …7529961607  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …1547988362  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4993161923  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0619026577  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …4859819007  out_of_sync (6 diffs)
+  ✗ …2250292703  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …2416183562  out_of_sync (8 diffs)
+  ✗ …0006358076  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …3164781840  out_of_sync (6 diffs)
+  ✗ …2716376977  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …3283237765  out_of_sync (6 diffs)
+  ⚠ …1552009617  out_of_sync (6 diffs)
+  ✗ …2249449968  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …7874895470  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4493111926  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …4417532904  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …6514165915  out_of_sync (7 diffs)
+  ✗ …5534171025  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9678135099  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ⚠ …5550154095  out_of_sync (7 diffs)
+  ✗ …7956909618  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2530590838  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …2487779121  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …9434688114  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  ✗ …0594564224  bscscan: page missing properties (title: BNB Smart Chain Blockchain Explorer | Maintenance Mode)
+  · Batch done — 550/11733 tokens
+Interrupted (KeyboardInterrupt)
+=== exit 130 at 2026-10-28 12:27:00.120224 ===
