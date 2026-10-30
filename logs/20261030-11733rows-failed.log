@@ -1,0 +1,15 @@
+=== refresh run: 2026-10-30 14:02:28.438860 ===
+repo=/Users/admin/refresh-metadata/refresh-metadata-tool
+python=/Library/Developer/CommandLineTools/usr/bin/python3 (3.9.6)
+args=--skip-crawl --from-token …9539719251
+
+══════════════════════════════════════════════════
+  BscScan Metadata Workflow
+══════════════════════════════════════════════════
+
+── Step 1: Update tokens.csv from Google Sheet ─────
+
+  ▸ Fetch shared token sheet (CSV export)
+  ⚠ Sheet fetch attempt 1/3 failed: ('Connection aborted.', TimeoutError(60, 'Operation timed out')) — retrying in 5s
+Interrupted (KeyboardInterrupt)
+=== exit 130 at 2026-10-30 14:02:47.798543 ===
