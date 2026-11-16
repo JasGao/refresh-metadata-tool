@@ -1,4 +1,4 @@
-=== refresh run: 2026-11-16 14:04:44.846185 ===
+=== refresh run: 2026-11-16 18:30:00.596938 ===
 repo=/Users/admin/refresh-metadata/refresh-metadata-tool
 python=/Library/Developer/CommandLineTools/usr/bin/python3 (3.9.6)
 args=<full pipeline>
@@ -17,21 +17,7 @@ args=<full pipeline>
 
 ── Step 2: Ensure starting crawl cookie (account 1) 
   Account pool       refresh1
-  · Re-logging in 1 account(s) via Selenium (steps 1→2→3)
-  · First tokenId  54296223445122374337133958324977420931493337655932383217735371877740130109943  (from tokens.csv)
-  · [1/1] refresh1
-  · Chrome profile  /Users/admin/.refresh/chrome-bscscan/profiles/refresh1  (Default)
-  · Chrome version_main  157
-  · Chrome started  (6.2s, cached chromedriver)
-  · Checking Chrome profile session for refresh1
-  ✓ Session recovered from Chrome profile  refresh1
-  · Step 2/3  Open first token NFT page  …0130109943
-  ·            https://bscscan.com/nft/0xF8646A3Ca093e97Bb404c3b25e675C0394DD5b30/54296223445122374337133958324977420931493337655932383217735371877740130109943
-  ✓ NFT page loaded  …0130109943
-  ✓ Reused Chrome profile session — no Turnstile login needed  refresh1
-  · Step 3/3  Capture cookie + userAgent  refresh1
-  ✓ Captured  12 cookies  cf_clearance=True  session=True
-  ✓ Saved to account state  refresh1
+  ✓ Cookies still valid today: refresh1
 
 ── Step 3: Reset compare output files ──────────────
   ✓ Progress reset: progress.json
@@ -55,20 +41,19 @@ args=<full pipeline>
   Remaining          1
   Concurrency        50
   RPC                https://bsc-dataseed.binance.org
-  ✗ …0130109943  rpc: tokenURI revert: execution reverted: RenaissRegistry
+  ✓ …6757213561  in_sync
   · Batch done — 1/1 tokens
 
 ── Crawl results ───────────────────────
-  in_sync            0
+  in_sync            1
   out_of_sync        0
-  errors             1
+  errors             0
   Progress file      progress.json
   Report file        report.json
-  Report contents    0 out_of_sync, 1 errors
+  Report contents    0 out_of_sync, 0 errors
 
 ── Step 5: Refresh out-of-sync + crawl-error tokens (Selenium) 
   Out-of-sync        0
-  Not refreshable    1 (tokenURI revert — token gone on-chain)
   To refresh         0
   Accounts needed    0
   ✓ Nothing to refresh
@@ -76,4 +61,4 @@ args=<full pipeline>
 ══════════════════════════════════════════════════
   Workflow complete
 ══════════════════════════════════════════════════
-=== exit 0 at 2026-11-16 14:05:14.193349 ===
+=== exit 0 at 2026-11-16 18:30:04.002146 ===
